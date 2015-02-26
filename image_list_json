@@ -1,6 +1,6 @@
 {
   "status": {
-    "success": true,
+    "result_code": 1,
     "message": "Successfully retrived data."
   },
   "data": {
