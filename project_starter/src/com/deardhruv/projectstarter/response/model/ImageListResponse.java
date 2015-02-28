@@ -21,4 +21,9 @@ public class ImageListResponse extends AbstractApiResponse {
 		return imageListResult;
 	}
 
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
 }

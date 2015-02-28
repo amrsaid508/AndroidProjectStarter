@@ -11,6 +11,7 @@ import com.deardhruv.projectstarter.abstracts.AbstractActivity;
 import com.deardhruv.projectstarter.events.ApiErrorEvent;
 import com.deardhruv.projectstarter.events.ApiErrorWithMessageEvent;
 import com.deardhruv.projectstarter.network.ApiClient;
+import com.deardhruv.projectstarter.response.model.ImageListResponse;
 import com.deardhruv.projectstarter.utils.Logger;
 
 import de.greenrobot.event.EventBus;
@@ -70,6 +71,22 @@ public class MainActivity extends AbstractActivity {
 	protected void onPause() {
 		super.onPause();
 		mEventBus.unregister(this);
+	}
+
+	/**
+	 * Response of Image list.
+	 * 
+	 * @param imageListResponse ImageListResponse
+	 */
+	public void onEventMainThread(ImageListResponse imageListResponse) {
+		switch (imageListResponse.getRequestTag()) {
+			case IMAGE_LIST_REQUEST_TAG:
+				showToast(imageListResponse.toString());
+				break;
+
+			default:
+				break;
+		}
 	}
 
 	/**
