@@ -10,20 +10,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class ImageListResponse extends AbstractApiResponse {
 
-	@JsonProperty("image_list")
-	private ImageListResult imageListResult;
+	@JsonProperty("data")
+	private Data data;
 
 	public ImageListResponse() {
 		// nothing.
 	}
 
-	public ImageListResult getImageListResult() {
-		return imageListResult;
-	}
-
 	@Override
 	public String toString() {
 		return super.toString();
+	}
+
+	public Data getData() {
+		return data;
 	}
 
 }

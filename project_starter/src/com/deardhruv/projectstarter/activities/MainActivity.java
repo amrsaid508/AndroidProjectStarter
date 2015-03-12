@@ -1,22 +1,35 @@
 
 package com.deardhruv.projectstarter.activities;
 
+import java.util.ArrayList;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.ListView;
 
 import com.deardhruv.projectstarter.ProjectStarterApplication;
 import com.deardhruv.projectstarter.R;
 import com.deardhruv.projectstarter.abstracts.AbstractActivity;
+import com.deardhruv.projectstarter.adapters.ImageItemDetailAdapter;
 import com.deardhruv.projectstarter.events.ApiErrorEvent;
 import com.deardhruv.projectstarter.events.ApiErrorWithMessageEvent;
 import com.deardhruv.projectstarter.network.ApiClient;
 import com.deardhruv.projectstarter.response.model.ImageListResponse;
+import com.deardhruv.projectstarter.response.model.ImageResult;
 import com.deardhruv.projectstarter.utils.Logger;
 
 import de.greenrobot.event.EventBus;
 
-public class MainActivity extends AbstractActivity {
+public class MainActivity extends AbstractActivity implements OnClickListener, OnItemClickListener {
 
 	private static final String LOGTAG = "MainActivity";
 	private static final Logger LOG = new Logger(LOGTAG);
@@ -26,20 +39,41 @@ public class MainActivity extends AbstractActivity {
 	private EventBus mEventBus;
 	ApiClient mApiClient;
 
+	Button btnReload;
+	private ProgressDialog pd;
+	private ListView listPhotos;
+
+	private ImageItemDetailAdapter adapter;
+
+	private ArrayList<String> mImageUrls;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		setProgressBarIndeterminateVisibility(true);
+
 		setContentView(R.layout.main_activity_layout);
+
+		initUI();
+
 		mEventBus = EventBus.getDefault();
 		ProjectStarterApplication app = ((ProjectStarterApplication) getApplication());
 		mApiClient = app.getApiClient();
+
 	}
 
-	@Override
-	protected void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
-		mApiClient.getImageList(IMAGE_LIST_REQUEST_TAG);
+	private void initUI() {
+		btnReload = (Button) findViewById(R.id.btnReload);
+		listPhotos = (ListView) findViewById(R.id.listPhotos);
+
+		initListener();
+	}
+
+	private void initListener() {
+		btnReload.setOnClickListener(this);
+		listPhotos.setOnItemClickListener(this);
 	}
 
 	@Override
@@ -73,6 +107,30 @@ public class MainActivity extends AbstractActivity {
 		mEventBus.unregister(this);
 	}
 
+	private void loadImages() {
+		showProgressDialog();
+		mApiClient.getImageList(IMAGE_LIST_REQUEST_TAG);
+	}
+
+	private void showProgressDialog() {
+		pd = ProgressDialog.show(MainActivity.this, "Please wait", "getting images...");
+		if (!pd.isShowing()) {
+			pd.show();
+		}
+		setProgressBarIndeterminateVisibility(true);
+	}
+
+	private void dismissProgressDialog() {
+		if (pd.isShowing()) {
+			pd.dismiss();
+		}
+		setProgressBarIndeterminateVisibility(false);
+	}
+
+	// ============================================================================================
+	// EventBus callbacks
+	// ============================================================================================
+
 	/**
 	 * Response of Image list.
 	 * 
@@ -81,7 +139,16 @@ public class MainActivity extends AbstractActivity {
 	public void onEventMainThread(ImageListResponse imageListResponse) {
 		switch (imageListResponse.getRequestTag()) {
 			case IMAGE_LIST_REQUEST_TAG:
-				showToast(imageListResponse.toString());
+				dismissProgressDialog();
+				adapter = new ImageItemDetailAdapter(MainActivity.this, imageListResponse.getData()
+						.getImageResultList());
+				listPhotos.setAdapter(adapter);
+
+				mImageUrls = new ArrayList<>();
+				for (ImageResult imageResult : imageListResponse.getData().getImageResultList()) {
+					mImageUrls.add(imageResult.getImg());
+				}
+
 				break;
 
 			default:
@@ -98,6 +165,7 @@ public class MainActivity extends AbstractActivity {
 	public void onEventMainThread(ApiErrorEvent event) {
 		switch (event.getRequestTag()) {
 			case IMAGE_LIST_REQUEST_TAG:
+				dismissProgressDialog();
 				showToast(getString(R.string.error_server_problem));
 				break;
 
@@ -115,6 +183,7 @@ public class MainActivity extends AbstractActivity {
 	public void onEventMainThread(ApiErrorWithMessageEvent event) {
 		switch (event.getRequestTag()) {
 			case IMAGE_LIST_REQUEST_TAG:
+				dismissProgressDialog();
 				showToast(event.getResultMsgUser());
 				break;
 
@@ -122,4 +191,27 @@ public class MainActivity extends AbstractActivity {
 				break;
 		}
 	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+			case R.id.btnReload:
+				loadImages();
+				break;
+
+			default:
+				break;
+		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+		final Intent intent = new Intent(MainActivity.this, PictureViewerActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.putStringArrayListExtra(PictureViewerActivity.EXTRA_IMAGE_URLS, mImageUrls);
+		intent.putExtra(PictureViewerActivity.EXTRA_IMAGE_SELECTION, position);
+		startActivity(intent);
+	}
+
 }

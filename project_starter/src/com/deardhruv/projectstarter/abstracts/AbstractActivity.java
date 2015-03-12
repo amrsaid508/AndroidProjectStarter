@@ -1,7 +1,7 @@
 
 package com.deardhruv.projectstarter.abstracts;
 
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
 import com.deardhruv.projectstarter.utils.Logger;
@@ -9,7 +9,7 @@ import com.deardhruv.projectstarter.utils.Logger;
 /**
  * @author DearDhruv
  */
-public abstract class AbstractActivity extends Activity {
+public abstract class AbstractActivity extends FragmentActivity{
 
 	private static final String LOGTAG = "AbstractActivity";
 	private static final Logger LOG = new Logger(LOGTAG);

@@ -14,10 +14,9 @@ import com.deardhruv.projectstarter.network.Api;
 import de.greenrobot.event.EventBus;
 
 /**
- * Use this class to have a callback which can be used for the api calls in
- * {@link Api}. Such a callback can be invalidated to not notify its caller
- * about the api response. Furthermore it handles finishing the request after
- * the caller has handled the response.
+ * Use this class to have a callback which can be used for the api calls in {@link Api}. 
+ * Such a callback can be invalidated to not notify its caller about the api response. 
+ * Furthermore it handles finishing the request after the caller has handled the response.
  */
 public class AbstractApiCallback<T extends AbstractApiResponse> implements Callback<T> {
 
@@ -29,8 +28,8 @@ public class AbstractApiCallback<T extends AbstractApiResponse> implements Callb
 
 	/**
 	 * Creates an {@link AbstractCallback} with the passed request tag. The tag
-	 * is used to finish the request after the response has been handled. See
-	 * {@link #finishRequest}.
+	 * is used to finish the request after the response has been handled. 
+	 * See {@link #finishRequest}.
 	 *
 	 * @param requestTag The tag of the request which uses this callback.
 	 */

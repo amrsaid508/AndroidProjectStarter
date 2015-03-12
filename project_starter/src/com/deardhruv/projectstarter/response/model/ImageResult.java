@@ -1,24 +1,28 @@
 
 package com.deardhruv.projectstarter.response.model;
 
+import java.io.Serializable;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** This class contains the detail information about Image List. */
-public class ImageListResult implements Parcelable {
+public class ImageResult implements Serializable, Parcelable {
 
-	public ImageListResult() {
+	private static final long serialVersionUID = 843633178166986606L;
+
+	public ImageResult() {
 		// nothing.
 	}
 
 	@JsonProperty("id")
 	private int id;
-	
+
 	@JsonProperty("name")
 	private String name;
-	
+
 	@JsonProperty("img")
 	private String img;
 
@@ -38,21 +42,33 @@ public class ImageListResult implements Parcelable {
 	}
 
 	/** Parcelable implementation. */
-	public static final Parcelable.Creator<ImageListResult> CREATOR = new Parcelable.Creator<ImageListResult>() {
-		public ImageListResult createFromParcel(Parcel in) {
-			return new ImageListResult(in);
+	public static final Parcelable.Creator<ImageResult> CREATOR = new Parcelable.Creator<ImageResult>() {
+		public ImageResult createFromParcel(Parcel in) {
+			return new ImageResult(in);
 		}
 
-		public ImageListResult[] newArray(int size) {
-			return new ImageListResult[size];
+		public ImageResult[] newArray(int size) {
+			return new ImageResult[size];
 		}
 	};
 
 	/** Parcelable implementation. */
-	private ImageListResult(Parcel in) {
+	private ImageResult(Parcel in) {
 		id = in.readInt();
 		name = in.readString();
 		img = in.readString();
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 }
