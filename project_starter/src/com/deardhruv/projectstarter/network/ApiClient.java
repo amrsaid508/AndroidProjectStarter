@@ -38,7 +38,7 @@ public class ApiClient {
 	private Map<String, AbstractApiRequest> requests;
 
 	/**
-	 * Initializes the quoka api interface which will handle the api calls. Also
+	 * Initializes the api interface which will handle the api calls. Also
 	 * initializes an empty hash map of <request tag, request> pairs. Registers
 	 * with EventBus to receive the {@link RequestFinishedEvent}.
 	 * 

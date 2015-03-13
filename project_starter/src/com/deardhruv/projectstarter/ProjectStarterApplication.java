@@ -29,7 +29,7 @@ public class ProjectStarterApplication extends Application {
 		mContext = getApplicationContext();
 
 		initImageLoader();
-		initQuokaApiClient();
+		initApiClient();
 	}
 
 	private void initImageLoader() {
@@ -42,12 +42,12 @@ public class ProjectStarterApplication extends Application {
 	}
 
 	/**
-	 * Initializes the api client which provides the connection to the quoka
-	 * api. The api client uses {@link OkHttpClient} for the http connection.
+	 * Initializes the api client which provides the connection to the api.
+	 * The api client uses {@link OkHttpClient} for the http connection.
 	 * This allows us to modify the connection properties. The response
 	 * conversion is done using the {@link SimpleXmlConverter}.
 	 */
-	private void initQuokaApiClient() {
+	private void initApiClient() {
 		OkHttpClient okHttpClient = new OkHttpClient();
 		okHttpClient.setReadTimeout(HTTP_TIMEOUT, TimeUnit.SECONDS);
 		okHttpClient.setConnectTimeout(HTTP_TIMEOUT, TimeUnit.SECONDS);

@@ -25,6 +25,7 @@ import com.deardhruv.projectstarter.events.ApiErrorWithMessageEvent;
 import com.deardhruv.projectstarter.network.ApiClient;
 import com.deardhruv.projectstarter.response.model.ImageListResponse;
 import com.deardhruv.projectstarter.response.model.ImageResult;
+import com.deardhruv.projectstarter.utils.Dumper;
 import com.deardhruv.projectstarter.utils.Logger;
 
 import de.greenrobot.event.EventBus;
@@ -151,6 +152,7 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 					mImageUrls.add(imageResult.getImg());
 				}
 
+				Dumper.dump(imageListResponse);
 				break;
 
 			default:

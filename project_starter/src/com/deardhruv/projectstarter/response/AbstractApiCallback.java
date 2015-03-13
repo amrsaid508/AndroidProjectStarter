@@ -10,6 +10,7 @@ import com.deardhruv.projectstarter.events.ApiErrorEvent;
 import com.deardhruv.projectstarter.events.ApiErrorWithMessageEvent;
 import com.deardhruv.projectstarter.events.RequestFinishedEvent;
 import com.deardhruv.projectstarter.network.Api;
+import com.deardhruv.projectstarter.network.ApiClient;
 
 import de.greenrobot.event.EventBus;
 
@@ -87,7 +88,7 @@ public class AbstractApiCallback<T extends AbstractApiResponse> implements Callb
 
 	/**
 	 * Posts a {@link RequestFinishedEvent} on the EventBus to tell the
-	 * {@link QuokaApiClient} to remove the request from the list of running
+	 * {@link ApiClient} to remove the request from the list of running
 	 * requests.
 	 */
 	private void finishRequest() {
@@ -95,7 +96,7 @@ public class AbstractApiCallback<T extends AbstractApiResponse> implements Callb
 	}
 
 	/**
-	 * This is for callbacks which extend QuokaApiCallback and want to modify
+	 * This is for callbacks which extend ApiCallback and want to modify
 	 * the response before it is delivered to the caller.
 	 *
 	 * @param result The api response.
