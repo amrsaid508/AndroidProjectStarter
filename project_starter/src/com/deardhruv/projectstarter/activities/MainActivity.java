@@ -113,6 +113,7 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 	}
 
 	private void showProgressDialog() {
+		btnReload.setEnabled(false);
 		pd = ProgressDialog.show(MainActivity.this, "Please wait", "getting images...");
 		if (!pd.isShowing()) {
 			pd.show();
@@ -121,6 +122,7 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 	}
 
 	private void dismissProgressDialog() {
+		btnReload.setEnabled(true);
 		if (pd.isShowing()) {
 			pd.dismiss();
 		}
@@ -157,8 +159,7 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 	}
 
 	/**
-	 * EventBus listener. Called when a api error occurred during one of the api
-	 * calls made here.
+	 * EventBus listener. An API call failed. No error message was returned.
 	 *
 	 * @param event ApiErrorEvent
 	 */
@@ -175,10 +176,9 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 	}
 
 	/**
-	 * EventBus listener. Called when a api error occurred during one of the api
-	 * calls made here. A error message is passed.
+	 * EventBus listener. An API call failed. An error message was returned.
 	 *
-	 * @param event ApiErrorWithMessageEvent
+	 * @param event ApiErrorWithMessageEvent Contains the error message.
 	 */
 	public void onEventMainThread(ApiErrorWithMessageEvent event) {
 		switch (event.getRequestTag()) {
