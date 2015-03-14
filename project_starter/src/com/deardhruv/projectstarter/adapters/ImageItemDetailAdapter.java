@@ -38,12 +38,9 @@ public class ImageItemDetailAdapter extends BaseAdapter {
 		mImageLoader = ImageLoader.getInstance();
 		mImageOptions = new DisplayImageOptions.Builder()
 				.showImageOnLoading(R.drawable.ic_launcher)
-				.showImageForEmptyUri(R.drawable.ic_image_err)
-				.cacheInMemory(true).cacheOnDisk(true)
-				.bitmapConfig(Bitmap.Config.RGB_565)
-				.imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
-				.considerExifParams(true)
-				.build();
+				.showImageForEmptyUri(R.drawable.ic_image_err).cacheInMemory(true)
+				.cacheOnDisk(true).bitmapConfig(Bitmap.Config.RGB_565)
+				.imageScaleType(ImageScaleType.EXACTLY_STRETCHED).considerExifParams(true).build();
 
 	}
 

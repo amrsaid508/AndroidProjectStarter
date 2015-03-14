@@ -11,13 +11,15 @@ import com.deardhruv.projectstarter.events.ApiErrorWithMessageEvent;
 import com.deardhruv.projectstarter.events.RequestFinishedEvent;
 import com.deardhruv.projectstarter.network.Api;
 import com.deardhruv.projectstarter.network.ApiClient;
+import com.deardhruv.projectstarter.requests.model.ImageListRequest;
 
 import de.greenrobot.event.EventBus;
 
 /**
- * Use this class to have a callback which can be used for the api calls in {@link Api}. 
- * Such a callback can be invalidated to not notify its caller about the api response. 
- * Furthermore it handles finishing the request after the caller has handled the response.
+ * Use this class to have a callback which can be used for the api calls in
+ * {@link Api}. Such a callback can be invalidated to not notify its caller
+ * about the api response. Furthermore it handles finishing the request after
+ * the caller has handled the response.
  */
 public class AbstractApiCallback<T extends AbstractApiResponse> implements Callback<T> {
 
@@ -29,8 +31,8 @@ public class AbstractApiCallback<T extends AbstractApiResponse> implements Callb
 
 	/**
 	 * Creates an {@link AbstractCallback} with the passed request tag. The tag
-	 * is used to finish the request after the response has been handled. 
-	 * See {@link #finishRequest}.
+	 * is used to finish the request after the response has been handled. See
+	 * {@link #finishRequest}.
 	 *
 	 * @param requestTag The tag of the request which uses this callback.
 	 */
@@ -96,13 +98,23 @@ public class AbstractApiCallback<T extends AbstractApiResponse> implements Callb
 	}
 
 	/**
-	 * This is for callbacks which extend ApiCallback and want to modify
-	 * the response before it is delivered to the caller.
+	 * This is for callbacks which extend ApiCallback and want to modify the
+	 * response before it is delivered to the caller.
 	 *
 	 * @param result The api response.
 	 */
 	@SuppressWarnings("UnusedParameters")
 	protected void modifyResponseBeforeDelivery(T result) {
 		// Do nothing here. Only for subclasses.
+	}
+
+	/**
+	 * Call this methode if No internet connection or other use. See
+	 * {@link ImageListRequest#execute()}
+	 * 
+	 * @param resultMsgUser
+	 */
+	public void postUnexpectedError(String resultMsgUser) {
+		EventBus.getDefault().post(new ApiErrorWithMessageEvent(requestTag, resultMsgUser));
 	}
 }

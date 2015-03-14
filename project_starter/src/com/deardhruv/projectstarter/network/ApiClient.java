@@ -48,8 +48,13 @@ public class ApiClient {
 	 *            api response conversion to POJOs.
 	 */
 	public ApiClient(Client client, Converter converter) {
-		RestAdapter restAdapter = new RestAdapter.Builder().setClient(client).setEndpoint(BASE_URL)
-				.setConverter(converter).setLogLevel(LogLevel.BASIC).setLog(new RestAdapter.Log() {
+		RestAdapter restAdapter = new RestAdapter
+				.Builder()
+		.setClient(client)
+		.setEndpoint(BASE_URL)
+		.setConverter(converter)
+		.setLogLevel(LogLevel.BASIC)
+		.setLog(new RestAdapter.Log() {
 					public void log(String msg) {
 						if (BuildConfig.DEBUG) {
 							Helper.logLongStrings(LOGTAG, msg);
@@ -90,6 +95,7 @@ public class ApiClient {
 	 * @return True if the request was cancelled, false otherwise.
 	 */
 	public boolean cancelRequest(String requestTag) {
+		System.gc();
 		AbstractApiRequest request = requests.get(requestTag);
 
 		if (request != null) {
@@ -115,6 +121,7 @@ public class ApiClient {
 	 * @param event The event posted on the EventBus.
 	 */
 	public void onEvent(RequestFinishedEvent event) {
+		System.gc();
 		requests.remove(event.getRequestTag());
 	}
 

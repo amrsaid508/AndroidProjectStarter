@@ -146,8 +146,7 @@ public class Dumper {
 		if (value == null) {
 			return "<null>";
 		}
-		if (value.getClass().isPrimitive() 
-				|| value.getClass() == java.lang.Short.class
+		if (value.getClass().isPrimitive() || value.getClass() == java.lang.Short.class
 				|| value.getClass() == java.lang.Long.class
 				|| value.getClass() == java.lang.String.class
 				|| value.getClass() == java.lang.Integer.class
@@ -156,8 +155,7 @@ public class Dumper {
 				|| value.getClass() == java.lang.Character.class
 				|| value.getClass() == java.lang.Double.class
 				|| value.getClass() == java.lang.Boolean.class
-				|| value.getClass() == java.util.Date.class 
-				|| value.getClass().isEnum()) {
+				|| value.getClass() == java.util.Date.class || value.getClass().isEnum()) {
 
 			return value.toString();
 

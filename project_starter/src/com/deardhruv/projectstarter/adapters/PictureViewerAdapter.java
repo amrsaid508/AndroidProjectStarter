@@ -53,11 +53,8 @@ public class PictureViewerAdapter extends PagerAdapter {
 
 		mImageOptions = new DisplayImageOptions.Builder()
 				.showImageOnLoading(android.R.color.transparent)
-				.showImageForEmptyUri(R.drawable.ic_image_err)
-				.cacheInMemory(true)
-				.cacheOnDisk(true)
-				.considerExifParams(true)
-				.build();
+				.showImageForEmptyUri(R.drawable.ic_image_err).cacheInMemory(true)
+				.cacheOnDisk(true).considerExifParams(true).build();
 	}
 
 	@Override

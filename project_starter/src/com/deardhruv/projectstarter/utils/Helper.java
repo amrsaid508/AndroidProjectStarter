@@ -22,7 +22,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -41,10 +40,8 @@ public final class Helper {
 
 	public static final long LOCATION_TIMEOUT = 15 * 60 * 1000;
 
-	public static final String NOPRIC = "nopric";
 	static final String DATE_TEMPLATE = "EEE, d MMM yyyy HH:mm:ss Z";
 
-	private static Typeface robotoTypeface = null;
 	public static final long ONE_DAY = 86400L;
 	public static final long FOUR_WEEKS = 28L * ONE_DAY * 1000L;
 
@@ -111,8 +108,8 @@ public final class Helper {
 	 * Returns a semicolon separated list built from the passed list of String.
 	 *
 	 * @param list A list of strings.
-	 * @return A semicolon separated list in one String object or an empty string
-	 *         if the passed list is null.
+	 * @return A semicolon separated list in one String object or an empty
+	 *         string if the passed list is null.
 	 */
 	private static String createSemicolonSeparatedList(List<String> list) {
 		if (list == null)
