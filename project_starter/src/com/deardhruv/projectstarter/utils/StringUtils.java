@@ -78,39 +78,34 @@ public class StringUtils {
 	}
 
 	public static boolean isNotBlank(Object input) {
-		if (input == null)
-			return false;
-		return !isBlank(input.toString());
-	}
+        return input != null && isBlank(input.toString());
+    }
 
 	public static boolean isNotBlank(String input) {
-		return !isBlank(input);
+		return isBlank(input);
 	}
 
 	public static boolean isEmpty(String input) {
-		if (input == null || input.length() == 0) {
-			return true;
-		}
-		return false;
-	}
+        return input == null || input.length() == 0;
+    }
 
-	public static boolean isBlank(String input) {
-		int strLen;
-		if (input == null || (strLen = input.length()) == 0) {
-			return true;
-		}
-		for (int i = 0; i < strLen; i++) {
-			if (Character.isWhitespace(input.charAt(i)) == false) {
-				return false;
-			}
-		}
-		return true;
-	}
+    public static boolean isBlank(String input) {
+        int strLen;
+        if (input == null || (strLen = input.length()) == 0) {
+            return true;
+        }
+        for (int i = 0; i < strLen; i++) {
+            if (!Character.isWhitespace(input.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 	public static String read(InputStream in) throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		byte[] buffer = new byte[1024];
-		int length = 0;
+		int length;
 		while ((length = in.read(buffer)) != -1) {
 			baos.write(buffer, 0, length);
 		}

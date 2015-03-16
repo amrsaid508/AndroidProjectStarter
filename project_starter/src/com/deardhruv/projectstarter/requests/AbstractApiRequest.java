@@ -20,7 +20,7 @@ public abstract class AbstractApiRequest {
 	 * @param api The {@link Api} used for executing the calls.
 	 * @param tag Identifies the request.
 	 */
-	public AbstractApiRequest(Api api, String tag) {
+    protected AbstractApiRequest(Api api, String tag) {
 		this.api = api;
 		this.tag = tag;
 	}

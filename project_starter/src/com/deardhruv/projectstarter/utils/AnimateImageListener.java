@@ -1,10 +1,6 @@
 
 package com.deardhruv.projectstarter.utils;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +9,10 @@ import android.widget.ProgressBar;
 import com.deardhruv.projectstarter.R;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 public class AnimateImageListener extends SimpleImageLoadingListener {
 	private List<String> mDisplayedImage = Collections.synchronizedList(new LinkedList<String>());

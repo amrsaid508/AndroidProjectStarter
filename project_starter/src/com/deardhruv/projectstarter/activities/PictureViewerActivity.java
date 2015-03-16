@@ -1,8 +1,6 @@
 
 package com.deardhruv.projectstarter.activities;
 
-import java.util.List;
-
 import android.os.Bundle;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.widget.Toast;
@@ -11,6 +9,8 @@ import com.deardhruv.projectstarter.R;
 import com.deardhruv.projectstarter.abstracts.AbstractActivity;
 import com.deardhruv.projectstarter.adapters.PictureViewerAdapter;
 import com.deardhruv.projectstarter.ui.views.CustomViewPager;
+
+import java.util.List;
 
 public class PictureViewerActivity extends AbstractActivity {
 

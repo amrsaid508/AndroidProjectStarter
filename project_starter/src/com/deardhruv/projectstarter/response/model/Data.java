@@ -1,9 +1,9 @@
 
 package com.deardhruv.projectstarter.response.model;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 public class Data {
 

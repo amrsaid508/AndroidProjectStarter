@@ -1,11 +1,11 @@
 
 package com.deardhruv.projectstarter.response;
 
-import java.io.Serializable;
-
 import com.deardhruv.projectstarter.utils.Dumper;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.io.Serializable;
 
 /**
  * The abstract base class for all possible API responses. It contains all
@@ -16,7 +16,7 @@ public abstract class AbstractApiResponse implements Serializable {
 	private static final long serialVersionUID = 6253190108505741009L;
 
 	@JsonProperty("status")
-	protected APIInfo apiInfo;
+    private APIInfo apiInfo;
 
 	public APIInfo getApiInfo() {
 		return apiInfo;

@@ -1,11 +1,7 @@
 
 package com.deardhruv.projectstarter.adapters;
 
-import it.sephiroth.android.library.imagezoom.ImageViewTouch;
-import it.sephiroth.android.library.imagezoom.ImageViewTouchBase.DisplayType;
-
-import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -17,6 +13,11 @@ import com.deardhruv.projectstarter.R;
 import com.deardhruv.projectstarter.utils.AnimateImageListener;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.List;
+
+import it.sephiroth.android.library.imagezoom.ImageViewTouch;
+import it.sephiroth.android.library.imagezoom.ImageViewTouchBase.DisplayType;
 
 /**
  * Adapter for the image pager
@@ -72,7 +73,7 @@ public class PictureViewerAdapter extends PagerAdapter {
 		final LayoutInflater inflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		final RelativeLayout layout = (RelativeLayout) inflater.inflate(
+		@SuppressLint("InflateParams") final RelativeLayout layout = (RelativeLayout) inflater.inflate(
 				R.layout.row_pictureviwer_image_item, null);
 
 		((ViewPager) collection).addView(layout, 0);

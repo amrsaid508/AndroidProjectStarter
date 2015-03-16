@@ -1,9 +1,7 @@
 
 package com.deardhruv.projectstarter.adapters;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -21,18 +19,19 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ImageItemDetailAdapter extends BaseAdapter {
 
 	private static final String ALLOWED_URI_CHARS = "@#&=*+-_.,:!?()/~'%";
-	private Activity activity;
-	private static LayoutInflater inflater = null;
+    private static LayoutInflater inflater = null;
 	private ArrayList<ImageResult> mList;
 	private final ImageLoader mImageLoader;
 	private final DisplayImageOptions mImageOptions;
 
-	public ImageItemDetailAdapter(Activity a, List<ImageResult> list) {
-		activity = a;
-		mList = new ArrayList<ImageResult>(list);
+	public ImageItemDetailAdapter(Activity activity, List<ImageResult> list) {
+		mList = new ArrayList<>(list);
 		inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		mImageLoader = ImageLoader.getInstance();
@@ -59,7 +58,8 @@ public class ImageItemDetailAdapter extends BaseAdapter {
 		return position;
 	}
 
-	@Override
+	@SuppressLint("InflateParams")
+    @Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {

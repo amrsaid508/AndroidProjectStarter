@@ -1,11 +1,6 @@
 
 package com.deardhruv.projectstarter;
 
-import java.util.concurrent.TimeUnit;
-
-import retrofit.client.Client;
-import retrofit.client.OkClient;
-import retrofit.converter.Converter;
 import android.app.Application;
 import android.content.Context;
 
@@ -14,6 +9,12 @@ import com.deardhruv.projectstarter.network.JacksonConverter;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.squareup.okhttp.OkHttpClient;
+
+import java.util.concurrent.TimeUnit;
+
+import retrofit.client.Client;
+import retrofit.client.OkClient;
+import retrofit.converter.Converter;
 
 public class ProjectStarterApplication extends Application {
 
@@ -45,7 +46,7 @@ public class ProjectStarterApplication extends Application {
 	 * Initializes the api client which provides the connection to the api. The
 	 * api client uses {@link OkHttpClient} for the http connection. This allows
 	 * us to modify the connection properties. The response conversion is done
-	 * using the {@link SimpleXmlConverter}.
+	 * using the {@link JacksonConverter}.
 	 */
 	private void initApiClient() {
 		OkHttpClient okHttpClient = new OkHttpClient();

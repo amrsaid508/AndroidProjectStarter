@@ -1,6 +1,10 @@
 
 package com.deardhruv.projectstarter.utils;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,10 +15,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.util.Log;
 
 public class StoreImageHelper {
 
@@ -95,10 +95,9 @@ public class StoreImageHelper {
 
 	@SuppressLint("SimpleDateFormat")
 	public File createImageFile() throws IOException {
-		// Create an image file name
-		final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-		final String imageFileName = "j" + timeStamp + "_";
-		final File image = File.createTempFile(imageFileName, ".jpg", mImageFolder);
-		return image;
-	}
+        // Create an image file name
+        final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        final String imageFileName = "j" + timeStamp + "_";
+        return File.createTempFile(imageFileName, ".jpg", mImageFolder);
+    }
 }

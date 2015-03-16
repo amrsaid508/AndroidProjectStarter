@@ -1,9 +1,6 @@
 
 package com.deardhruv.projectstarter.response;
 
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 import android.text.TextUtils;
 
 import com.deardhruv.projectstarter.events.ApiErrorEvent;
@@ -14,6 +11,9 @@ import com.deardhruv.projectstarter.network.ApiClient;
 import com.deardhruv.projectstarter.requests.model.ImageListRequest;
 
 import de.greenrobot.event.EventBus;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Use this class to have a callback which can be used for the api calls in
@@ -30,7 +30,7 @@ public class AbstractApiCallback<T extends AbstractApiResponse> implements Callb
 	private String requestTag;
 
 	/**
-	 * Creates an {@link AbstractCallback} with the passed request tag. The tag
+	 * Creates an {@link AbstractApiCallback} with the passed request tag. The tag
 	 * is used to finish the request after the response has been handled. See
 	 * {@link #finishRequest}.
 	 *

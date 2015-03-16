@@ -1,21 +1,20 @@
 
 package com.deardhruv.projectstarter.network;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import retrofit.RestAdapter;
-import retrofit.RestAdapter.LogLevel;
-import retrofit.client.Client;
-import retrofit.converter.Converter;
-
 import com.deardhruv.projectstarter.BuildConfig;
 import com.deardhruv.projectstarter.events.RequestFinishedEvent;
 import com.deardhruv.projectstarter.requests.AbstractApiRequest;
 import com.deardhruv.projectstarter.requests.model.ImageListRequest;
 import com.deardhruv.projectstarter.utils.Helper;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import de.greenrobot.event.EventBus;
+import retrofit.RestAdapter;
+import retrofit.RestAdapter.LogLevel;
+import retrofit.client.Client;
+import retrofit.converter.Converter;
 
 /**
  * Provides request functions for all api calls. This class maintains a map of
@@ -63,7 +62,7 @@ public class ApiClient {
 				}).build();
 
 		mApi = restAdapter.create(Api.class);
-		requests = new HashMap<String, AbstractApiRequest>();
+		requests = new HashMap<>();
 		EventBus.getDefault().register(this);
 	}
 

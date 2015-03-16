@@ -1,8 +1,6 @@
 
 package com.deardhruv.projectstarter.activities;
 
-import java.util.ArrayList;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +26,8 @@ import com.deardhruv.projectstarter.response.model.ImageResult;
 import com.deardhruv.projectstarter.utils.Dumper;
 import com.deardhruv.projectstarter.utils.Logger;
 
+import java.util.ArrayList;
+
 import de.greenrobot.event.EventBus;
 
 public class MainActivity extends AbstractActivity implements OnClickListener, OnItemClickListener {
@@ -38,15 +38,13 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 	private static final String IMAGE_LIST_REQUEST_TAG = LOGTAG + ".imageListRequest";
 
 	private EventBus mEventBus;
-	ApiClient mApiClient;
+	private ApiClient mApiClient;
 
-	Button btnReload;
+	private Button btnReload;
 	private ProgressDialog pd;
 	private ListView listPhotos;
 
-	private ImageItemDetailAdapter adapter;
-
-	private ArrayList<String> mImageUrls;
+    private ArrayList<String> mImageUrls;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,11 +88,8 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
+    }
 
 	@Override
 	protected void onResume() {
@@ -143,8 +138,8 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 		switch (imageListResponse.getRequestTag()) {
 			case IMAGE_LIST_REQUEST_TAG:
 				dismissProgressDialog();
-				adapter = new ImageItemDetailAdapter(MainActivity.this, imageListResponse.getData()
-						.getImageResultList());
+                ImageItemDetailAdapter adapter = new ImageItemDetailAdapter(MainActivity.this, imageListResponse.getData()
+                        .getImageResultList());
 				listPhotos.setAdapter(adapter);
 
 				mImageUrls = new ArrayList<>();

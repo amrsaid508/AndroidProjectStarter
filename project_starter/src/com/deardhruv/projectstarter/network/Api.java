@@ -1,10 +1,10 @@
 
 package com.deardhruv.projectstarter.network;
 
+import com.deardhruv.projectstarter.response.model.ImageListResponse;
+
 import retrofit.Callback;
 import retrofit.http.GET;
-
-import com.deardhruv.projectstarter.response.model.ImageListResponse;
 
 /**
  * The API interface for retrofit calls. This interface defines all the api

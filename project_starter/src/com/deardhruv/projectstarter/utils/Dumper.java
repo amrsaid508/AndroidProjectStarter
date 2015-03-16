@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 
 public class Dumper {
-	private static Dumper instance = new Dumper();
+	private static final Dumper instance = new Dumper();
 
 	protected static Dumper getInstance() {
 		return instance;
@@ -16,8 +16,8 @@ public class Dumper {
 		int maxDepth = 0;
 		int maxArrayElements = 0;
 		int callCount = 0;
-		HashMap<String, String> ignoreList = new HashMap<String, String>();
-		HashMap<Object, Integer> visited = new HashMap<Object, Integer>();
+		HashMap<String, String> ignoreList = new HashMap<>();
+		HashMap<Object, Integer> visited = new HashMap<>();
 	}
 
 	public static String dump(Object o) {
@@ -81,7 +81,7 @@ public class Dumper {
 			}
 			if (rowCount < Array.getLength(o)) {
 				buffer.append(tabs.toString());
-				buffer.append(Array.getLength(o) - rowCount + " more array elements...");
+				buffer.append(Array.getLength(o) - rowCount).append(" more array elements...");
 				buffer.append("\n");
 			}
 			buffer.append(tabs.toString().substring(1));
@@ -99,35 +99,35 @@ public class Dumper {
 				if (ctx.ignoreList.get(oClass.getSimpleName()) == null) {
 					if (oClass != o.getClass()) {
 						buffer.append(tabs.toString().substring(1));
-						buffer.append("  Inherited from superclass " + oSimpleName + ":\n");
+						buffer.append("  Inherited from superclass ").append(oSimpleName).append(":\n");
 					}
 
-					for (int i = 0; i < fields.length; i++) {
+                    for (Field field : fields) {
 
-						String fSimpleName = getSimpleNameWithoutArrayQualifier(fields[i].getType());
-						String fName = fields[i].getName();
+                        String fSimpleName = getSimpleNameWithoutArrayQualifier(field.getType());
+                        String fName = field.getName();
 
-						fields[i].setAccessible(true);
-						buffer.append(tabs.toString());
-						buffer.append(fName + "(" + fSimpleName + ")");
-						buffer.append("=");
+                        field.setAccessible(true);
+                        buffer.append(tabs.toString());
+                        buffer.append(fName).append("(").append(fSimpleName).append(")");
+                        buffer.append("=");
 
-						if (ctx.ignoreList.get(":" + fName) == null
-								&& ctx.ignoreList.get(fSimpleName + ":" + fName) == null
-								&& ctx.ignoreList.get(fSimpleName + ":") == null) {
+                        if (ctx.ignoreList.get(":" + fName) == null
+                                && ctx.ignoreList.get(fSimpleName + ":" + fName) == null
+                                && ctx.ignoreList.get(fSimpleName + ":") == null) {
 
-							try {
-								Object value = fields[i].get(o);
-								buffer.append(dumpValue(value, ctx));
-							} catch (Exception e) {
-								buffer.append(e.getMessage());
-							}
-							buffer.append("\n");
-						} else {
-							buffer.append("<Ignored>");
-							buffer.append("\n");
-						}
-					}
+                            try {
+                                Object value = field.get(o);
+                                buffer.append(dumpValue(value, ctx));
+                            } catch (Exception e) {
+                                buffer.append(e.getMessage());
+                            }
+                            buffer.append("\n");
+                        } else {
+                            buffer.append("<Ignored>");
+                            buffer.append("\n");
+                        }
+                    }
 					oClass = oClass.getSuperclass();
 					oSimpleName = oClass.getSimpleName();
 				} else {

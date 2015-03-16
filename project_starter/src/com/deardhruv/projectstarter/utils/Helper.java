@@ -1,20 +1,6 @@
 
 package com.deardhruv.projectstarter.utils;
 
-import java.net.URLEncoder;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +19,20 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+
+import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
 /** Helper methods that are used all over the app. */
 public final class Helper {
 	private static final String LOGTAG = "Helper";
@@ -42,7 +42,7 @@ public final class Helper {
 
 	static final String DATE_TEMPLATE = "EEE, d MMM yyyy HH:mm:ss Z";
 
-	public static final long ONE_DAY = 86400L;
+	private static final long ONE_DAY = 86400L;
 	public static final long FOUR_WEEKS = 28L * ONE_DAY * 1000L;
 
 	public static final SimpleDateFormat FORMATTER1 = new SimpleDateFormat(
@@ -72,14 +72,8 @@ public final class Helper {
 		if (info == null) {
 			return false;
 		}
-		if (!info.isConnected()) {
-			return false;
-		}
-		if (!info.isAvailable()) {
-			return false;
-		}
-		return true;
-	}
+        return info.isConnected() && info.isAvailable();
+    }
 
 	public static void closeCursor(Cursor c) {
 		if (c != null && !c.isClosed()) {
@@ -195,12 +189,9 @@ public final class Helper {
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo ni = cm.getActiveNetworkInfo();
 
-		if (ni != null) {
-			return ni.isRoaming();
-		}
+        return ni != null && ni.isRoaming();
 
-		return false;
-	}
+    }
 
 	/**
 	 * Is Roaming enabled.
@@ -234,13 +225,7 @@ public final class Helper {
 	public static boolean isNetworkConnectionAllowed(Context ctx) {
 		boolean result;
 		if (isOnline(ctx)) {
-			if (isConnectionRoaming(ctx) && isRoamingEnabled(ctx)) {
-				result = true;
-			} else if (!isConnectionRoaming(ctx)) {
-				result = true;
-			} else {
-				result = false;
-			}
+            result = isConnectionRoaming(ctx) && isRoamingEnabled(ctx) || !isConnectionRoaming(ctx);
 		} else {
 			result = false;
 		}
@@ -254,7 +239,7 @@ public final class Helper {
 
 	public static boolean isAppInstalled(String uri, Context context) {
 		PackageManager pm = context.getPackageManager();
-		boolean app_installed = false;
+		boolean app_installed;
 
 		try {
 			pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
@@ -267,7 +252,7 @@ public final class Helper {
 	}
 
 	public static List<NameValuePair> encodeNameValuePair(Bundle parameters) {
-		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
+		List<NameValuePair> nameValuePair = new ArrayList<>();
 
 		if (parameters != null && parameters.size() > 0) {
 			boolean first = true;
@@ -313,10 +298,9 @@ public final class Helper {
 					}
 
 					try {
-						sb.append(URLEncoder.encode(key, HTTP.UTF_8) + "="
-								+ URLEncoder.encode(value, HTTP.UTF_8));
+						sb.append(URLEncoder.encode(key, HTTP.UTF_8)).append("=").append(URLEncoder.encode(value, HTTP.UTF_8));
 					} catch (Exception e) {
-						sb.append(URLEncoder.encode(key) + "=" + URLEncoder.encode(value));
+						sb.append(URLEncoder.encode(key)).append("=").append(URLEncoder.encode(value));
 					}
 				}
 			}
@@ -359,9 +343,9 @@ public final class Helper {
 
 		StringBuffer md5checksum = new StringBuffer();
 
-		for (int i = 0; i < md5sum.length; i++) {
-			md5checksum.append(Integer.toString((md5sum[i] & 0xff) + 0x100, 16).substring(1));
-		}
+        for (byte aMd5sum : md5sum) {
+            md5checksum.append(Integer.toString((aMd5sum & 0xff) + 0x100, 16).substring(1));
+        }
 
 		return md5checksum;
 	}
