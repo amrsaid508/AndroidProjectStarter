@@ -9,5 +9,6 @@
     <string name="size_info">Below images has total size of 12 MB; be patient and let app load the images.</string>
     <string name="pictureviewer_error_no_pictures">No images</string>
     <string name="images">Images</string>
+    <string name="upload_file">Upload File</string>
 
 </resources>

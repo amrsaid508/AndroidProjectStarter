@@ -1,20 +1,21 @@
 
 package com.deardhruv.projectstarter.network;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit.RestAdapter;
+import retrofit.RestAdapter.LogLevel;
+import retrofit.client.Client;
+import retrofit.converter.Converter;
+
 import com.deardhruv.projectstarter.BuildConfig;
 import com.deardhruv.projectstarter.events.RequestFinishedEvent;
 import com.deardhruv.projectstarter.requests.AbstractApiRequest;
 import com.deardhruv.projectstarter.requests.model.ImageListRequest;
 import com.deardhruv.projectstarter.utils.Helper;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import de.greenrobot.event.EventBus;
-import retrofit.RestAdapter;
-import retrofit.RestAdapter.LogLevel;
-import retrofit.client.Client;
-import retrofit.converter.Converter;
 
 /**
  * Provides request functions for all api calls. This class maintains a map of
@@ -24,10 +25,21 @@ public class ApiClient {
 	private static final String LOGTAG = ApiClient.class.getSimpleName();
 
 	public static final String WS_SCHEME = "https://";
-	public static final String WS_HOSTNAME = "raw.githubusercontent.com";
-	public static final String WS_SUFFIX_FOLDER = "/DearDhruv/AndroidProjectStarter/master";
+	// public static final String WS_PREFIX_DOMAIN = "";
+	// public static final String WS_HOSTNAME = "raw.githubusercontent.com";
+	// public static final String WS_SUFFIX_FOLDER =
+	// "/DearDhruv/AndroidProjectStarter/master";
 
-	private static final String BASE_URL = WS_SCHEME + WS_HOSTNAME + WS_SUFFIX_FOLDER;
+	public static final String WS_PREFIX_DOMAIN = "u.";
+	public static final String WS_PREFIX_DOMAIN_API = "api.";
+	public static final String WS_HOSTNAME = "teknik.io";
+	public static final String WS_SUFFIX_FOLDER = "";
+
+	// https://u.teknik.io/dr8OwG
+	// https://api.teknik.io/upload/post
+
+	private static final String BASE_URL = WS_SCHEME + WS_PREFIX_DOMAIN + WS_HOSTNAME
+			+ WS_SUFFIX_FOLDER;
 	// https://raw.githubusercontent.com/DearDhruv/AndroidProjectStarter/master/image_list_json
 
 	/** Makes the api calls. */
@@ -47,13 +59,8 @@ public class ApiClient {
 	 *            api response conversion to POJOs.
 	 */
 	public ApiClient(Client client, Converter converter) {
-		RestAdapter restAdapter = new RestAdapter
-				.Builder()
-		.setClient(client)
-		.setEndpoint(BASE_URL)
-		.setConverter(converter)
-		.setLogLevel(LogLevel.BASIC)
-		.setLog(new RestAdapter.Log() {
+		RestAdapter restAdapter = new RestAdapter.Builder().setClient(client).setEndpoint(BASE_URL)
+				.setConverter(converter).setLogLevel(LogLevel.BASIC).setLog(new RestAdapter.Log() {
 					public void log(String msg) {
 						if (BuildConfig.DEBUG) {
 							Helper.logLongStrings(LOGTAG, msg);

@@ -1,10 +1,10 @@
 
 package com.deardhruv.projectstarter.network;
 
-import com.deardhruv.projectstarter.response.model.ImageListResponse;
-
 import retrofit.Callback;
 import retrofit.http.GET;
+
+import com.deardhruv.projectstarter.response.model.ImageListResponse;
 
 /**
  * The API interface for retrofit calls. This interface defines all the api
@@ -21,6 +21,8 @@ public interface Api {
 	static final String BASE_PARAMS = "?application=" + APP_ID + "&userid=" + USER_ID;
 	static final String SECRET_KEY = "";
 
+	// POST https://api.teknik.io/upload/post --> file get_delete_key
+
 	/*
 	 * @GET("/image_list_json" + BASE_PARAMS) void getImageList(
 	 * @Query("adnumber") String adnumber,
@@ -31,7 +33,8 @@ public interface Api {
 	/**
 	 * Retrive list of images.
 	 */
-	@GET("/image_list_json")
+	// @GET("/image_list_json")
+	@GET("/dr8OwG")
 	void getImageList(Callback<ImageListResponse> callback);
 
 }

@@ -10,16 +10,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class ImageListResponse extends AbstractApiResponse {
 
+	private static final long serialVersionUID = -6933878383763810916L;
 	@JsonProperty("data")
 	private Data data;
 
 	public ImageListResponse() {
 		// nothing.
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 
 	public Data getData() {
