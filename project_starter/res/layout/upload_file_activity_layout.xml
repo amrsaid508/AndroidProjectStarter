@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_4"
+    tools:context="com.deardhruv.projectstarter.activities.MainActivity" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/select_file_to_upload_on_the_server"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:ignore="RtlHardcoded" />
+
+    <ImageView
+        android:id="@+id/imgAddPhoto"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/button_newphoto_selector" />
+
+    <Button
+        android:id="@+id/btnUploadFile"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload File" />
+
+</LinearLayout>

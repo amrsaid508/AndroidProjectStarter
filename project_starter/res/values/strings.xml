@@ -10,5 +10,6 @@
     <string name="pictureviewer_error_no_pictures">No images</string>
     <string name="images">Images</string>
     <string name="upload_file">Upload File</string>
+    <string name="select_file_to_upload_on_the_server">Select file to upload on the server</string>
 
 </resources>

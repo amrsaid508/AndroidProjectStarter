@@ -1,6 +1,8 @@
 
 package com.deardhruv.projectstarter.activities;
 
+import java.util.ArrayList;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,8 +28,6 @@ import com.deardhruv.projectstarter.response.model.ImageResult;
 import com.deardhruv.projectstarter.utils.Dumper;
 import com.deardhruv.projectstarter.utils.Logger;
 
-import java.util.ArrayList;
-
 import de.greenrobot.event.EventBus;
 
 public class MainActivity extends AbstractActivity implements OnClickListener, OnItemClickListener {
@@ -40,11 +40,11 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 	private EventBus mEventBus;
 	private ApiClient mApiClient;
 
-	private Button btnReload;
+	private Button btnReload, btnUploadFile;
 	private ProgressDialog pd;
 	private ListView listPhotos;
 
-    private ArrayList<String> mImageUrls;
+	private ArrayList<String> mImageUrls;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +65,7 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 
 	private void initUI() {
 		btnReload = (Button) findViewById(R.id.btnReload);
+		btnUploadFile = (Button) findViewById(R.id.btnUploadFile);
 		listPhotos = (ListView) findViewById(R.id.listPhotos);
 
 		initListener();
@@ -72,6 +73,7 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 
 	private void initListener() {
 		btnReload.setOnClickListener(this);
+		btnUploadFile.setOnClickListener(this);
 		listPhotos.setOnItemClickListener(this);
 	}
 
@@ -88,8 +90,8 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-        return id == R.id.action_settings || super.onOptionsItemSelected(item);
-    }
+		return id == R.id.action_settings || super.onOptionsItemSelected(item);
+	}
 
 	@Override
 	protected void onResume() {
@@ -126,6 +128,38 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 	}
 
 	// ============================================================================================
+	// User Clicks and Actions
+	// ============================================================================================
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+			case R.id.btnReload:
+				loadImages();
+				break;
+
+			case R.id.btnUploadFile:
+				final Intent intent = new Intent(MainActivity.this, UploadFileActivity.class);
+				startActivity(intent);
+				break;
+
+			default:
+				LOG.i("default case");
+				break;
+		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+		final Intent intent = new Intent(MainActivity.this, PictureViewerActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.putStringArrayListExtra(PictureViewerActivity.EXTRA_IMAGE_URLS, mImageUrls);
+		intent.putExtra(PictureViewerActivity.EXTRA_IMAGE_SELECTION, position);
+		startActivity(intent);
+	}
+
+	// ============================================================================================
 	// EventBus callbacks
 	// ============================================================================================
 
@@ -138,8 +172,8 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 		switch (imageListResponse.getRequestTag()) {
 			case IMAGE_LIST_REQUEST_TAG:
 				dismissProgressDialog();
-                ImageItemDetailAdapter adapter = new ImageItemDetailAdapter(MainActivity.this, imageListResponse.getData()
-                        .getImageResultList());
+				ImageItemDetailAdapter adapter = new ImageItemDetailAdapter(MainActivity.this,
+						imageListResponse.getData().getImageResultList());
 				listPhotos.setAdapter(adapter);
 
 				mImageUrls = new ArrayList<>();
@@ -187,28 +221,6 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 			default:
 				break;
 		}
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-			case R.id.btnReload:
-				loadImages();
-				break;
-
-			default:
-				break;
-		}
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-		final Intent intent = new Intent(MainActivity.this, PictureViewerActivity.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.putStringArrayListExtra(PictureViewerActivity.EXTRA_IMAGE_URLS, mImageUrls);
-		intent.putExtra(PictureViewerActivity.EXTRA_IMAGE_SELECTION, position);
-		startActivity(intent);
 	}
 
 }

@@ -25,21 +25,11 @@ public class UploadFileResponse extends AbstractApiResponse {
 		// nothing.
 	}
 
-	class Results {
-		@JsonProperty("file")
-		private FileKey file;
+	class Results implements Serializable, Parcelable {
 
-		public FileKey getFile() {
-			return file;
-		}
-
-	}
-
-	class FileKey implements Serializable, Parcelable {
-		
 		private static final long serialVersionUID = 6148637452535436602L;
 
-		public FileKey() {
+		public Results() {
 		}
 
 		@JsonProperty("name")
@@ -48,14 +38,8 @@ public class UploadFileResponse extends AbstractApiResponse {
 		@JsonProperty("url")
 		private String url;
 
-		@JsonProperty("type")
-		private String type;
-
 		@JsonProperty("size")
 		private int size;
-
-		@JsonProperty("delete_key")
-		private String delete_key;
 
 		/** Parcelable implementation. */
 		@Override
@@ -69,31 +53,27 @@ public class UploadFileResponse extends AbstractApiResponse {
 
 			out.writeString(name);
 			out.writeString(url);
-			out.writeString(type);
 			out.writeInt(size);
-			out.writeString(delete_key);
 
 		}
 
 		/** Parcelable implementation. */
-		public final Parcelable.Creator<FileKey> CREATOR = new Parcelable.Creator<FileKey>() {
-			public FileKey createFromParcel(Parcel in) {
-				return new FileKey(in);
+		public final Parcelable.Creator<Results> CREATOR = new Parcelable.Creator<Results>() {
+			public Results createFromParcel(Parcel in) {
+				return new Results(in);
 			}
 
-			public FileKey[] newArray(int size) {
-				return new FileKey[size];
+			public Results[] newArray(int size) {
+				return new Results[size];
 			}
 		};
 
 		/** Parcelable implementation. */
-		private FileKey(Parcel in) {
+		private Results(Parcel in) {
 
 			name = in.readString();
 			url = in.readString();
-			type = in.readString();
 			size = in.readInt();
-			delete_key = in.readString();
 
 		}
 
@@ -105,16 +85,8 @@ public class UploadFileResponse extends AbstractApiResponse {
 			return url;
 		}
 
-		public String getType() {
-			return type;
-		}
-
 		public int getSize() {
 			return size;
-		}
-
-		public String getDelete_key() {
-			return delete_key;
 		}
 
 	}

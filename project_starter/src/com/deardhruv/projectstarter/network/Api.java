@@ -3,8 +3,14 @@ package com.deardhruv.projectstarter.network;
 
 import retrofit.Callback;
 import retrofit.http.GET;
+import retrofit.http.Multipart;
+import retrofit.http.POST;
+import retrofit.http.Part;
+import retrofit.http.Query;
+import retrofit.mime.TypedFile;
 
 import com.deardhruv.projectstarter.response.model.ImageListResponse;
+import com.deardhruv.projectstarter.response.model.UploadFileResponse;
 
 /**
  * The API interface for retrofit calls. This interface defines all the api
@@ -21,20 +27,25 @@ public interface Api {
 	static final String BASE_PARAMS = "?application=" + APP_ID + "&userid=" + USER_ID;
 	static final String SECRET_KEY = "";
 
-	// POST https://api.teknik.io/upload/post --> file get_delete_key
-
-	/*
-	 * @GET("/image_list_json" + BASE_PARAMS) void getImageList(
-	 * @Query("adnumber") String adnumber,
-	 * @Query("deviceid") String deviceid, Callback<ImageListResponse>
-	 * callback);
-	 */
-
 	/**
 	 * Retrive list of images.
 	 */
-	// @GET("/image_list_json")
-	@GET("/dr8OwG")
+	@GET("/image_list_json")
 	void getImageList(Callback<ImageListResponse> callback);
+
+	/**
+	 * Upload file to server
+	 * 
+	 * @param file
+	 * @param get_delete_key
+	 * @param callback
+	 */
+	@Multipart
+	@POST("/upload.php")
+	void uploadFile(
+//			@Query("file") TypedFile file,
+			@Part("file") TypedFile file,
+			@Query("get_delete_key") String get_delete_key,
+			Callback<UploadFileResponse> callback);
 
 }

@@ -8,11 +8,13 @@ import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.client.Client;
 import retrofit.converter.Converter;
+import retrofit.mime.TypedFile;
 
 import com.deardhruv.projectstarter.BuildConfig;
 import com.deardhruv.projectstarter.events.RequestFinishedEvent;
 import com.deardhruv.projectstarter.requests.AbstractApiRequest;
 import com.deardhruv.projectstarter.requests.model.ImageListRequest;
+import com.deardhruv.projectstarter.requests.model.UploadFileRequest;
 import com.deardhruv.projectstarter.utils.Helper;
 
 import de.greenrobot.event.EventBus;
@@ -24,19 +26,23 @@ import de.greenrobot.event.EventBus;
 public class ApiClient {
 	private static final String LOGTAG = ApiClient.class.getSimpleName();
 
-	public static final String WS_SCHEME = "https://";
-	// public static final String WS_PREFIX_DOMAIN = "";
-	// public static final String WS_HOSTNAME = "raw.githubusercontent.com";
-	// public static final String WS_SUFFIX_FOLDER =
-	// "/DearDhruv/AndroidProjectStarter/master";
-
-	public static final String WS_PREFIX_DOMAIN = "u.";
-	public static final String WS_PREFIX_DOMAIN_API = "api.";
-	public static final String WS_HOSTNAME = "teknik.io";
-	public static final String WS_SUFFIX_FOLDER = "";
-
 	// https://u.teknik.io/dr8OwG
 	// https://api.teknik.io/upload/post
+
+	// http://laendleimmo.immoservice.mobi/api/ad/upload/pictures
+	// http://laendleimmo.immoservice.mobi/immobilien/gewerbliche-immobilien/buro-ordination/vorarlberg/feldkirch/73793
+
+	// http://vendev12/image_list_json 192.168.1.12/
+
+	// http://vendev12/Upload.php
+
+	// public static final String WS_SCHEME = "https://";
+	public static final String WS_SCHEME = "http://";
+
+	// public static final String WS_PREFIX_DOMAIN = "u.";
+	public static final String WS_PREFIX_DOMAIN = "192.168.1.12";
+	public static final String WS_HOSTNAME = "";
+	public static final String WS_SUFFIX_FOLDER = "/api";
 
 	private static final String BASE_URL = WS_SCHEME + WS_PREFIX_DOMAIN + WS_HOSTNAME
 			+ WS_SUFFIX_FOLDER;
@@ -59,8 +65,13 @@ public class ApiClient {
 	 *            api response conversion to POJOs.
 	 */
 	public ApiClient(Client client, Converter converter) {
-		RestAdapter restAdapter = new RestAdapter.Builder().setClient(client).setEndpoint(BASE_URL)
-				.setConverter(converter).setLogLevel(LogLevel.BASIC).setLog(new RestAdapter.Log() {
+		RestAdapter restAdapter = new RestAdapter
+				.Builder()
+		.setClient(client)
+		.setEndpoint(BASE_URL)
+		.setConverter(converter)
+		.setLogLevel(LogLevel.FULL)
+		.setLog(new RestAdapter.Log() {
 					public void log(String msg) {
 						if (BuildConfig.DEBUG) {
 							Helper.logLongStrings(LOGTAG, msg);
@@ -87,6 +98,19 @@ public class ApiClient {
 		ImageListRequest request = new ImageListRequest(mApi, requestTag);
 		requests.put(requestTag, request);
 		request.execute();
+	}
+
+	/**
+	 * Execute a request to retrieve the update message. See
+	 * {@link Api#uploadFile(TypedFile, String, retrofit.Callback)} for
+	 * parameter details.
+	 * 
+	 * @param requestTag The tag for identifying the request.
+	 */
+	public void uploadFile(String requestTag, TypedFile file, String get_delete_key) {
+		UploadFileRequest request = new UploadFileRequest(mApi, requestTag);
+		requests.put(requestTag, request);
+		request.execute(requestTag, file, get_delete_key);
 	}
 
 	// ============================================================================================
