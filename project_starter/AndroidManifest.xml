@@ -37,7 +37,7 @@
         </activity>
         <activity
             android:name="com.deardhruv.projectstarter.activities.UploadFileActivity"
-            android:configChanges="screenLayout|screenSize"
+            android:configChanges="screenLayout|screenSize|orientation|keyboardHidden"
             android:label="@string/upload_file"
             android:screenOrientation="portrait" >
         </activity>

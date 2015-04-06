@@ -9,7 +9,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import retrofit.mime.TypedFile;
+import com.deardhruv.projectstarter.ProjectStarterApplication;
+import com.deardhruv.projectstarter.R;
+import com.deardhruv.projectstarter.abstracts.AbstractActivity;
+import com.deardhruv.projectstarter.events.ApiErrorEvent;
+import com.deardhruv.projectstarter.events.ApiErrorWithMessageEvent;
+import com.deardhruv.projectstarter.network.ApiClient;
+import com.deardhruv.projectstarter.response.model.UploadFileResponse;
+import com.deardhruv.projectstarter.utils.Dumper;
+import com.deardhruv.projectstarter.utils.ImageValidator;
+import com.deardhruv.projectstarter.utils.Logger;
+import com.deardhruv.projectstarter.utils.StoreImageHelper;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -28,22 +41,8 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import com.deardhruv.projectstarter.ProjectStarterApplication;
-import com.deardhruv.projectstarter.R;
-import com.deardhruv.projectstarter.abstracts.AbstractActivity;
-import com.deardhruv.projectstarter.events.ApiErrorEvent;
-import com.deardhruv.projectstarter.events.ApiErrorWithMessageEvent;
-import com.deardhruv.projectstarter.network.ApiClient;
-import com.deardhruv.projectstarter.response.model.UploadFileResponse;
-import com.deardhruv.projectstarter.utils.Dumper;
-import com.deardhruv.projectstarter.utils.ImageValidator;
-import com.deardhruv.projectstarter.utils.Logger;
-import com.deardhruv.projectstarter.utils.StoreImageHelper;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import de.greenrobot.event.EventBus;
+import retrofit.mime.TypedFile;
 
 public class UploadFileActivity extends AbstractActivity implements OnClickListener {
 
@@ -222,7 +221,7 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 		}
 
 		Intent[] additionalIntents = new Intent[] {
-			takePictureIntent
+				takePictureIntent
 		};
 
 		Intent chooserIntent = Intent.createChooser(getContentIntent, "Pick your choice");
@@ -257,13 +256,13 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 				imagePath.replace("file://", "");
 			}
 
-			final File file = new File(imagePath);
+			mTmpPictureFile = new File(imagePath);
 
-			if (file.exists()) {
-				if (!ImageValidator.isPictureValidForUpload(file.getAbsolutePath())) {
+			if (mTmpPictureFile.exists()) {
+				if (!ImageValidator.isPictureValidForUpload(mTmpPictureFile.getAbsolutePath())) {
 					showToast("Creating image failed.");
 				} else {
-					addImageToView(file);
+					addImageToView(mTmpPictureFile);
 				}
 			} else {
 				Log.e(LOGTAG, "Photo picker: File does not exist!");
@@ -324,7 +323,7 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 		// available to the user.
 		// http://developer.android.com/reference/android/os/Environment.html#getExternalStoragePublicDirectory%28java.lang.String%29
 		String[] filePaths = new String[] {
-			file_save.toString()
+				file_save.toString()
 		};
 		MediaScannerConnection.scanFile(this, filePaths, null, null);
 
@@ -336,14 +335,15 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 			throw new IllegalArgumentException("image cannot be null");
 		}
 
-		mImageLoader
-				.displayImage(mStoreImageHelper.getImagePath(image), imgAddPhoto, mImageOptions);
+		mImageLoader.displayImage(mStoreImageHelper.getImagePath(image), imgAddPhoto,
+				mImageOptions);
 
 	}
 
 	private void startUploading(final File file) {
 
-		if (file == null || !isPictureValid(file.getAbsolutePath())) {
+		// if (file == null || !isPictureValid(file.getAbsolutePath())) {
+		if (file == null) {
 			showToast("File is not valid, try again.");
 		} else if (file.exists()) {
 			// || new File(file.getAbsolutePath().replace("file://",
@@ -370,7 +370,7 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 	// ============================================================================================
 
 	private boolean isPictureValid(String filePath) {
-		return true; // ImageValidator.isPictureValidForUpload(filePath);
+		return ImageValidator.isPictureValidForUpload(filePath);
 	}
 
 	// ============================================================================================

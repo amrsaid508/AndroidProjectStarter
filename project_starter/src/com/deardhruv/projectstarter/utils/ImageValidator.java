@@ -1,6 +1,13 @@
 
 package com.deardhruv.projectstarter.utils;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.Context;
@@ -16,13 +23,6 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
-
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class ImageValidator {
 
@@ -47,16 +47,16 @@ public class ImageValidator {
 		final Options opt = new Options();
 		opt.inJustDecodeBounds = true;
 
-		if (filepath.startsWith("http://")) {
-			// already uploaded images are considered valid
-			return true;
+		// if (filepath.startsWith("http://"))
+		// // already uploaded images are considered valid
+		// return true;
+
+		if (filepath.startsWith("file://")) {
+			BitmapFactory.decodeFile(filepath.replace("file://", ""), opt);
 		} else {
-			if (filepath.startsWith("file://")) {
-				BitmapFactory.decodeFile(filepath.replace("file://", ""), opt);
-			} else {
-				BitmapFactory.decodeFile(filepath, opt);
-			}
+			BitmapFactory.decodeFile(filepath, opt);
 		}
+		
 		if (opt.outWidth < 320) {
 			Log.e(LOGTAG, "width too small");
 			return false;
