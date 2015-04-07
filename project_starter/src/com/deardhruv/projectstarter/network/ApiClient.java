@@ -4,12 +4,6 @@ package com.deardhruv.projectstarter.network;
 import java.util.HashMap;
 import java.util.Map;
 
-import retrofit.RestAdapter;
-import retrofit.RestAdapter.LogLevel;
-import retrofit.client.Client;
-import retrofit.converter.Converter;
-import retrofit.mime.TypedFile;
-
 import com.deardhruv.projectstarter.BuildConfig;
 import com.deardhruv.projectstarter.events.RequestFinishedEvent;
 import com.deardhruv.projectstarter.requests.AbstractApiRequest;
@@ -18,6 +12,11 @@ import com.deardhruv.projectstarter.requests.model.UploadFileRequest;
 import com.deardhruv.projectstarter.utils.Helper;
 
 import de.greenrobot.event.EventBus;
+import retrofit.RestAdapter;
+import retrofit.RestAdapter.LogLevel;
+import retrofit.client.Client;
+import retrofit.converter.Converter;
+import retrofit.mime.TypedFile;
 
 /**
  * Provides request functions for all api calls. This class maintains a map of
@@ -70,7 +69,7 @@ public class ApiClient {
 		.setClient(client)
 		.setEndpoint(BASE_URL)
 		.setConverter(converter)
-		.setLogLevel(LogLevel.FULL)
+		.setLogLevel(LogLevel.BASIC)
 		.setLog(new RestAdapter.Log() {
 					public void log(String msg) {
 						if (BuildConfig.DEBUG) {

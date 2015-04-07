@@ -342,12 +342,9 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 
 	private void startUploading(final File file) {
 
-		// if (file == null || !isPictureValid(file.getAbsolutePath())) {
-		if (file == null) {
+		if (file == null || !isPictureValid(file.getAbsolutePath())) {
 			showToast("File is not valid, try again.");
 		} else if (file.exists()) {
-			// || new File(file.getAbsolutePath().replace("file://",
-			// "")).exists()) {
 			showProgressDialog();
 			String mimeType = "image/jpeg"
 			// "application/octet-stream"
@@ -357,8 +354,8 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 			;
 
 			TypedFile typedFile = new TypedFile(mimeType, file);
-
 			mApiClient.uploadFile(UPLOAD_FILE_REQUEST_TAG, typedFile, "yes");
+
 		} else {
 			showToast("File is corrupted.");
 		}
