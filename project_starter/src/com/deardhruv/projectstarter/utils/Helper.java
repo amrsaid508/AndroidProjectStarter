@@ -69,11 +69,8 @@ public final class Helper {
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo info = conMgr.getActiveNetworkInfo();
 
-		if (info == null) {
-			return false;
-		}
-        return info.isConnected() && info.isAvailable();
-    }
+		return info != null && info.isConnected() && info.isAvailable();
+	}
 
 	public static void closeCursor(Cursor c) {
 		if (c != null && !c.isClosed()) {
@@ -224,11 +221,7 @@ public final class Helper {
 	 */
 	public static boolean isNetworkConnectionAllowed(Context ctx) {
 		boolean result;
-		if (isOnline(ctx)) {
-            result = isConnectionRoaming(ctx) && isRoamingEnabled(ctx) || !isConnectionRoaming(ctx);
-		} else {
-			result = false;
-		}
+		result = isOnline(ctx) && (isConnectionRoaming(ctx) && isRoamingEnabled(ctx) || !isConnectionRoaming(ctx));
 
 		if (!result) {
 			LOG.w("no network connection allowed");
