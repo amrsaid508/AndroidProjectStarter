@@ -3,6 +3,19 @@ package com.deardhruv.projectstarter.activities;
 
 import java.util.ArrayList;
 
+import com.deardhruv.projectstarter.ProjectStarterApplication;
+import com.deardhruv.projectstarter.R;
+import com.deardhruv.projectstarter.abstracts.AbstractActivity;
+import com.deardhruv.projectstarter.adapters.ImageItemDetailAdapter;
+import com.deardhruv.projectstarter.events.ApiErrorEvent;
+import com.deardhruv.projectstarter.events.ApiErrorWithMessageEvent;
+import com.deardhruv.projectstarter.network.ApiClient;
+import com.deardhruv.projectstarter.response.model.ImageListResponse;
+import com.deardhruv.projectstarter.response.model.ImageResult;
+import com.deardhruv.projectstarter.utils.Dumper;
+import com.deardhruv.projectstarter.utils.Helper;
+import com.deardhruv.projectstarter.utils.Logger;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,20 +28,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-
-import com.deardhruv.projectstarter.ProjectStarterApplication;
-import com.deardhruv.projectstarter.R;
-import com.deardhruv.projectstarter.abstracts.AbstractActivity;
-import com.deardhruv.projectstarter.adapters.ImageItemDetailAdapter;
-import com.deardhruv.projectstarter.events.ApiErrorEvent;
-import com.deardhruv.projectstarter.events.ApiErrorWithMessageEvent;
-import com.deardhruv.projectstarter.network.ApiClient;
-import com.deardhruv.projectstarter.response.model.ImageListResponse;
-import com.deardhruv.projectstarter.response.model.ImageResult;
-import com.deardhruv.projectstarter.utils.Dumper;
-import com.deardhruv.projectstarter.utils.Logger;
-
-import de.greenrobot.event.EventBus;
+import de.greenrobot.event.EventBus; 
 
 public class MainActivity extends AbstractActivity implements OnClickListener, OnItemClickListener {
 
@@ -52,6 +52,8 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setProgressBarIndeterminateVisibility(true);
+		
+		Helper.riseAndShine(this);
 
 		setContentView(R.layout.main_activity_layout);
 

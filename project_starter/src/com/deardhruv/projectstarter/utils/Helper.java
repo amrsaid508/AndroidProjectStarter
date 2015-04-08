@@ -1,6 +1,21 @@
 
 package com.deardhruv.projectstarter.utils;
 
+import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,26 +27,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-
-import java.net.URLEncoder;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 /** Helper methods that are used all over the app. */
 public final class Helper {
@@ -186,9 +189,9 @@ public final class Helper {
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo ni = cm.getActiveNetworkInfo();
 
-        return ni != null && ni.isRoaming();
+		return ni != null && ni.isRoaming();
 
-    }
+	}
 
 	/**
 	 * Is Roaming enabled.
@@ -221,7 +224,8 @@ public final class Helper {
 	 */
 	public static boolean isNetworkConnectionAllowed(Context ctx) {
 		boolean result;
-		result = isOnline(ctx) && (isConnectionRoaming(ctx) && isRoamingEnabled(ctx) || !isConnectionRoaming(ctx));
+		result = isOnline(ctx)
+				&& (isConnectionRoaming(ctx) && isRoamingEnabled(ctx) || !isConnectionRoaming(ctx));
 
 		if (!result) {
 			LOG.w("no network connection allowed");
@@ -291,9 +295,11 @@ public final class Helper {
 					}
 
 					try {
-						sb.append(URLEncoder.encode(key, HTTP.UTF_8)).append("=").append(URLEncoder.encode(value, HTTP.UTF_8));
+						sb.append(URLEncoder.encode(key, HTTP.UTF_8)).append("=")
+								.append(URLEncoder.encode(value, HTTP.UTF_8));
 					} catch (Exception e) {
-						sb.append(URLEncoder.encode(key)).append("=").append(URLEncoder.encode(value));
+						sb.append(URLEncoder.encode(key)).append("=")
+								.append(URLEncoder.encode(value));
 					}
 				}
 			}
@@ -336,9 +342,9 @@ public final class Helper {
 
 		StringBuffer md5checksum = new StringBuffer();
 
-        for (byte aMd5sum : md5sum) {
-            md5checksum.append(Integer.toString((aMd5sum & 0xff) + 0x100, 16).substring(1));
-        }
+		for (byte aMd5sum : md5sum) {
+			md5checksum.append(Integer.toString((aMd5sum & 0xff) + 0x100, 16).substring(1));
+		}
 
 		return md5checksum;
 	}
@@ -375,15 +381,34 @@ public final class Helper {
 
 		try {
 			marketIntent = new Intent(Intent.ACTION_VIEW, storeAppUri);
-			marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY
-					| Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+			marketIntent.addFlags(
+					Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 			ctx.startActivity(marketIntent);
 
 		} catch (android.content.ActivityNotFoundException anfe) {
 			marketIntent = new Intent(Intent.ACTION_VIEW, storeWebsiteUri);
-			marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY
-					| Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+			marketIntent.addFlags(
+					Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 			ctx.startActivity(marketIntent);
 		}
+	}
+
+	/**
+	 * Show the activity over the lockscreen and wake up the device. If you
+	 * launched the app manually both of these conditions are already true. If
+	 * you deployed from the IDE, however, this will save you from hundreds of
+	 * power button presses and pattern swiping per day!
+	 */
+	public static void riseAndShine(Activity activity) {
+		activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+
+		PowerManager power = (PowerManager) activity.getSystemService(Context.POWER_SERVICE);
+		PowerManager.WakeLock lock = power.newWakeLock(
+				PowerManager.FULL_WAKE_LOCK |
+				PowerManager.ACQUIRE_CAUSES_WAKEUP |
+				PowerManager.ON_AFTER_RELEASE, "wakeup!");
+
+		lock.acquire();
+		lock.release();
 	}
 }
