@@ -1,6 +1,13 @@
 
 package com.deardhruv.projectstarter.adapters;
 
+import java.util.List;
+
+import com.deardhruv.projectstarter.R;
+import com.deardhruv.projectstarter.utils.AnimateImageListener;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -8,14 +15,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
-
-import com.deardhruv.projectstarter.R;
-import com.deardhruv.projectstarter.utils.AnimateImageListener;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-import java.util.List;
-
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import it.sephiroth.android.library.imagezoom.ImageViewTouchBase.DisplayType;
 
@@ -73,7 +72,8 @@ public class PictureViewerAdapter extends PagerAdapter {
 		final LayoutInflater inflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		@SuppressLint("InflateParams") final RelativeLayout layout = (RelativeLayout) inflater.inflate(
+		@SuppressLint("InflateParams")
+		final RelativeLayout layout = (RelativeLayout) inflater.inflate(
 				R.layout.row_pictureviwer_image_item, null);
 
 		((ViewPager) collection).addView(layout, 0);
@@ -83,7 +83,7 @@ public class PictureViewerAdapter extends PagerAdapter {
 
 		iv.setDisplayType(DisplayType.FIT_TO_SCREEN);
 
-		mImageLoader.displayImage(mImageUrls.get(position), iv, mImageOptions,
+		getImageLoader().displayImage(mImageUrls.get(position), iv, getImageOptions(),
 				mAnimateImageListener);
 
 		return layout;
@@ -92,6 +92,14 @@ public class PictureViewerAdapter extends PagerAdapter {
 	@Override
 	public void destroyItem(View view, int index, Object obj) {
 		((ViewPager) view).removeView((View) obj);
+	}
+
+	public DisplayImageOptions getImageOptions() {
+		return mImageOptions;
+	}
+
+	public ImageLoader getImageLoader() {
+		return mImageLoader;
 	}
 
 }

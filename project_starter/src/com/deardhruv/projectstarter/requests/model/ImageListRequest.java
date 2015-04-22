@@ -1,8 +1,6 @@
 
 package com.deardhruv.projectstarter.requests.model;
 
-import android.content.Context;
-
 import com.deardhruv.projectstarter.ProjectStarterApplication;
 import com.deardhruv.projectstarter.R;
 import com.deardhruv.projectstarter.network.Api;
@@ -11,6 +9,8 @@ import com.deardhruv.projectstarter.response.AbstractApiCallback;
 import com.deardhruv.projectstarter.response.model.ImageListResponse;
 import com.deardhruv.projectstarter.utils.Helper;
 import com.deardhruv.projectstarter.utils.Logger;
+
+import android.content.Context;
 
 /**
  * Use this request to retrieve the image list via the ImageListResponse api
@@ -41,7 +41,8 @@ public class ImageListRequest extends AbstractApiRequest {
 	 * Retrofit. The api response is posted on the EventBus.
 	 */
 	public void execute() {
-		callback = new AbstractApiCallback<>(tag);
+		callback = new ImageListCallback(tag);
+
 		if (!isInternetActive()) {
 			callback.postUnexpectedError(mContext.getString(R.string.error_no_internet));
 			return;

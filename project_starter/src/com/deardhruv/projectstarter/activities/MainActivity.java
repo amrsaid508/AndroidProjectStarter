@@ -19,8 +19,6 @@ import com.deardhruv.projectstarter.utils.Logger;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -28,7 +26,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import de.greenrobot.event.EventBus; 
+import de.greenrobot.event.EventBus;
 
 public class MainActivity extends AbstractActivity implements OnClickListener, OnItemClickListener {
 
@@ -52,7 +50,7 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setProgressBarIndeterminateVisibility(true);
-		
+
 		Helper.riseAndShine(this);
 
 		setContentView(R.layout.main_activity_layout);
@@ -77,22 +75,6 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 		btnReload.setOnClickListener(this);
 		btnUploadFile.setOnClickListener(this);
 		listPhotos.setOnItemClickListener(this);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		return id == R.id.action_settings || super.onOptionsItemSelected(item);
 	}
 
 	@Override

@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -26,6 +27,7 @@ import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.provider.Settings;
@@ -369,6 +371,22 @@ public final class Helper {
 	}
 
 	/**
+	 * @param ctx The Android application context.
+	 * @return Application name
+	 */
+	public static String getAppName(Context ctx) {
+		PackageManager packageManager = ctx.getPackageManager();
+		ApplicationInfo applicationInfo = null;
+		try {
+			applicationInfo = packageManager
+					.getApplicationInfo(ctx.getApplicationInfo().packageName, 0);
+		} catch (final NameNotFoundException e) {
+		}
+		return (String) (applicationInfo != null
+				? packageManager.getApplicationLabel(applicationInfo) : "Unknown");
+	}
+
+	/**
 	 * Tries to open the app store by using the passed storeAppUri. If this
 	 * fails, opens the store website.
 	 *
@@ -394,6 +412,13 @@ public final class Helper {
 	}
 
 	/**
+	 * @return true If the current system OS version is higher then HONEYCOMB[11]
+	 */
+	public static boolean isHoneyCombOrHigher() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
+	}
+
+	/**
 	 * Show the activity over the lockscreen and wake up the device. If you
 	 * launched the app manually both of these conditions are already true. If
 	 * you deployed from the IDE, however, this will save you from hundreds of
@@ -403,10 +428,8 @@ public final class Helper {
 		activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 
 		PowerManager power = (PowerManager) activity.getSystemService(Context.POWER_SERVICE);
-		PowerManager.WakeLock lock = power.newWakeLock(
-				PowerManager.FULL_WAKE_LOCK |
-				PowerManager.ACQUIRE_CAUSES_WAKEUP |
-				PowerManager.ON_AFTER_RELEASE, "wakeup!");
+		PowerManager.WakeLock lock = power.newWakeLock(PowerManager.FULL_WAKE_LOCK
+				| PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "wakeup!");
 
 		lock.acquire();
 		lock.release();

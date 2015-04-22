@@ -1,10 +1,10 @@
 
 package com.deardhruv.projectstarter.abstracts;
 
+import com.deardhruv.projectstarter.utils.Logger;
+
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
-
-import com.deardhruv.projectstarter.utils.Logger;
 
 /**
  * @author DearDhruv

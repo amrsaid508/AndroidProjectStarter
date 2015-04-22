@@ -1,12 +1,12 @@
 
 package com.deardhruv.projectstarter.response.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /** This class contains the detail information about Image List. */
 public class ImageResult implements Serializable, Parcelable {
@@ -35,9 +35,9 @@ public class ImageResult implements Serializable, Parcelable {
 	/** Parcelable implementation. */
 	@Override
 	public void writeToParcel(Parcel out, int flags) {
-		out.writeInt(id);
-		out.writeString(name);
-		out.writeString(img);
+		out.writeInt(getId());
+		out.writeString(getName());
+		out.writeString(getImg());
 
 	}
 
@@ -54,9 +54,9 @@ public class ImageResult implements Serializable, Parcelable {
 
 	/** Parcelable implementation. */
 	private ImageResult(Parcel in) {
-		id = in.readInt();
-		name = in.readString();
-		img = in.readString();
+		setId(in.readInt());
+		setName(in.readString());
+		setImg(in.readString());
 	}
 
 	public String getImg() {
@@ -69,6 +69,18 @@ public class ImageResult implements Serializable, Parcelable {
 
 	public int getId() {
 		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 }
