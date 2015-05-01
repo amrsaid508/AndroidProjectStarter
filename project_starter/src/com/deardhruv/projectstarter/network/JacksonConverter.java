@@ -1,12 +1,12 @@
 
 package com.deardhruv.projectstarter.network;
 
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Type;
+
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import retrofit.converter.ConversionException;
 import retrofit.converter.Converter;
@@ -24,6 +24,8 @@ public class JacksonConverter implements Converter {
 	}
 
 	public JacksonConverter(ObjectMapper objectMapper) {
+		if (objectMapper == null)
+			throw new NullPointerException("objectMapper == null");
 		this.objectMapper = objectMapper;
 	}
 

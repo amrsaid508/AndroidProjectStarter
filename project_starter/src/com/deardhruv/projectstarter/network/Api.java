@@ -1,16 +1,15 @@
 
 package com.deardhruv.projectstarter.network;
 
+import com.deardhruv.projectstarter.response.model.ImageListResponse;
+import com.deardhruv.projectstarter.response.model.UploadFileResponse;
+
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Multipart;
 import retrofit.http.POST;
 import retrofit.http.Part;
-import retrofit.http.Query;
 import retrofit.mime.TypedFile;
-
-import com.deardhruv.projectstarter.response.model.ImageListResponse;
-import com.deardhruv.projectstarter.response.model.UploadFileResponse;
 
 /**
  * The API interface for retrofit calls. This interface defines all the api
@@ -30,6 +29,7 @@ public interface Api {
 	/**
 	 * Retrive list of images.
 	 */
+//	@GET("/image_list_json")
 	@GET("/image_list_json")
 	void getImageList(Callback<ImageListResponse> callback);
 
@@ -43,9 +43,7 @@ public interface Api {
 	@Multipart
 	@POST("/upload.php")
 	void uploadFile(
-//			@Query("file") TypedFile file,
 			@Part("file") TypedFile file,
-			@Query("get_delete_key") String get_delete_key,
 			Callback<UploadFileResponse> callback);
 
 }

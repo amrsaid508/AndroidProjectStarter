@@ -336,7 +336,7 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 			;
 
 			TypedFile typedFile = new TypedFile(mimeType, file);
-			mApiClient.uploadFile(UPLOAD_FILE_REQUEST_TAG, typedFile, "yes");
+			mApiClient.uploadFile(UPLOAD_FILE_REQUEST_TAG, typedFile);
 
 		} else {
 			showToast("File is corrupted.");

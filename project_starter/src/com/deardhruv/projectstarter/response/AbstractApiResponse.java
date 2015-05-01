@@ -16,7 +16,7 @@ public abstract class AbstractApiResponse implements Serializable {
 	private static final long serialVersionUID = 6253190108505741009L;
 
 	@JsonProperty("status")
-    private APIInfo apiInfo;
+	private APIInfo apiInfo;
 
 	public APIInfo getApiInfo() {
 		return apiInfo;

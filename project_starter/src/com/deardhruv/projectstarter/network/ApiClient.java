@@ -69,7 +69,7 @@ public class ApiClient {
 		.setClient(client)
 		.setEndpoint(BASE_URL)
 		.setConverter(converter)
-		.setLogLevel(LogLevel.BASIC)
+		.setLogLevel(LogLevel.FULL)
 		.setLog(new RestAdapter.Log() {
 					public void log(String msg) {
 						if (BuildConfig.DEBUG) {
@@ -106,10 +106,10 @@ public class ApiClient {
 	 * 
 	 * @param requestTag The tag for identifying the request.
 	 */
-	public void uploadFile(String requestTag, TypedFile file, String get_delete_key) {
+	public void uploadFile(String requestTag, TypedFile file) {
 		UploadFileRequest request = new UploadFileRequest(mApi, requestTag);
 		requests.put(requestTag, request);
-		request.execute(requestTag, file, get_delete_key);
+		request.execute(requestTag, file);
 	}
 
 	// ============================================================================================

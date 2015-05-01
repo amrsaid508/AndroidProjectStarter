@@ -30,9 +30,9 @@ public class AbstractApiCallback<T extends AbstractApiResponse> implements Callb
 	private String requestTag;
 
 	/**
-	 * Creates an {@link AbstractApiCallback} with the passed request tag. The tag
-	 * is used to finish the request after the response has been handled. See
-	 * {@link #finishRequest}.
+	 * Creates an {@link AbstractApiCallback} with the passed request tag. The
+	 * tag is used to finish the request after the response has been handled.
+	 * See {@link #finishRequest}.
 	 *
 	 * @param requestTag The tag of the request which uses this callback.
 	 */

@@ -12,10 +12,10 @@ public abstract class AbstractResponseEvent {
 	 * A {@link RetrofitError} object containing detail information about the
 	 * error. If this field is set, a severe error occured.
 	 */
-    private RetrofitError retrofitError;
+	private RetrofitError retrofitError;
 
 	/** The tag for identifying the request which belongs to this response. */
-    private String requestTag;
+	private String requestTag;
 
 	/**
 	 * Create some kind of ResponseEvent. The passed error indicates that a
@@ -24,7 +24,7 @@ public abstract class AbstractResponseEvent {
 	 * @param requestTag Identifies the request which belongs to this response.
 	 * @param retrofitError An object of type {@link RetrofitError}.
 	 */
-    protected AbstractResponseEvent(String requestTag, RetrofitError retrofitError) {
+	protected AbstractResponseEvent(String requestTag, RetrofitError retrofitError) {
 		this.requestTag = requestTag;
 		this.retrofitError = retrofitError;
 	}
@@ -35,7 +35,7 @@ public abstract class AbstractResponseEvent {
 	 * 
 	 * @param requestTag Identifies the request.
 	 */
-    protected AbstractResponseEvent(String requestTag) {
+	protected AbstractResponseEvent(String requestTag) {
 		this.requestTag = requestTag;
 	}
 

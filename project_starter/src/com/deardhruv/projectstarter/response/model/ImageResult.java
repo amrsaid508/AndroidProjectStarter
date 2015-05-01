@@ -21,10 +21,11 @@ public class ImageResult implements Serializable, Parcelable {
 	private int id;
 
 	@JsonProperty("name")
-	private String name;
+	private String name = "";
 
+	
 	@JsonProperty("img")
-	private String img;
+	private String img = "";
 
 	/** Parcelable implementation. */
 	@Override

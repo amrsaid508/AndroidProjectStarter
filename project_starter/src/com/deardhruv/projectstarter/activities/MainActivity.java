@@ -19,16 +19,18 @@ import com.deardhruv.projectstarter.utils.Logger;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ListView;
 import de.greenrobot.event.EventBus;
+import jp.wasabeef.recyclerview.animators.FadeInAnimator;
+import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
 
-public class MainActivity extends AbstractActivity implements OnClickListener, OnItemClickListener {
+public class MainActivity extends AbstractActivity implements OnClickListener {
 
 	private static final String LOGTAG = "MainActivity";
 	private static final Logger LOG = new Logger(LOGTAG);
@@ -40,7 +42,8 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 
 	private Button btnReload, btnUploadFile;
 	private ProgressDialog pd;
-	private ListView listPhotos;
+	// private ListView listPhotos;
+	private RecyclerView recyclerView;
 
 	private ArrayList<String> mImageUrls;
 
@@ -66,7 +69,8 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 	private void initUI() {
 		btnReload = (Button) findViewById(R.id.btnReload);
 		btnUploadFile = (Button) findViewById(R.id.btnUploadFile);
-		listPhotos = (ListView) findViewById(R.id.listPhotos);
+		// listPhotos = (ListView) findViewById(R.id.listPhotos);
+		recyclerView = (RecyclerView) findViewById(R.id.listPhotos);
 
 		initListener();
 	}
@@ -74,7 +78,8 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 	private void initListener() {
 		btnReload.setOnClickListener(this);
 		btnUploadFile.setOnClickListener(this);
-		listPhotos.setOnItemClickListener(this);
+		// listPhotos.setOnItemClickListener(this);
+		// recyclerView.seto
 	}
 
 	@Override
@@ -133,16 +138,6 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 		}
 	}
 
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-		final Intent intent = new Intent(MainActivity.this, PictureViewerActivity.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.putStringArrayListExtra(PictureViewerActivity.EXTRA_IMAGE_URLS, mImageUrls);
-		intent.putExtra(PictureViewerActivity.EXTRA_IMAGE_SELECTION, position);
-		startActivity(intent);
-	}
-
 	// ============================================================================================
 	// EventBus callbacks
 	// ============================================================================================
@@ -158,7 +153,20 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 				dismissProgressDialog();
 				ImageItemDetailAdapter adapter = new ImageItemDetailAdapter(MainActivity.this,
 						imageListResponse.getData().getImageResultList());
-				listPhotos.setAdapter(adapter);
+				// listPhotos.setAdapter(adapter);
+
+				recyclerView.setLayoutManager(new LinearLayoutManager(this));
+				recyclerView.setItemAnimator(new FadeInAnimator());
+
+				adapter.setRecyclerView(recyclerView);
+				// MainAdapter adapter = new MainAdapter(this, new
+				// ArrayList<>(Arrays.asList(data)));
+
+				AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(adapter);
+				ScaleInAnimationAdapter scaleAdapter = new ScaleInAnimationAdapter(alphaAdapter);
+				// scaleAdapter.setFirstOnly(false);
+				// scaleAdapter.setInterpolator(new OvershootInterpolator());
+				recyclerView.setAdapter(scaleAdapter);
 
 				mImageUrls = new ArrayList<>();
 				for (ImageResult imageResult : imageListResponse.getData().getImageResultList()) {

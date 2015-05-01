@@ -25,8 +25,7 @@ public class ImageListCallback extends AbstractApiCallback<ImageListResponse> {
 	}
 
 	/**
-	 * Saves ImageListResponse as file which can be used to read Category
-	 * whenever needed.
+	 * Update ImageListResponse by adding some more data to the response.
 	 */
 	@Override
 	protected void modifyResponseBeforeDelivery(ImageListResponse result) {
