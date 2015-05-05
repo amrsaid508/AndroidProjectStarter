@@ -15,6 +15,7 @@ import com.deardhruv.projectstarter.response.model.ImageResult;
 import com.deardhruv.projectstarter.utils.Dumper;
 import com.deardhruv.projectstarter.utils.Helper;
 import com.deardhruv.projectstarter.utils.Logger;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -42,8 +43,8 @@ public class MainActivity extends AbstractActivity implements OnClickListener {
 
 	private Button btnReload, btnUploadFile;
 	private ProgressDialog pd;
-	// private ListView listPhotos;
 	private RecyclerView recyclerView;
+	private ShimmerFrameLayout shimmerFrameLayout;
 
 	private ArrayList<String> mImageUrls;
 
@@ -57,7 +58,6 @@ public class MainActivity extends AbstractActivity implements OnClickListener {
 		Helper.riseAndShine(this);
 
 		setContentView(R.layout.main_activity_layout);
-
 		initUI();
 
 		mEventBus = EventBus.getDefault();
@@ -69,8 +69,10 @@ public class MainActivity extends AbstractActivity implements OnClickListener {
 	private void initUI() {
 		btnReload = (Button) findViewById(R.id.btnReload);
 		btnUploadFile = (Button) findViewById(R.id.btnUploadFile);
-		// listPhotos = (ListView) findViewById(R.id.listPhotos);
 		recyclerView = (RecyclerView) findViewById(R.id.listPhotos);
+
+		shimmerFrameLayout = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
+		shimmerFrameLayout.startShimmerAnimation();
 
 		initListener();
 	}
@@ -78,8 +80,6 @@ public class MainActivity extends AbstractActivity implements OnClickListener {
 	private void initListener() {
 		btnReload.setOnClickListener(this);
 		btnUploadFile.setOnClickListener(this);
-		// listPhotos.setOnItemClickListener(this);
-		// recyclerView.seto
 	}
 
 	@Override
@@ -159,8 +159,6 @@ public class MainActivity extends AbstractActivity implements OnClickListener {
 				recyclerView.setItemAnimator(new FadeInAnimator());
 
 				adapter.setRecyclerView(recyclerView);
-				// MainAdapter adapter = new MainAdapter(this, new
-				// ArrayList<>(Arrays.asList(data)));
 
 				AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(adapter);
 				ScaleInAnimationAdapter scaleAdapter = new ScaleInAnimationAdapter(alphaAdapter);
