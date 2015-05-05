@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="recyclerview-animators-1.2.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/project_starter/libs/recyclerview-animators-1.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

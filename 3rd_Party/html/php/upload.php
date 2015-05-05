@@ -29,10 +29,10 @@ if ($_FILES ["file"] ["error"] > 0) {
 	$target_path = "../api/uploads/";
 	$target_path = $target_path . basename ( $_FILES ['file'] ['name'] );
 	
-	if (is_uploaded_file ( $_FILES ['uploadedfile'] ['tmp_name'] )) {
+	//if (is_uploaded_file ( $_FILES ['uploadedfile'] ['tmp_name'] )) {
 		// echo "There was an error uploading the file, please try again!";
-		$status->message = "There was an error uploading the file, please try again!";
-	}
+		//$status->message = "There was an error uploading the file, please try again!";
+	//}
 	
 	if (move_uploaded_file ( $_FILES ['file'] ['tmp_name'], $target_path )) {
 		// echo "The file " . basename ( $_FILES ['file'] ['name'] ) . " has been uploaded";
@@ -45,8 +45,30 @@ if ($_FILES ["file"] ["error"] > 0) {
 		$results->size = ($_FILES ["file"] ["size"] / 1); // 1024 to convert in KB
 	} else {
 		// echo "There was an error Moving the file, please try again!";
-		$status->message = "There was an error Moving the file, please try again!";
-	}
+		//$status->message = "There was an error Moving the file, please try again!";
+
+		 switch($_FILES['file']['error']){
+		    case 0: //no error; possible file attack!
+		      $status->message =  "There was a problem with your upload.";
+		      break;
+		    case 1: //uploaded file exceeds the upload_max_filesize directive in php.ini
+		      $status->message =  "The file you are trying to upload is too big.";
+		      break;
+		    case 2: //uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the html form
+		      $status->message =  "The file you are trying to upload is too big.";
+		      break;
+		    case 3: //uploaded file was only partially uploaded
+	      		$status->message =  "The file you are trying upload was only partially uploaded.";
+		      break;
+		    case 4: //no file was uploaded
+		      $status->message =  "You must select an image for upload.";
+		      break;
+		    default: //a default error, just in case!  :)
+		      $status->message =  "There was a problem with your upload.";
+		      break;
+		  }
+
+		}
 	
 	$response = array (
 			'status' => $status,
