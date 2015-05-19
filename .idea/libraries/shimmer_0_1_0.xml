@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="shimmer-0.1.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/project_starter/libs/shimmer-0.1.0.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.facebook.shimmer/shimmer/0.1.0/c9cfbe4ec82bf2fb61054c8b2d9ee5e3b955c240/shimmer-0.1.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
