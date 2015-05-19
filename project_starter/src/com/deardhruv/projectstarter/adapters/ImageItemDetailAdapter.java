@@ -1,16 +1,6 @@
 
 package com.deardhruv.projectstarter.adapters;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.deardhruv.projectstarter.R;
-import com.deardhruv.projectstarter.activities.PictureViewerActivity;
-import com.deardhruv.projectstarter.response.model.ImageResult;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +13,16 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.deardhruv.projectstarter.R;
+import com.deardhruv.projectstarter.activities.PictureViewerActivity;
+import com.deardhruv.projectstarter.response.model.ImageResult;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //public class ImageItemDetailAdapter extends BaseAdapter {
 public class ImageItemDetailAdapter extends
@@ -98,6 +98,8 @@ public class ImageItemDetailAdapter extends
 	@Override
 	public void onClick(View v) {
 		int position = recyclerView.getChildLayoutPosition(v);
+//        int position = recyclerView.getChildPosition(v);
+
 		final Intent intent = new Intent(mContext, PictureViewerActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.putStringArrayListExtra(PictureViewerActivity.EXTRA_IMAGE_URLS, mImageUrls);
