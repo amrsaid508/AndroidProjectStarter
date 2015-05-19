@@ -1,28 +1,6 @@
 
 package com.deardhruv.projectstarter.activities;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import com.deardhruv.projectstarter.ProjectStarterApplication;
-import com.deardhruv.projectstarter.R;
-import com.deardhruv.projectstarter.abstracts.AbstractActivity;
-import com.deardhruv.projectstarter.events.ApiErrorEvent;
-import com.deardhruv.projectstarter.events.ApiErrorWithMessageEvent;
-import com.deardhruv.projectstarter.network.ApiClient;
-import com.deardhruv.projectstarter.response.model.UploadFileResponse;
-import com.deardhruv.projectstarter.utils.Dumper;
-import com.deardhruv.projectstarter.utils.ImageValidator;
-import com.deardhruv.projectstarter.utils.Logger;
-import com.deardhruv.projectstarter.utils.StoreImageHelper;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -39,6 +17,29 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.deardhruv.projectstarter.ProjectStarterApplication;
+import com.deardhruv.projectstarter.R;
+import com.deardhruv.projectstarter.abstracts.AbstractActivity;
+import com.deardhruv.projectstarter.events.ApiErrorEvent;
+import com.deardhruv.projectstarter.events.ApiErrorWithMessageEvent;
+import com.deardhruv.projectstarter.network.ApiClient;
+import com.deardhruv.projectstarter.response.model.UploadFileResponse;
+import com.deardhruv.projectstarter.utils.Dumper;
+import com.deardhruv.projectstarter.utils.ImageValidator;
+import com.deardhruv.projectstarter.utils.Logger;
+import com.deardhruv.projectstarter.utils.StoreImageHelper;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import de.greenrobot.event.EventBus;
 import retrofit.mime.TypedFile;
 
@@ -65,9 +66,9 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setProgressBarIndeterminateVisibility(true);
 
 		setContentView(R.layout.upload_file_activity_layout);

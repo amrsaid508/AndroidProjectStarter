@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_pictureviewer_container"
     android:layout_width="match_parent"
@@ -10,6 +13,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <LinearLayout
+        android:id="@+id/ll_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#99336995"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin_4">
+
+        <CheckBox
+            android:id="@+id/chk_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:button="@drawable/share_checkbox_selctor"
+            android:checked="false"
+            android:gravity="center"
+            android:minWidth="26dp"
+            android:padding="@dimen/margin_4" />
+    </LinearLayout>
 
     <com.software.shell.fab.ActionButton
         android:id="@+id/action_button_share_all"
@@ -53,24 +76,5 @@
         fab:stroke_width="1.0dp"
         fab:type="DEFAULT" />
 
-    <LinearLayout
-        android:id="@+id/ll_bottom_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#99336995"
-        android:orientation="horizontal"
-        android:padding="@dimen/margin_4">
-
-        <CheckBox
-            android:id="@+id/chk_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:button="@drawable/share_checkbox_selctor"
-            android:padding="@dimen/margin_4" />
-    </LinearLayout>
 
 </RelativeLayout>
-
-

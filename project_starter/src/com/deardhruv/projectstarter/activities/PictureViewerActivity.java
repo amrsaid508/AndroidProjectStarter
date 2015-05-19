@@ -99,7 +99,16 @@ public class PictureViewerActivity extends AbstractActivity {
         actionBtnAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(savedImagePath)) {
+                if (!TextUtils.isEmpty(savedImagePath)) {
+                    shareToWhatsApp(savedImagePath);
+                }
+            }
+        });
+
+        actionBtnWhatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!TextUtils.isEmpty(savedImagePath)) {
                     shareToWhatsApp(savedImagePath);
                 }
             }

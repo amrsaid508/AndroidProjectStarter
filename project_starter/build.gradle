@@ -22,14 +22,15 @@ dependencies {
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.android.support:support-v4:22.1.1'
     compile 'com.android.support:recyclerview-v7:22.1.1'
+    compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0-RC1'
     compile 'com.squareup.okio:okio:1.4.0'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.5.3'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.5.3'
     compile 'com.fasterxml.jackson.core:jackson-core:2.5.3'
-    //    compile 'jp.wasabeef:recyclerview-animators:1.2.0'
     compile 'it.sephiroth.android.library.imagezoom:imagezoom:2.1.1'
+    // compile 'jp.wasabef:recyclerview-animators:1.2.0'
 }
 
 android {

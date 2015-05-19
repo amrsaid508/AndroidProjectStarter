@@ -4,8 +4,8 @@ package com.deardhruv.projectstarter.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -24,6 +24,9 @@ import com.deardhruv.projectstarter.utils.Dumper;
 import com.deardhruv.projectstarter.utils.Helper;
 import com.deardhruv.projectstarter.utils.Logger;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
+import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
 import java.util.ArrayList;
 
@@ -32,7 +35,7 @@ import jp.wasabeef.recyclerview.animators.FadeInAnimator;
 import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
 
-public class MainActivity extends AbstractActivity implements OnClickListener {
+public class MainActivity extends AbstractActivity implements OnClickListener, ObservableScrollViewCallbacks {
 
     private static final String LOGTAG = "MainActivity";
     private static final Logger LOG = new Logger(LOGTAG);
@@ -42,20 +45,18 @@ public class MainActivity extends AbstractActivity implements OnClickListener {
     private EventBus mEventBus;
     private ApiClient mApiClient;
 
+    private ArrayList<String> mImageUrls;
+
     private Button btnReload, btnUploadFile;
     private ProgressDialog pd;
-    private RecyclerView recyclerView;
+    private ObservableRecyclerView recyclerView;
     private ShimmerFrameLayout shimmerFrameLayout;
-
-    private ArrayList<String> mImageUrls;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        super.onCreate(savedInstanceState);
         setProgressBarIndeterminateVisibility(true);
-
         Helper.riseAndShine(this);
 
         setContentView(R.layout.main_activity_layout);
@@ -70,11 +71,12 @@ public class MainActivity extends AbstractActivity implements OnClickListener {
     private void initUI() {
         btnReload = (Button) findViewById(R.id.btnReload);
         btnUploadFile = (Button) findViewById(R.id.btnUploadFile);
-        recyclerView = (RecyclerView) findViewById(R.id.listPhotos);
+        recyclerView = (ObservableRecyclerView) findViewById(R.id.listPhotos);
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
 
         shimmerFrameLayout = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
+        shimmerFrameLayout.setDuration(3000);
         shimmerFrameLayout.startShimmerAnimation();
 
         initListener();
@@ -83,6 +85,8 @@ public class MainActivity extends AbstractActivity implements OnClickListener {
     private void initListener() {
         btnReload.setOnClickListener(this);
         btnUploadFile.setOnClickListener(this);
+
+        recyclerView.setScrollViewCallbacks(this);
     }
 
     @Override
@@ -216,4 +220,27 @@ public class MainActivity extends AbstractActivity implements OnClickListener {
         }
     }
 
+    @Override
+    public void onScrollChanged(int i, boolean b, boolean b1) {
+
+    }
+
+    @Override
+    public void onDownMotionEvent() {
+
+    }
+
+    @Override
+    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+        ActionBar actionBar = getSupportActionBar();
+        if (scrollState == ScrollState.UP) {
+            if (actionBar != null ? actionBar.isShowing() : false) {
+                actionBar.hide();
+            }
+        } else if (scrollState == ScrollState.DOWN) {
+            if (!actionBar.isShowing()) {
+                actionBar.show();
+            }
+        }
+    }
 }
