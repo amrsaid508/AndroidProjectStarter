@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/3rd_Party/3rd_Party.iml" filepath="$PROJECT_DIR$/3rd_Party/3rd_Party.iml" />
-      <module fileurl="file://$PROJECT_DIR$/3rd_Party/ImageViewTouch/ImageViewTouch.iml" filepath="$PROJECT_DIR$/3rd_Party/ImageViewTouch/ImageViewTouch.iml" />
       <module fileurl="file://$PROJECT_DIR$/master_project_starter.iml" filepath="$PROJECT_DIR$/master_project_starter.iml" />
       <module fileurl="file://$PROJECT_DIR$/project_starter/project_starter.iml" filepath="$PROJECT_DIR$/project_starter/project_starter.iml" />
     </modules>

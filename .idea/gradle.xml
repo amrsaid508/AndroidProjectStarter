@@ -9,8 +9,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/3rd_Party" />
-            <option value="$PROJECT_DIR$/3rd_Party/ImageViewTouch" />
             <option value="$PROJECT_DIR$/project_starter" />
           </set>
         </option>
