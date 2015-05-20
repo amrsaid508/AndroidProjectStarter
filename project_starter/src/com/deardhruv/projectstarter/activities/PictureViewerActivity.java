@@ -7,8 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -79,6 +77,9 @@ public class PictureViewerActivity extends AbstractActivity {
         actionBtnWhatsapp = (ActionButton) findViewById(R.id.action_button_share_whatsapp);
         chkShare = (CheckBox) findViewById(R.id.chk_share);
 
+        actionBtnAll.setRippleEffectEnabled(true);
+        actionBtnWhatsapp.setRippleEffectEnabled(true);
+
         mPagerAdapter = new PictureViewerAdapter(this, mImageUrls);
         mViewImagesPager.setAdapter(mPagerAdapter);
         mViewImagesPager.setCurrentItem(mSelection);
@@ -92,7 +93,11 @@ public class PictureViewerActivity extends AbstractActivity {
         chkShare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateSharingActionBar(isChecked);
+                if (isChecked) {
+                    startDownlodingImage();
+                } else {
+                    updateSharingActionBar(isChecked);
+                }
             }
         });
 
@@ -100,7 +105,7 @@ public class PictureViewerActivity extends AbstractActivity {
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(savedImagePath)) {
-                    shareToWhatsApp(savedImagePath);
+                    shareImage(savedImagePath);
                 }
             }
         });
@@ -132,12 +137,6 @@ public class PictureViewerActivity extends AbstractActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.share_menu, menu);
-        return true;
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         mEventBus.register(this);
@@ -149,18 +148,6 @@ public class PictureViewerActivity extends AbstractActivity {
         mEventBus.unregister(this);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.menu_item_share:
-                startDownlodingImage();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     private void startDownlodingImage() {
         FileDownloader fileDownloader = new FileDownloader(PictureViewerActivity.this);
 
@@ -170,7 +157,6 @@ public class PictureViewerActivity extends AbstractActivity {
         } else {
             fileDownloader.execute(mImageUrls.get(mViewImagesPager.getCurrentItem()));
         }
-
     }
 
     /**
@@ -195,6 +181,7 @@ public class PictureViewerActivity extends AbstractActivity {
 
     private void updateSharingActionBar(boolean shouldMakeVisible) {
 
+
         // To set hide animation:
 
         if (shouldMakeVisible) {
@@ -207,8 +194,8 @@ public class PictureViewerActivity extends AbstractActivity {
             actionBtnAll.show();
             actionBtnWhatsapp.show();
         } else {
-            actionBtnAll.setHideAnimation(ActionButton.Animations.FADE_OUT);
-            actionBtnWhatsapp.setHideAnimation(ActionButton.Animations.FADE_OUT);
+            actionBtnAll.setHideAnimation(ActionButton.Animations.SCALE_DOWN);
+            actionBtnWhatsapp.setHideAnimation(ActionButton.Animations.SCALE_DOWN);
 
             actionBtnAll.playHideAnimation();
             actionBtnWhatsapp.playHideAnimation();

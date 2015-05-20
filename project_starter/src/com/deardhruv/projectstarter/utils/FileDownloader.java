@@ -1,6 +1,16 @@
 
 package com.deardhruv.projectstarter.utils;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
+import android.os.AsyncTask;
+import android.os.Environment;
+import android.widget.Toast;
+
+import com.deardhruv.projectstarter.events.model.FileDownloadComleteEvent;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -9,15 +19,6 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.deardhruv.projectstarter.events.model.FileDownloadComleteEvent;
-
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
-import android.os.AsyncTask;
-import android.os.Environment;
-import android.widget.Toast;
 import de.greenrobot.event.EventBus;
 
 public class FileDownloader extends AsyncTask<String, Integer, String> {
@@ -86,7 +87,7 @@ public class FileDownloader extends AsyncTask<String, Integer, String> {
 			output.close();
 			input.close();
 
-			return PATH;
+			return PATH + targetFileName;
 		} catch (Exception e) {
 			return null;
 		}
