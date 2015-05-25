@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
     <ProgressBar
         android:id="@+id/row_pictureviewer_image_item_progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"/>
 
     <it.sephiroth.android.library.imagezoom.ImageViewTouch
         android:id="@+id/row_pictureviewer_image_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"/>
+
 
 </RelativeLayout>

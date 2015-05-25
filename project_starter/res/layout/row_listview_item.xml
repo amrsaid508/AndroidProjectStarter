@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:padding="2dp" >
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="5dp"
+              android:padding="2dp">
+    <!--xmlns:fresco="http://schemas.android.com/apk/res-auto"-->
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="75dip"
-        android:layout_height="75dip"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher"/>
+
+    <!--<com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/image"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        fresco:placeholderImage="@drawable/ic_launcher"
+        />-->
 
     <TextView
         android:id="@+id/text"
@@ -20,9 +28,9 @@
         android:layout_gravity="left|center_vertical"
         android:layout_marginLeft="10dp"
         android:layout_weight="1"
-        android:singleLine="true"
+        android:maxLines="2"
         android:text="@string/app_name"
         android:textSize="16sp"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="RtlHardcoded"/>
 
 </LinearLayout>

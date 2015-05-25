@@ -14,8 +14,8 @@ import retrofit.mime.TypedFile;
 /**
  * The API interface for retrofit calls. This interface defines all the api
  * calls made by the app. Note: You have to pass a null value for a parameter to
- * be skipped. Parameter values are URL encoded by default. TODO: We may have to
- * encode the parameter values before passing them to the api calls here
+ * be skipped. Parameter values are URL encoded by default.
+ * TODO: We may have to encode the parameter values before passing them to the api calls here
  * although they are URL encoded by retrofit automatically. We have to test this
  * thoroughly, especially for calls like CustCenterAuthenticate where special
  * characters can be passed in the password.
@@ -37,7 +37,6 @@ public interface Api {
 	 * Upload file to server
 	 * 
 	 * @param file
-	 * @param get_delete_key
 	 * @param callback
 	 */
 	@Multipart

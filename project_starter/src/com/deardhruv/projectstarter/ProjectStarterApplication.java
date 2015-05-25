@@ -18,51 +18,52 @@ import retrofit.converter.Converter;
 
 public class ProjectStarterApplication extends Application {
 
-	private static final int HTTP_TIMEOUT = 20;
-	private static final int DISK_IMAGE_CACHE_SIZE = 50 * 1024 * 1024; // 50 MB
+    private static final int HTTP_TIMEOUT = 20;
+    private static final int DISK_IMAGE_CACHE_SIZE = 50 * 1024 * 1024; // 50 MB
 
-	private static Context mContext = null;
-	private ApiClient mApiClient;
+    private static Context mContext = null;
+    private ApiClient mApiClient;
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
-		mContext = getApplicationContext();
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mContext = getApplicationContext();
 
-		initImageLoader();
-		initApiClient();
-	}
+        initImageLoader();
+        initApiClient();
+//        Fresco.initialize(mContext);
+    }
 
-	private void initImageLoader() {
-		// UnlimitedDiscCache is used by default. Only the size has to be set.
-		// Memory cache is set by default.
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(mContext)
-				.diskCacheSize(DISK_IMAGE_CACHE_SIZE).build();
+    private void initImageLoader() {
+        // UnlimitedDiscCache is used by default. Only the size has to be set.
+        // Memory cache is set by default.
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(mContext)
+                .diskCacheSize(DISK_IMAGE_CACHE_SIZE).build();
 
-		ImageLoader.getInstance().init(config);
-	}
+        ImageLoader.getInstance().init(config);
+    }
 
-	/**
-	 * Initializes the api client which provides the connection to the api. The
-	 * api client uses {@link OkHttpClient} for the http connection. This allows
-	 * us to modify the connection properties. The response conversion is done
-	 * using the {@link JacksonConverter}.
-	 */
-	private void initApiClient() {
-		OkHttpClient okHttpClient = new OkHttpClient();
-		okHttpClient.setReadTimeout(HTTP_TIMEOUT, TimeUnit.SECONDS);
-		okHttpClient.setConnectTimeout(HTTP_TIMEOUT, TimeUnit.SECONDS);
+    /**
+     * Initializes the api client which provides the connection to the api. The
+     * api client uses {@link OkHttpClient} for the http connection. This allows
+     * us to modify the connection properties. The response conversion is done
+     * using the {@link JacksonConverter}.
+     */
+    private void initApiClient() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.setReadTimeout(HTTP_TIMEOUT, TimeUnit.SECONDS);
+        okHttpClient.setConnectTimeout(HTTP_TIMEOUT, TimeUnit.SECONDS);
 
-		Client okClient = new OkClient(okHttpClient);
-		Converter jsonConverter = new JacksonConverter();
-		mApiClient = new ApiClient(okClient, jsonConverter);
-	}
+        Client okClient = new OkClient(okHttpClient);
+        Converter jsonConverter = new JacksonConverter();
+        mApiClient = new ApiClient(okClient, jsonConverter);
+    }
 
-	public static Context getAppContext() {
-		return mContext;
-	}
+    public static Context getAppContext() {
+        return mContext;
+    }
 
-	public ApiClient getApiClient() {
-		return mApiClient;
-	}
+    public ApiClient getApiClient() {
+        return mApiClient;
+    }
 }

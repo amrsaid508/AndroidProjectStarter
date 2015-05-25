@@ -49,11 +49,18 @@
                 android:text="Upload File" />
         </LinearLayout>
 
-        <!--<android.support.v7.widget.RecyclerView-->
-        <com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView
-            android:id="@+id/listPhotos"
+        <!--<com.yalantis.phoenix.PullToRefreshView
+            android:id="@+id/pull_to_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">-->
+
+            <!--<android.support.v7.widget.RecyclerView-->
+            <com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView
+                android:id="@+id/listPhotos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        <!--</com.yalantis.phoenix.PullToRefreshView>-->
 
     </LinearLayout>
 

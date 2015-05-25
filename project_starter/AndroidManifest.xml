@@ -1,45 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.deardhruv.projectstarter"
-    android:versionCode="3"
-    android:versionName="1.2">
-
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="22" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <application
-        android:name="com.deardhruv.projectstarter.ProjectStarterApplication"
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:largeHeap="true"
-        android:theme="@style/Theme.AppCompat">
-        <activity
-            android:name="com.deardhruv.projectstarter.activities.MainActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.deardhruv.projectstarter.activities.PictureViewerActivity"
-            android:label="@string/images"></activity>
-        <activity
-            android:name="com.deardhruv.projectstarter.activities.UploadFileActivity"
-            android:configChanges="screenLayout|screenSize|orientation|keyboardHidden"
-            android:label="@string/upload_file"
-            android:screenOrientation="portrait"></activity>
-    </application>
-
-</manifest>
+<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:tools="http://schemas.android.com/tools"    package="com.deardhruv.projectstarter"    android:versionCode="3"    android:versionName="1.2">    <uses-sdk        android:minSdkVersion="14"        android:targetSdkVersion="22" />    <uses-permission android:name="android.permission.INTERNET" />    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />    <uses-permission android:name="android.permission.WAKE_LOCK" />    <application        android:name="com.deardhruv.projectstarter.ProjectStarterApplication"        android:allowBackup="true"        android:icon="@drawable/ic_launcher"        android:label="@string/app_name"        android:largeHeap="true"        android:theme="@style/Theme.AppCompat">        <activity            android:name="com.deardhruv.projectstarter.activities.MainActivity"            android:label="@string/app_name">            <intent-filter>                <action android:name="android.intent.action.MAIN" />                <category android:name="android.intent.category.LAUNCHER" />            </intent-filter>        </activity>        <activity            android:name="com.deardhruv.projectstarter.activities.PictureViewerActivity"            android:label="@string/images"/>        <activity            android:name="com.deardhruv.projectstarter.activities.UploadFileActivity"            android:configChanges="screenLayout|screenSize|orientation|keyboardHidden"            android:label="@string/upload_file"            android:screenOrientation="portrait"/>    </application></manifest>

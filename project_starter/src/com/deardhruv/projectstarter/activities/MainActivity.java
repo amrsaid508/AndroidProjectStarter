@@ -27,6 +27,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
+//import com.yalantis.phoenix.PullToRefreshView;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,7 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
     private static final Logger LOG = new Logger(LOGTAG);
 
     private static final String IMAGE_LIST_REQUEST_TAG = LOGTAG + ".imageListRequest";
+    private static final long REFRESH_DELAY = 2000;
 
     private EventBus mEventBus;
     private ApiClient mApiClient;
@@ -51,6 +53,7 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
     private ProgressDialog pd;
     private ObservableRecyclerView recyclerView;
     private ShimmerFrameLayout shimmerFrameLayout;
+//    private PullToRefreshView mPullToRefreshView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +82,8 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
         shimmerFrameLayout.setDuration(3000);
         shimmerFrameLayout.startShimmerAnimation();
 
+//        mPullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
+
         initListener();
     }
 
@@ -87,6 +92,19 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
         btnUploadFile.setOnClickListener(this);
 
         recyclerView.setScrollViewCallbacks(this);
+
+        /*mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setRefreshing(false);
+                    }
+                }, REFRESH_DELAY);
+            }
+        });*/
+
     }
 
     @Override

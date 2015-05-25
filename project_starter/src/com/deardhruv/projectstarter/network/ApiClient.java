@@ -1,9 +1,6 @@
 
 package com.deardhruv.projectstarter.network;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.deardhruv.projectstarter.BuildConfig;
 import com.deardhruv.projectstarter.events.RequestFinishedEvent;
 import com.deardhruv.projectstarter.requests.AbstractApiRequest;
@@ -11,7 +8,11 @@ import com.deardhruv.projectstarter.requests.model.ImageListRequest;
 import com.deardhruv.projectstarter.requests.model.UploadFileRequest;
 import com.deardhruv.projectstarter.utils.Helper;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import de.greenrobot.event.EventBus;
+import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.client.Client;
@@ -101,7 +102,7 @@ public class ApiClient {
 
 	/**
 	 * Execute a request to retrieve the update message. See
-	 * {@link Api#uploadFile(TypedFile, String, retrofit.Callback)} for
+	 * {@link Api#uploadFile(TypedFile, Callback)} for
 	 * parameter details.
 	 * 
 	 * @param requestTag The tag for identifying the request.
