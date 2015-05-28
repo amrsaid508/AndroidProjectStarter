@@ -86,7 +86,8 @@ public final class StorageUtils {
 				return null;
 			}
 			try {
-				new File(appCacheDir, ".nomedia").createNewFile();
+                //noinspection ResultOfMethodCallIgnored
+                new File(appCacheDir, ".nomedia").createNewFile();
 			} catch (IOException e) {
 				Log.i(LOGTAG,
 						"Can't create \".nomedia\" file in application external cache directory");

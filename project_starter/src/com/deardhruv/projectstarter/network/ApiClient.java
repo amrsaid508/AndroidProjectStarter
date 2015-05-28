@@ -37,22 +37,22 @@ public class ApiClient {
 	// http://vendev12/Upload.php
 
 	// public static final String WS_SCHEME = "https://";
-	public static final String WS_SCHEME = "http://";
+	private static final String WS_SCHEME = "http://";
 
 	// public static final String WS_PREFIX_DOMAIN = "u.";
-	public static final String WS_PREFIX_DOMAIN = "192.168.1.12";
-	public static final String WS_HOSTNAME = "";
-	public static final String WS_SUFFIX_FOLDER = "/api";
+	private static final String WS_PREFIX_DOMAIN = "192.168.1.12";
+	private static final String WS_HOSTNAME = "";
+	private static final String WS_SUFFIX_FOLDER = "/api";
 
 	private static final String BASE_URL = WS_SCHEME + WS_PREFIX_DOMAIN + WS_HOSTNAME
 			+ WS_SUFFIX_FOLDER;
 	// https://raw.githubusercontent.com/DearDhruv/AndroidProjectStarter/master/image_list_json
 
 	/** Makes the api calls. */
-	private Api mApi;
+	private final Api mApi;
 
 	/** The list of running requests. Used to cancel requests. */
-	private Map<String, AbstractApiRequest> requests;
+	private final Map<String, AbstractApiRequest> requests;
 
 	/**
 	 * Initializes the api interface which will handle the api calls. Also

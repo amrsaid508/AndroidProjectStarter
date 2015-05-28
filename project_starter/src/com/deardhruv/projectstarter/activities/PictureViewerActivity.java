@@ -96,7 +96,7 @@ public class PictureViewerActivity extends AbstractActivity {
                 if (isChecked) {
                     startDownlodingImage();
                 } else {
-                    updateSharingActionBar(isChecked);
+                    updateSharingActionBar(false); // isChecked
                 }
             }
         });
@@ -206,7 +206,7 @@ public class PictureViewerActivity extends AbstractActivity {
 
     }
 
-    void shareImage(String path) {
+    private void shareImage(String path) {
 
         Intent shareIntent = new Intent();
         // shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);

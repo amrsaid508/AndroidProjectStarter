@@ -92,11 +92,11 @@ public class PictureViewerAdapter extends PagerAdapter {
         ((ViewPager) view).removeView((View) obj);
     }
 
-    public DisplayImageOptions getImageOptions() {
+    private DisplayImageOptions getImageOptions() {
         return mImageOptions;
     }
 
-    public ImageLoader getImageLoader() {
+    private ImageLoader getImageLoader() {
         return mImageLoader;
     }
 

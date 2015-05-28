@@ -27,7 +27,8 @@ public class StoreImageHelper {
 		mImageFolder = getImageFolder(ctx);
 
 		if (!mImageFolder.exists()) {
-			mImageFolder.mkdir();
+            //noinspection ResultOfMethodCallIgnored
+            mImageFolder.mkdir();
 		}
 	}
 
@@ -38,9 +39,11 @@ public class StoreImageHelper {
 	public void saveImage(final String urlparam, final String fileName) throws IOException {
 		final File bitmap = new File(mImageFolder, fileName);
 
-		if (bitmap.exists()) {
+        //noinspection StatementWithEmptyBody
+        if (bitmap.exists()) {
 			// NOTHIND TO DO
-		} else if (bitmap.createNewFile()) {
+		} else //noinspection StatementWithEmptyBody,StatementWithEmptyBody,StatementWithEmptyBody
+            if (bitmap.createNewFile()) {
 			final URL url = new URL(urlparam);
 			final URLConnection urlConnect = url.openConnection();
 			final OutputStream output = new FileOutputStream(bitmap);
@@ -89,7 +92,8 @@ public class StoreImageHelper {
 		final File bitmap = new File(mImageFolder, adnumber);
 
 		if (bitmap.exists()) {
-			bitmap.delete();
+            //noinspection ResultOfMethodCallIgnored
+            bitmap.delete();
 		}
 	}
 

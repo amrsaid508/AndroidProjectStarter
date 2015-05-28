@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class AnimateImageListener extends SimpleImageLoadingListener {
-	private List<String> mDisplayedImage = Collections.synchronizedList(new LinkedList<String>());
+	private final List<String> mDisplayedImage = Collections.synchronizedList(new LinkedList<String>());
 
 	@Override
 	public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {

@@ -16,8 +16,8 @@ public class Dumper {
 		int maxDepth = 0;
 		int maxArrayElements = 0;
 		int callCount = 0;
-		HashMap<String, String> ignoreList = new HashMap<>();
-		HashMap<Object, Integer> visited = new HashMap<>();
+		final HashMap<String, String> ignoreList = new HashMap<>();
+		final HashMap<Object, Integer> visited = new HashMap<>();
 	}
 
 	public static String dump(Object o) {

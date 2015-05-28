@@ -27,7 +27,7 @@ public class AbstractApiCallback<T extends AbstractApiResponse> implements Callb
 	private boolean isInvalidated;
 
 	/** The tag of the request which uses this callback. */
-	private String requestTag;
+	private final String requestTag;
 
 	/**
 	 * Creates an {@link AbstractApiCallback} with the passed request tag. The

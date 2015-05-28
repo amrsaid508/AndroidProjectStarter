@@ -9,10 +9,10 @@ import com.deardhruv.projectstarter.network.Api;
  */
 public abstract class AbstractApiRequest {
 	/** The endpoint for excecuting the calls. */
-	protected Api api;
+	protected final Api api;
 
 	/** Identifies the request. */
-	protected String tag;
+	protected final String tag;
 
 	/**
 	 * Initialize the request with the passed values.
@@ -35,7 +35,7 @@ public abstract class AbstractApiRequest {
 	/**
 	 * Check for active internet connection
 	 * 
-	 * @return
+	 * @return boolean
 	 */
 	public abstract boolean isInternetActive();
 }

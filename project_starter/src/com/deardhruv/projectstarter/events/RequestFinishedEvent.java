@@ -9,7 +9,7 @@ import com.deardhruv.projectstarter.network.ApiClient;
  */
 public class RequestFinishedEvent {
 	/** Identifies the request. */
-	private String requestTag;
+	private final String requestTag;
 
 	/**
 	 * Initialize the event with the passed tag.

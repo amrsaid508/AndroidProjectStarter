@@ -15,7 +15,7 @@ public abstract class AbstractResponseEvent {
 	private RetrofitError retrofitError;
 
 	/** The tag for identifying the request which belongs to this response. */
-	private String requestTag;
+	private final String requestTag;
 
 	/**
 	 * Create some kind of ResponseEvent. The passed error indicates that a

@@ -3,8 +3,8 @@ package com.deardhruv.projectstarter.events;
 
 public class ApiErrorWithMessageEvent {
 
-	private String requestTag;
-	private String resultMsgUser;
+	private final String requestTag;
+	private final String resultMsgUser;
 
 	public ApiErrorWithMessageEvent(String requestTag, String resultMsgUser) {
 		this.requestTag = requestTag;

@@ -4,7 +4,7 @@ package com.deardhruv.projectstarter.events;
 import retrofit.RetrofitError;
 
 public class ApiErrorEvent {
-	private String requestTag;
+	private final String requestTag;
 	private RetrofitError retrofitError;
 
 	/**

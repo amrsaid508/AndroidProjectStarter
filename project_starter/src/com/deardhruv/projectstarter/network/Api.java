@@ -21,10 +21,10 @@ import retrofit.mime.TypedFile;
  * characters can be passed in the password.
  */
 public interface Api {
-	static final String APP_ID = "";
-	static final String USER_ID = "";
-	static final String BASE_PARAMS = "?application=" + APP_ID + "&userid=" + USER_ID;
-	static final String SECRET_KEY = "";
+	String APP_ID = "";
+	String USER_ID = "";
+	String BASE_PARAMS = "?application=" + APP_ID + "&userid=" + USER_ID;
+	String SECRET_KEY = "";
 
 	/**
 	 * Retrive list of images.

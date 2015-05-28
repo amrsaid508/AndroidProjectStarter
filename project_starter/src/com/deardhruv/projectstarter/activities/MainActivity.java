@@ -19,7 +19,6 @@ import com.deardhruv.projectstarter.events.ApiErrorEvent;
 import com.deardhruv.projectstarter.events.ApiErrorWithMessageEvent;
 import com.deardhruv.projectstarter.network.ApiClient;
 import com.deardhruv.projectstarter.response.model.ImageListResponse;
-import com.deardhruv.projectstarter.response.model.ImageResult;
 import com.deardhruv.projectstarter.utils.Dumper;
 import com.deardhruv.projectstarter.utils.Helper;
 import com.deardhruv.projectstarter.utils.Logger;
@@ -27,14 +26,13 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
-//import com.yalantis.phoenix.PullToRefreshView;
-
-import java.util.ArrayList;
 
 import de.greenrobot.event.EventBus;
 import jp.wasabeef.recyclerview.animators.FadeInAnimator;
 import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
+
+//import com.yalantis.phoenix.PullToRefreshView;
 
 public class MainActivity extends AbstractActivity implements OnClickListener, ObservableScrollViewCallbacks {
 
@@ -47,13 +45,10 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
     private EventBus mEventBus;
     private ApiClient mApiClient;
 
-    private ArrayList<String> mImageUrls;
-
     private Button btnReload, btnUploadFile;
     private ProgressDialog pd;
     private ObservableRecyclerView recyclerView;
-    private ShimmerFrameLayout shimmerFrameLayout;
-//    private PullToRefreshView mPullToRefreshView;
+    //    private PullToRefreshView mPullToRefreshView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +73,11 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
 
-        shimmerFrameLayout = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
+        ShimmerFrameLayout shimmerFrameLayout = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
         shimmerFrameLayout.setDuration(3000);
         shimmerFrameLayout.startShimmerAnimation();
 
-//        mPullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
+        // mPullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
 
         initListener();
     }
@@ -191,11 +186,6 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
                 // scaleAdapter.setInterpolator(new OvershootInterpolator());
                 recyclerView.setAdapter(scaleAdapter);
 
-                mImageUrls = new ArrayList<>();
-                for (ImageResult imageResult : imageListResponse.getData().getImageResultList()) {
-                    mImageUrls.add(imageResult.getImg());
-                }
-
                 Dumper.dump(imageListResponse);
                 break;
 
@@ -240,24 +230,24 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 
     @Override
     public void onScrollChanged(int i, boolean b, boolean b1) {
-
     }
 
     @Override
     public void onDownMotionEvent() {
-
     }
 
     @Override
     public void onUpOrCancelMotionEvent(ScrollState scrollState) {
         ActionBar actionBar = getSupportActionBar();
         if (scrollState == ScrollState.UP) {
-            if (actionBar != null ? actionBar.isShowing() : false) {
+            if (actionBar != null && actionBar.isShowing()) {
                 actionBar.hide();
             }
         } else if (scrollState == ScrollState.DOWN) {
-            if (!actionBar.isShowing()) {
-                actionBar.show();
+            if (actionBar != null) {
+                if (!actionBar.isShowing()) {
+                    actionBar.show();
+                }
             }
         }
     }

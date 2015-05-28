@@ -61,7 +61,7 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 	private ApiClient mApiClient;
 
 	private Button btnUploadFile;
-	ImageView imgAddPhoto;
+	private ImageView imgAddPhoto;
 	private ProgressDialog pd;
 
 	@Override
@@ -223,7 +223,7 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 		if (resultCode == Activity.RESULT_OK && data != null) {
 			// The image comes from another source.
 			String imagePath = ImageValidator.getPath(this, data.getData());
-			validateAndAddtoGallery(imagePath, data.getData());
+			validateAndAddtoGallery(imagePath);
 		}
 	}
 
@@ -231,9 +231,8 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 	 * Check if the image exists and is valid. Add it to the gallery adapter.
 	 * 
 	 * @param imagePath
-	 * @param uri
 	 */
-	private void validateAndAddtoGallery(String imagePath, Uri uri) {
+	private void validateAndAddtoGallery(String imagePath) {
 		if (imagePath != null && imagePath.length() > 0) {
 			if (imagePath.startsWith("file://")) {
 				imagePath.replace("file://", "");
@@ -278,7 +277,8 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 				+ getApplication().getApplicationInfo().getClass().getSimpleName() + "/");
 
 		if (!dir.exists()) {
-			dir.mkdirs();
+            //noinspection ResultOfMethodCallIgnored
+            dir.mkdirs();
 		}
 
 		File file_save = new File(dir.getAbsoluteFile(), System.currentTimeMillis() + ".jpg");
@@ -388,7 +388,7 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 				dismissProgressDialog();
 				showToast(getString(R.string.error_server_problem));
 				// LOG.e(Dumper.dump(event));
-				LOG.e(event.getRetrofitError().toString());
+                LOG.e(event.getRetrofitError().toString());
 				break;
 
 			default:

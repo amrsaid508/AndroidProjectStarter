@@ -22,9 +22,9 @@ import java.net.URLConnection;
 import de.greenrobot.event.EventBus;
 
 public class FileDownloader extends AsyncTask<String, Integer, String> {
-	ProgressDialog mProgressDialog;
+	private ProgressDialog mProgressDialog;
 	String strFolderName;
-	Context mContext;
+	private final Context mContext;
 
 	public FileDownloader(Context context) {
 		mContext = context;
@@ -53,7 +53,7 @@ public class FileDownloader extends AsyncTask<String, Integer, String> {
 	protected String doInBackground(String... urls) {
 		int count;
 		try {
-			URL url = new URL((String) urls[0]);
+			URL url = new URL(urls[0]);
 			URLConnection conexion = url.openConnection();
 			conexion.connect();
 
@@ -71,7 +71,8 @@ public class FileDownloader extends AsyncTask<String, Integer, String> {
 
 			File dir = new File(PATH);
 			if (!dir.exists()) {
-				dir.mkdirs();
+                //noinspection ResultOfMethodCallIgnored
+                dir.mkdirs();
 			}
 
 			InputStream input = new BufferedInputStream(url.openStream());

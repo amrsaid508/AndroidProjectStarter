@@ -1,20 +1,6 @@
 
 package com.deardhruv.projectstarter.utils;
 
-import java.net.URLEncoder;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -38,6 +24,20 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+
+import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
 /** Helper methods that are used all over the app. */
 public final class Helper {
 	private static final String LOGTAG = "Helper";
@@ -50,7 +50,7 @@ public final class Helper {
 	private static final long ONE_DAY = 86400L;
 	public static final long FOUR_WEEKS = 28L * ONE_DAY * 1000L;
 
-	public static final SimpleDateFormat FORMATTER1 = new SimpleDateFormat(
+	private static final SimpleDateFormat FORMATTER1 = new SimpleDateFormat(
 			"EEE, d MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
 	public static final SimpleDateFormat FORMATTER2 = new SimpleDateFormat("dd.MM.yyyy",
 			Locale.getDefault());
@@ -92,7 +92,7 @@ public final class Helper {
 	 * @param date2 -future date than date1
 	 * @return total days between Dates
 	 */
-	public static int getDaysBetweenDates(Date date1, Date date2) {
+	private static int getDaysBetweenDates(Date date1, Date date2) {
 		return (int) ((date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24l));
 	}
 
@@ -186,7 +186,7 @@ public final class Helper {
 	 *
 	 * @return
 	 */
-	public static boolean isConnectionRoaming(Context ctx) {
+	private static boolean isConnectionRoaming(Context ctx) {
 		ConnectivityManager cm = (ConnectivityManager) ctx
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo ni = cm.getActiveNetworkInfo();
@@ -201,7 +201,7 @@ public final class Helper {
 	 * @return
 	 */
 	@SuppressWarnings("deprecation")
-	public static boolean isRoamingEnabled(Context ctx) {
+    private static boolean isRoamingEnabled(Context ctx) {
 		ContentResolver cr = ctx.getContentResolver();
 		int result = 0; // 0 is false
 		boolean check = false;
@@ -380,7 +380,7 @@ public final class Helper {
 		try {
 			applicationInfo = packageManager
 					.getApplicationInfo(ctx.getApplicationInfo().packageName, 0);
-		} catch (final NameNotFoundException e) {
+		} catch (final NameNotFoundException ignored) {
 		}
 		return (String) (applicationInfo != null
 				? packageManager.getApplicationLabel(applicationInfo) : "Unknown");
