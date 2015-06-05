@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -45,374 +46,382 @@ import retrofit.mime.TypedFile;
 
 public class UploadFileActivity extends AbstractActivity implements OnClickListener {
 
-	private static final String LOGTAG = "UploadFileActivity";
-	private static final Logger LOG = new Logger(LOGTAG);
+    private static final String LOGTAG = "UploadFileActivity";
+    private static final Logger LOG = new Logger(LOGTAG);
 
-	private static final int PHOTO_PICKER_CODE = 2001;
-	private static final String UPLOAD_FILE_REQUEST_TAG = LOGTAG + ".uploadFileRequest";
+    private static final int PHOTO_PICKER_CODE = 2001;
+    private static final String UPLOAD_FILE_REQUEST_TAG = LOGTAG + ".uploadFileRequest";
 
-	private StoreImageHelper mStoreImageHelper;
-	private File mTmpPictureFile;
+    private StoreImageHelper mStoreImageHelper;
+    private File mTmpPictureFile;
 
-	private DisplayImageOptions mImageOptions;
-	private ImageLoader mImageLoader;
+    private DisplayImageOptions mImageOptions;
+    private ImageLoader mImageLoader;
 
-	private EventBus mEventBus;
-	private ApiClient mApiClient;
+    private EventBus mEventBus;
+    private ApiClient mApiClient;
 
-	private Button btnUploadFile;
-	private ImageView imgAddPhoto;
-	private ProgressDialog pd;
+    private Button btnUploadFile;
+    private ImageView imgAddPhoto;
+    private ProgressDialog pd;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        super.onCreate(savedInstanceState);
+        setProgressBarIndeterminateVisibility(true);
+        setContentView(R.layout.upload_file_activity_layout);
 
-		setProgressBarIndeterminateVisibility(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        initUI();
 
-		setContentView(R.layout.upload_file_activity_layout);
+        mEventBus = EventBus.getDefault();
+        ProjectStarterApplication app = ((ProjectStarterApplication) getApplication());
+        mApiClient = app.getApiClient();
 
-		initUI();
+        mImageLoader = ImageLoader.getInstance();
+        mImageLoader.clearMemoryCache();
 
-		mEventBus = EventBus.getDefault();
-		ProjectStarterApplication app = ((ProjectStarterApplication) getApplication());
-		mApiClient = app.getApiClient();
+        mImageOptions = new DisplayImageOptions.Builder()
+                .showImageOnLoading(android.R.color.transparent)
+                .showImageForEmptyUri(R.drawable.ic_launcher).cacheInMemory(true).cacheOnDisk(true)
+                .considerExifParams(true).build();
+        mStoreImageHelper = new StoreImageHelper(this);
+    }
 
-		mImageLoader = ImageLoader.getInstance();
-		mImageLoader.clearMemoryCache();
+    private void initUI() {
+        btnUploadFile = (Button) findViewById(R.id.btnUploadFile);
+        imgAddPhoto = (ImageView) findViewById(R.id.imgAddPhoto);
+        initListener();
+    }
 
-		mImageOptions = new DisplayImageOptions.Builder()
-				.showImageOnLoading(android.R.color.transparent)
-				.showImageForEmptyUri(R.drawable.ic_launcher).cacheInMemory(true).cacheOnDisk(true)
-				.considerExifParams(true).build();
-		mStoreImageHelper = new StoreImageHelper(this);
-	}
+    private void initListener() {
+        btnUploadFile.setOnClickListener(this);
+        imgAddPhoto.setOnClickListener(this);
+    }
 
-	private void initUI() {
-		btnUploadFile = (Button) findViewById(R.id.btnUploadFile);
-		imgAddPhoto = (ImageView) findViewById(R.id.imgAddPhoto);
-		initListener();
-	}
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mEventBus.register(this);
+    }
 
-	private void initListener() {
-		btnUploadFile.setOnClickListener(this);
-		imgAddPhoto.setOnClickListener(this);
-	}
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mEventBus.unregister(this);
+    }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		mEventBus.register(this);
-	}
+    private void showProgressDialog() {
+        btnUploadFile.setEnabled(false);
+        pd = ProgressDialog.show(this, "Please wait", "uploading file...");
+        if (!pd.isShowing()) {
+            pd.show();
+        }
+        setProgressBarIndeterminateVisibility(true);
+    }
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		mEventBus.unregister(this);
-	}
+    private void dismissProgressDialog() {
+        btnUploadFile.setEnabled(true);
+        if (pd.isShowing()) {
+            pd.dismiss();
+        }
+        setProgressBarIndeterminateVisibility(false);
+    }
 
-	private void showProgressDialog() {
-		btnUploadFile.setEnabled(false);
-		pd = ProgressDialog.show(this, "Please wait", "uploading file...");
-		if (!pd.isShowing()) {
-			pd.show();
-		}
-		setProgressBarIndeterminateVisibility(true);
-	}
+    // ============================================================================================
+    // User Clicks and Actions
+    // ============================================================================================
 
-	private void dismissProgressDialog() {
-		btnUploadFile.setEnabled(true);
-		if (pd.isShowing()) {
-			pd.dismiss();
-		}
-		setProgressBarIndeterminateVisibility(false);
-	}
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
 
-	// ============================================================================================
-	// User Clicks and Actions
-	// ============================================================================================
+            case R.id.imgAddPhoto:
+                showAddPhotoDialog();
+                break;
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
+            case R.id.btnUploadFile:
+                startUploading(mTmpPictureFile);
+                break;
 
-			case R.id.imgAddPhoto:
-				showAddPhotoDialog();
-				break;
+            default:
+                LOG.i("default case");
+                break;
+        }
+    }
 
-			case R.id.btnUploadFile:
-				startUploading(mTmpPictureFile);
-				break;
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-			default:
-				LOG.i("default case");
-				break;
-		}
-	}
+        switch (requestCode) {
+            case PHOTO_PICKER_CODE:
+                if (data == null) {
+                    // The camera picture does not come with the data. It is set
+                    // via Extra
+                    // android.provider.MediaStore.EXTRA_OUTPUT when the camera
+                    // intent is started.
+                    handleTakePictureResult(resultCode);
+                } else {
+                    handlePhotoPickerResult(resultCode, data);
+                }
+                break;
+            default:
+                break;
+        }
 
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
+    }
 
-		switch (requestCode) {
-			case PHOTO_PICKER_CODE:
-				if (data == null) {
-					// The camera picture does not come with the data. It is set
-					// via Extra
-					// android.provider.MediaStore.EXTRA_OUTPUT when the camera
-					// intent is started.
-					handleTakePictureResult(resultCode);
-				} else {
-					handlePhotoPickerResult(resultCode, data);
-				}
-				break;
-			default:
-				break;
-		}
+    @TargetApi(Build.VERSION_CODES.ECLAIR)
+    private void showAddPhotoDialog() {
 
-	}
+        Intent getContentIntent = new Intent();
+        getContentIntent.setAction(Intent.ACTION_GET_CONTENT);
+        getContentIntent.setType("image/*");
 
-	@TargetApi(Build.VERSION_CODES.ECLAIR)
-	private void showAddPhotoDialog() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-		Intent getContentIntent = new Intent();
-		getContentIntent.setAction(Intent.ACTION_GET_CONTENT);
-		getContentIntent.setType("image/*");
+        try {
+            mTmpPictureFile = null;
+            mTmpPictureFile = mStoreImageHelper.createImageFile();
+            Uri saveUri = Uri.fromFile(mTmpPictureFile);
+            // takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+            // Uri.fromFile(mTmpPictureFile));
 
-		Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            Bundle bundle = new Bundle();
 
-		try {
-			mTmpPictureFile = null;
-			mTmpPictureFile = mStoreImageHelper.createImageFile();
-			Uri saveUri = Uri.fromFile(mTmpPictureFile);
-			// takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-			// Uri.fromFile(mTmpPictureFile));
+            if (saveUri != null) {
+                bundle.putParcelable(MediaStore.EXTRA_OUTPUT, saveUri);
+            } else {
+                bundle.putBoolean("return-data", true);
+            }
 
-			Bundle bundle = new Bundle();
+            takePictureIntent.putExtras(bundle);
 
-			if (saveUri != null) {
-				bundle.putParcelable(MediaStore.EXTRA_OUTPUT, saveUri);
-			} else {
-				bundle.putBoolean("return-data", true);
-			}
+        } catch (IOException e) {
+            Log.e(LOGTAG, e.getMessage());
+        }
 
-			takePictureIntent.putExtras(bundle);
+        Intent[] additionalIntents = new Intent[]{
+                takePictureIntent
+        };
 
-		} catch (IOException e) {
-			Log.e(LOGTAG, e.getMessage());
-		}
+        Intent chooserIntent = Intent.createChooser(getContentIntent, "Pick your choice");
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, additionalIntents);
+        startActivityForResult(chooserIntent, PHOTO_PICKER_CODE);
+    }
 
-		Intent[] additionalIntents = new Intent[] {
-				takePictureIntent
-		};
+    /**
+     * Handles the result which is returned when the user picked one or more
+     * photos from the multi picture chooser or another source.
+     *
+     * @param resultCode
+     * @param data
+     */
+    private void handlePhotoPickerResult(int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            // The image comes from another source.
+            String imagePath = ImageValidator.getPath(this, data.getData());
+            validateAndAddtoGallery(imagePath);
+        }
+    }
 
-		Intent chooserIntent = Intent.createChooser(getContentIntent, "Pick your choice");
-		chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, additionalIntents);
-		startActivityForResult(chooserIntent, PHOTO_PICKER_CODE);
-	}
+    /**
+     * Check if the image exists and is valid. Add it to the gallery adapter.
+     *
+     * @param imagePath
+     */
+    private void validateAndAddtoGallery(String imagePath) {
+        if (imagePath != null && imagePath.length() > 0) {
+            if (imagePath.startsWith("file://")) {
+                imagePath.replace("file://", "");
+            }
 
-	/**
-	 * Handles the result which is returned when the user picked one or more
-	 * photos from the multi picture chooser or another source.
-	 * 
-	 * @param resultCode
-	 * @param data
-	 */
-	private void handlePhotoPickerResult(int resultCode, Intent data) {
-		if (resultCode == Activity.RESULT_OK && data != null) {
-			// The image comes from another source.
-			String imagePath = ImageValidator.getPath(this, data.getData());
-			validateAndAddtoGallery(imagePath);
-		}
-	}
+            mTmpPictureFile = new File(imagePath);
 
-	/**
-	 * Check if the image exists and is valid. Add it to the gallery adapter.
-	 * 
-	 * @param imagePath
-	 */
-	private void validateAndAddtoGallery(String imagePath) {
-		if (imagePath != null && imagePath.length() > 0) {
-			if (imagePath.startsWith("file://")) {
-				imagePath.replace("file://", "");
-			}
+            if (mTmpPictureFile.exists()) {
+                if (!ImageValidator.isPictureValidForUpload(mTmpPictureFile.getAbsolutePath())) {
+                    showToast("Creating image failed.");
+                } else {
+                    addImageToView(mTmpPictureFile);
+                }
+            } else {
+                Log.e(LOGTAG, "Photo picker: File does not exist!");
+                showToast("Image is not supported.");
+            }
+        } else {
+            showToast("Creating image failed.");
+        }
+    }
 
-			mTmpPictureFile = new File(imagePath);
+    /**
+     * Handles the result which is returned when the user took a picture with
+     * the camera.
+     *
+     * @param resultCode
+     */
+    private void handleTakePictureResult(int resultCode) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (mTmpPictureFile == null) {
+                showToast("Creating image failed.");
+            } else {
+                saveImageAndUpdateGallery();
+            }
+        }
+    }
 
-			if (mTmpPictureFile.exists()) {
-				if (!ImageValidator.isPictureValidForUpload(mTmpPictureFile.getAbsolutePath())) {
-					showToast("Creating image failed.");
-				} else {
-					addImageToView(mTmpPictureFile);
-				}
-			} else {
-				Log.e(LOGTAG, "Photo picker: File does not exist!");
-				showToast("Image is not supported.");
-			}
-		} else {
-			showToast("Creating image failed.");
-		}
-	}
+    @TargetApi(Build.VERSION_CODES.FROYO)
+    private void saveImageAndUpdateGallery() {
+        File dir = new File(Environment.getExternalStorageDirectory() + "/"
+                + getApplication().getApplicationInfo().getClass().getSimpleName() + "/");
 
-	/**
-	 * Handles the result which is returned when the user took a picture with
-	 * the camera.
-	 * 
-	 * @param resultCode
-	 */
-	private void handleTakePictureResult(int resultCode) {
-		if (resultCode == Activity.RESULT_OK) {
-			if (mTmpPictureFile == null) {
-				showToast("Creating image failed.");
-			} else {
-				saveImageAndUpdateGallery();
-			}
-		}
-	}
-
-	@TargetApi(Build.VERSION_CODES.FROYO)
-	private void saveImageAndUpdateGallery() {
-		File dir = new File(Environment.getExternalStorageDirectory() + "/"
-				+ getApplication().getApplicationInfo().getClass().getSimpleName() + "/");
-
-		if (!dir.exists()) {
+        if (!dir.exists()) {
             //noinspection ResultOfMethodCallIgnored
             dir.mkdirs();
-		}
+        }
 
-		File file_save = new File(dir.getAbsoluteFile(), System.currentTimeMillis() + ".jpg");
+        File file_save = new File(dir.getAbsoluteFile(), System.currentTimeMillis() + ".jpg");
 
-		try {
-			InputStream in = new FileInputStream(mTmpPictureFile);
-			OutputStream out = new FileOutputStream(file_save);
-			// Copy the bits from instream to outstream
-			byte[] buf = new byte[1024];
-			int len;
+        try {
+            InputStream in = new FileInputStream(mTmpPictureFile);
+            OutputStream out = new FileOutputStream(file_save);
+            // Copy the bits from instream to outstream
+            byte[] buf = new byte[1024];
+            int len;
 
-			while ((len = in.read(buf)) > 0) {
-				out.write(buf, 0, len);
-			}
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
 
-			in.close();
-			out.close();
-		} catch (FileNotFoundException e) {
-			Log.e(LOGTAG, "FileNotFoundException while saving image. Message: " + e.getMessage());
-		} catch (IOException e) {
-			Log.e(LOGTAG, "IOException while saving image. Message: " + e.getMessage());
-		}
+            in.close();
+            out.close();
+        } catch (FileNotFoundException e) {
+            Log.e(LOGTAG, "FileNotFoundException while saving image. Message: " + e.getMessage());
+        } catch (IOException e) {
+            Log.e(LOGTAG, "IOException while saving image. Message: " + e.getMessage());
+        }
 
-		// Tell the MediaScanner to scan the newly created image to make it
-		// available to the user.
-		// http://developer.android.com/reference/android/os/Environment.html#getExternalStoragePublicDirectory%28java.lang.String%29
-		String[] filePaths = new String[] {
-				file_save.toString()
-		};
-		MediaScannerConnection.scanFile(this, filePaths, null, null);
+        // Tell the MediaScanner to scan the newly created image to make it
+        // available to the user.
+        // http://developer.android.com/reference/android/os/Environment.html#getExternalStoragePublicDirectory%28java.lang.String%29
+        String[] filePaths = new String[]{
+                file_save.toString()
+        };
+        MediaScannerConnection.scanFile(this, filePaths, null, null);
 
-		addImageToView(mTmpPictureFile);
-	}
+        addImageToView(mTmpPictureFile);
+    }
 
-	private void addImageToView(final File image) {
-		if (image == null) {
-			throw new IllegalArgumentException("image cannot be null");
-		}
+    private void addImageToView(final File image) {
+        if (image == null) {
+            throw new IllegalArgumentException("image cannot be null");
+        }
 
-		mImageLoader.displayImage(mStoreImageHelper.getImagePath(image), imgAddPhoto,
-				mImageOptions);
+        mImageLoader.displayImage(mStoreImageHelper.getImagePath(image), imgAddPhoto,
+                mImageOptions);
+    }
 
-	}
+    private void startUploading(final File file) {
 
-	private void startUploading(final File file) {
+        if (file == null || !isPictureValid(file.getAbsolutePath())) {
+            showToast("File is not valid, try again.");
+        } else if (file.exists()) {
+            showProgressDialog();
+            String mimeType = "image/jpeg"
+                    // "application/octet-stream"
+                    // "multipart/form-data"
+                    // "image/*"
+                    // "multipart/mixed"
+                    ;
 
-		if (file == null || !isPictureValid(file.getAbsolutePath())) {
-			showToast("File is not valid, try again.");
-		} else if (file.exists()) {
-			showProgressDialog();
-			String mimeType = "image/jpeg"
-			// "application/octet-stream"
-			// "multipart/form-data"
-			// "image/*"
-			// "multipart/mixed"
-			;
+            TypedFile typedFile = new TypedFile(mimeType, file);
+            mApiClient.uploadFile(UPLOAD_FILE_REQUEST_TAG, typedFile);
 
-			TypedFile typedFile = new TypedFile(mimeType, file);
-			mApiClient.uploadFile(UPLOAD_FILE_REQUEST_TAG, typedFile);
+        } else {
+            showToast("File is corrupted.");
+        }
+    }
 
-		} else {
-			showToast("File is corrupted.");
-		}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
-	}
+    // ============================================================================================
+    // Validation
+    // ============================================================================================
 
-	// ============================================================================================
-	// Validation
-	// ============================================================================================
+    private boolean isPictureValid(String filePath) {
+        return ImageValidator.isPictureValidForUpload(filePath);
+    }
 
-	private boolean isPictureValid(String filePath) {
-		return ImageValidator.isPictureValidForUpload(filePath);
-	}
+    // ============================================================================================
+    // EventBus callbacks
+    // ============================================================================================
 
-	// ============================================================================================
-	// EventBus callbacks
-	// ============================================================================================
+    /**
+     * Response of Image list.
+     *
+     * @param uploadFileResponse UploadFileResponse
+     */
+    public void onEventMainThread(UploadFileResponse uploadFileResponse) {
+        switch (uploadFileResponse.getRequestTag()) {
+            case UPLOAD_FILE_REQUEST_TAG:
+                dismissProgressDialog();
+                // showToast(Dumper.dump(uploadFileResponse));
+                // showToast(uploadFileResponse.getApiInfo().toString());
+                showToast(uploadFileResponse.getApiInfo().getMessage());
 
-	/**
-	 * Response of Image list.
-	 * 
-	 * @param uploadFileResponse UploadFileResponse
-	 */
-	public void onEventMainThread(UploadFileResponse uploadFileResponse) {
-		switch (uploadFileResponse.getRequestTag()) {
-			case UPLOAD_FILE_REQUEST_TAG:
-				dismissProgressDialog();
-				// showToast(Dumper.dump(uploadFileResponse));
-				// showToast(uploadFileResponse.getApiInfo().toString());
-				showToast(uploadFileResponse.getApiInfo().getMessage());
+                break;
 
-				break;
+            default:
+                break;
+        }
+    }
 
-			default:
-				break;
-		}
-	}
-
-	/**
-	 * EventBus listener. An API call failed. No error message was returned.
-	 *
-	 * @param event ApiErrorEvent
-	 */
-	public void onEventMainThread(ApiErrorEvent event) {
-		switch (event.getRequestTag()) {
-			case UPLOAD_FILE_REQUEST_TAG:
-				dismissProgressDialog();
-				showToast(getString(R.string.error_server_problem));
-				// LOG.e(Dumper.dump(event));
+    /**
+     * EventBus listener. An API call failed. No error message was returned.
+     *
+     * @param event ApiErrorEvent
+     */
+    public void onEventMainThread(ApiErrorEvent event) {
+        switch (event.getRequestTag()) {
+            case UPLOAD_FILE_REQUEST_TAG:
+                dismissProgressDialog();
+                showToast(getString(R.string.error_server_problem));
+                // LOG.e(Dumper.dump(event));
                 LOG.e(event.getRetrofitError().toString());
-				break;
+                break;
 
-			default:
-				break;
-		}
-	}
+            default:
+                break;
+        }
+    }
 
-	/**
-	 * EventBus listener. An API call failed. An error message was returned.
-	 *
-	 * @param event ApiErrorWithMessageEvent Contains the error message.
-	 */
-	public void onEventMainThread(ApiErrorWithMessageEvent event) {
-		switch (event.getRequestTag()) {
-			case UPLOAD_FILE_REQUEST_TAG:
-				dismissProgressDialog();
-				showToast(event.getResultMsgUser());
-				// LOG.e(Dumper.dump(event));
-				LOG.e(Dumper.dump(event.getResultMsgUser()));
-				break;
+    /**
+     * EventBus listener. An API call failed. An error message was returned.
+     *
+     * @param event ApiErrorWithMessageEvent Contains the error message.
+     */
+    public void onEventMainThread(ApiErrorWithMessageEvent event) {
+        switch (event.getRequestTag()) {
+            case UPLOAD_FILE_REQUEST_TAG:
+                dismissProgressDialog();
+                showToast(event.getResultMsgUser());
+                // LOG.e(Dumper.dump(event));
+                LOG.e(Dumper.dump(event.getResultMsgUser()));
+                break;
 
-			default:
-				break;
-		}
-	}
+            default:
+                break;
+        }
+    }
 
 }

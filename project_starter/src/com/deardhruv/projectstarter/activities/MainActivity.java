@@ -1,4 +1,3 @@
-
 package com.deardhruv.projectstarter.activities;
 
 import android.content.Intent;
@@ -8,7 +7,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.Button;
 
 import com.deardhruv.projectstarter.ProjectStarterApplication;
@@ -52,9 +50,7 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
-        setProgressBarIndeterminateVisibility(true);
         Helper.riseAndShine(this);
 
         setContentView(R.layout.main_activity_layout);
@@ -73,9 +69,9 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
 
-        ShimmerFrameLayout shimmerFrameLayout = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
-        shimmerFrameLayout.setDuration(3000);
-        shimmerFrameLayout.startShimmerAnimation();
+        ShimmerFrameLayout mShimmerFrameLayout = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
+        mShimmerFrameLayout.setDuration(3000);
+        mShimmerFrameLayout.startShimmerAnimation();
 
         // mPullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
@@ -128,16 +124,12 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 
     private void showProgressDialog() {
         btnReload.setEnabled(false);
-        setProgressBarIndeterminateVisibility(true);
         mSwipeRefreshLayout.setRefreshing(true);
-
     }
 
     private void dismissProgressDialog() {
         btnReload.setEnabled(true);
-        setProgressBarIndeterminateVisibility(false);
         mSwipeRefreshLayout.setRefreshing(false);
-
     }
 
     // ============================================================================================

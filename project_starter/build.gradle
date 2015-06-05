@@ -15,9 +15,9 @@ apply plugin: 'com.android.application'
 
 dependencies {
     compile fileTree(include: '*.jar', dir: 'libs')
-    compile 'com.android.support:support-v4:22.1.1'
-    compile 'com.android.support:recyclerview-v7:22.1.1'
-    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'com.android.support:support-v4:22.2.0'
+    compile 'com.android.support:recyclerview-v7:22.2.0'
+    compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0-RC1'
     compile 'com.squareup.okio:okio:1.4.0'
@@ -25,17 +25,19 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.5.3'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.5.3'
     compile 'com.fasterxml.jackson.core:jackson-core:2.5.3'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'it.sephiroth.android.library.imagezoom:imagezoom:2.1.1'
     compile 'com.facebook.shimmer:shimmer:0.1.0'
     compile 'com.github.shell-software:fab:1.1.0'
     compile 'com.github.ksoichiro:android-observablescrollview:1.5.1'
-    compile 'com.github.chenupt.android:springindicator:1.0.2'
+    //    compile 'com.github.chenupt.android:springindicator:1.0.2'
     // compile 'com.xgc1986.android:parallaxpagertransformer:1.0.3'
     // compile 'jp.wasabef:recyclerview-animators:1.2.0'
     // compile 'com.yalantis:phoenix:1.1.2'
     // compile 'com.facebook.fresco:fresco:0.5.0'
     // compile 'com.xgc1986.parallaxPagerTransformer:library:1.0.0'
+    compile 'com.mikepenz:materialdrawer:3.0.4'
+    compile 'com.github.rey5137:material:1.1.1'
 }
 
 android {

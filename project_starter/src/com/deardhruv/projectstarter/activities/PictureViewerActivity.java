@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -36,7 +37,6 @@ public class PictureViewerActivity extends AbstractActivity {
 
     private EventBus mEventBus;
 
-    private PictureViewerAdapter mPagerAdapter;
     private CustomViewPager mViewImagesPager;
     private int mSelection;
     private List<String> mImageUrls;
@@ -49,6 +49,8 @@ public class PictureViewerActivity extends AbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pictureviewer);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mEventBus = EventBus.getDefault();
 
         if (getIntent() == null || !getIntent().hasExtra(EXTRA_IMAGE_URLS)
@@ -80,7 +82,7 @@ public class PictureViewerActivity extends AbstractActivity {
         actionBtnAll.setRippleEffectEnabled(true);
         actionBtnWhatsapp.setRippleEffectEnabled(true);
 
-        mPagerAdapter = new PictureViewerAdapter(this, mImageUrls);
+        PictureViewerAdapter mPagerAdapter = new PictureViewerAdapter(this, mImageUrls);
         mViewImagesPager.setAdapter(mPagerAdapter);
         mViewImagesPager.setCurrentItem(mSelection);
         mViewImagesPager.setOffscreenPageLimit(mImageUrls.size());
@@ -148,6 +150,17 @@ public class PictureViewerActivity extends AbstractActivity {
         mEventBus.unregister(this);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void startDownlodingImage() {
         FileDownloader fileDownloader = new FileDownloader(PictureViewerActivity.this);
 
@@ -180,10 +193,7 @@ public class PictureViewerActivity extends AbstractActivity {
     }
 
     private void updateSharingActionBar(boolean shouldMakeVisible) {
-
-
         // To set hide animation:
-
         if (shouldMakeVisible) {
             actionBtnAll.setShowAnimation(ActionButton.Animations.ROLL_FROM_RIGHT);
             actionBtnWhatsapp.setShowAnimation(ActionButton.Animations.ROLL_FROM_RIGHT);
@@ -207,7 +217,6 @@ public class PictureViewerActivity extends AbstractActivity {
     }
 
     private void shareImage(String path) {
-
         Intent shareIntent = new Intent();
         // shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
         shareIntent.setAction(Intent.ACTION_SEND);

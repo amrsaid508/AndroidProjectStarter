@@ -109,10 +109,10 @@ public class AbstractApiCallback<T extends AbstractApiResponse> implements Callb
 	}
 
 	/**
-	 * Call this methode if No internet connection or other use. See
+	 * Call this method if No internet connection or other use. See
 	 * {@link ImageListRequest#execute()}
 	 * 
-	 * @param resultMsgUser
+	 * @param resultMsgUser User defined messages.
 	 */
 	public void postUnexpectedError(String resultMsgUser) {
 		EventBus.getDefault().post(new ApiErrorWithMessageEvent(requestTag, resultMsgUser));

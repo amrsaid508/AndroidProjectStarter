@@ -36,8 +36,8 @@ public interface Api {
 	/**
 	 * Upload file to server
 	 * 
-	 * @param file
-	 * @param callback
+	 * @param file file to upload
+	 * @param callback callback class object
 	 */
 	@Multipart
 	@POST("/upload.php")
