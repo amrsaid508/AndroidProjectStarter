@@ -55,12 +55,14 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 
         setContentView(R.layout.main_activity_layout);
         initUI();
+        initSnackBar(MainActivity.this);
 
         mEventBus = EventBus.getDefault();
         ProjectStarterApplication app = ((ProjectStarterApplication) getApplication());
         mApiClient = app.getApiClient();
 
     }
+
 
     private void initUI() {
         btnReload = (Button) findViewById(R.id.btnReload);
@@ -199,7 +201,7 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
         switch (event.getRequestTag()) {
             case IMAGE_LIST_REQUEST_TAG:
                 dismissProgressDialog();
-                showToast(getString(R.string.error_server_problem));
+                showMsg(getString(R.string.error_server_problem));
                 break;
 
             default:
@@ -216,7 +218,7 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
         switch (event.getRequestTag()) {
             case IMAGE_LIST_REQUEST_TAG:
                 dismissProgressDialog();
-                showToast(event.getResultMsgUser());
+                showMsg(event.getResultMsgUser());
                 break;
 
             default:

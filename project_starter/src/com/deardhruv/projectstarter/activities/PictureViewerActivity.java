@@ -67,6 +67,7 @@ public class PictureViewerActivity extends AbstractActivity {
                     .show();
         }
 
+        initSnackBar(PictureViewerActivity.this);
         initUi();
 
         actionBtnAll.hide();
@@ -245,7 +246,7 @@ public class PictureViewerActivity extends AbstractActivity {
         try {
             startActivity(shareIntent);
         } catch (android.content.ActivityNotFoundException ex) {
-            showToast("Whatsapp have not been installed.");
+            showMsg("Whatsapp have not been installed.");
         }
     }
 }

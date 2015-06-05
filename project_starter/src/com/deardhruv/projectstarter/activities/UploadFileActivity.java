@@ -73,6 +73,7 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
         setContentView(R.layout.upload_file_activity_layout);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        initSnackBar(UploadFileActivity.this);
         initUI();
 
         mEventBus = EventBus.getDefault();
@@ -242,16 +243,16 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 
             if (mTmpPictureFile.exists()) {
                 if (!ImageValidator.isPictureValidForUpload(mTmpPictureFile.getAbsolutePath())) {
-                    showToast("Creating image failed.");
+                    showMsg("Creating image failed.");
                 } else {
                     addImageToView(mTmpPictureFile);
                 }
             } else {
                 Log.e(LOGTAG, "Photo picker: File does not exist!");
-                showToast("Image is not supported.");
+                showMsg("Image is not supported.");
             }
         } else {
-            showToast("Creating image failed.");
+            showMsg("Creating image failed.");
         }
     }
 
@@ -264,7 +265,7 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
     private void handleTakePictureResult(int resultCode) {
         if (resultCode == Activity.RESULT_OK) {
             if (mTmpPictureFile == null) {
-                showToast("Creating image failed.");
+                showMsg("Creating image failed.");
             } else {
                 saveImageAndUpdateGallery();
             }
@@ -325,7 +326,7 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
     private void startUploading(final File file) {
 
         if (file == null || !isPictureValid(file.getAbsolutePath())) {
-            showToast("File is not valid, try again.");
+            showMsg("File is not valid, try again.");
         } else if (file.exists()) {
             showProgressDialog();
             String mimeType = "image/jpeg"
@@ -339,7 +340,7 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
             mApiClient.uploadFile(UPLOAD_FILE_REQUEST_TAG, typedFile);
 
         } else {
-            showToast("File is corrupted.");
+            showMsg("File is corrupted.");
         }
     }
 
@@ -375,9 +376,9 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
         switch (uploadFileResponse.getRequestTag()) {
             case UPLOAD_FILE_REQUEST_TAG:
                 dismissProgressDialog();
-                // showToast(Dumper.dump(uploadFileResponse));
-                // showToast(uploadFileResponse.getApiInfo().toString());
-                showToast(uploadFileResponse.getApiInfo().getMessage());
+                // showMsg(Dumper.dump(uploadFileResponse));
+                // showMsg(uploadFileResponse.getApiInfo().toString());
+                showMsg(uploadFileResponse.getApiInfo().getMessage());
 
                 break;
 
@@ -395,7 +396,7 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
         switch (event.getRequestTag()) {
             case UPLOAD_FILE_REQUEST_TAG:
                 dismissProgressDialog();
-                showToast(getString(R.string.error_server_problem));
+                showMsg(getString(R.string.error_server_problem));
                 // LOG.e(Dumper.dump(event));
                 LOG.e(event.getRetrofitError().toString());
                 break;
@@ -414,7 +415,7 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
         switch (event.getRequestTag()) {
             case UPLOAD_FILE_REQUEST_TAG:
                 dismissProgressDialog();
-                showToast(event.getResultMsgUser());
+                showMsg(event.getResultMsgUser());
                 // LOG.e(Dumper.dump(event));
                 LOG.e(Dumper.dump(event.getResultMsgUser()));
                 break;
