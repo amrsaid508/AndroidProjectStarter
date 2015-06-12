@@ -24,14 +24,14 @@ public interface Api {
 	String APP_ID = "";
 	String USER_ID = "";
 	String BASE_PARAMS = "?application=" + APP_ID + "&userid=" + USER_ID;
-	String SECRET_KEY = "";
-
 	/**
 	 * Retrive list of images.
 	 */
 //	@GET("/image_list_json")
-	@GET("/image_list_json")
+	@GET("/image_list.php")
 	void getImageList(Callback<ImageListResponse> callback);
+
+	String SECRET_KEY = "";
 
 	/**
 	 * Upload file to server

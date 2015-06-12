@@ -1,10 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/margin_4"
-    tools:context="com.deardhruv.projectstarter.activities.MainActivity" >
+    tools:context="com.deardhruv.projectstarter.activities.MainActivity">
 
     <TextView
         android:id="@+id/textView1"
@@ -15,12 +16,60 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         tools:ignore="RtlHardcoded" />
 
-    <ImageView
-        android:id="@+id/imgAddPhoto"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/button_newphoto_selector" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_5"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgAddPhoto"
+            android:layout_width="@dimen/pic_thumb_size"
+            android:layout_height="@dimen/pic_thumb_size"
+            android:scaleType="centerCrop"
+            android:src="@drawable/button_newphoto_selector" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_5"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_5">
+
+            <com.rey.material.widget.EditText
+                android:id="@+id/txt_first_name"
+                style="@style/Material.Widget.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_4"
+                android:hint="First name"
+                android:inputType="textPersonName"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/fab_material_white"
+                app:et_inputId="@+id/txt_first_name_input"
+                app:et_labelInAnim="@anim/abc_grow_fade_in_from_bottom"
+                app:et_labelOutAnim="@anim/abc_slide_out_top"
+                app:et_supportMaxChars="12"
+                app:et_supportMode="none" />
+
+            <com.rey.material.widget.EditText
+                android:id="@+id/txt_last_name"
+                style="@style/Material.Widget.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_4"
+                android:hint="Last name"
+                android:inputType="textPersonName"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/fab_material_white"
+                app:et_inputId="@+id/txt_last_name_input"
+                app:et_labelInAnim="@anim/abc_grow_fade_in_from_bottom"
+                app:et_labelOutAnim="@anim/abc_slide_out_top"
+                app:et_supportMode="none" />
+        </LinearLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnUploadFile"

@@ -7,12 +7,12 @@
     "image_list": [
       {
         "id": 1,
-        "name": "lacinia nisi",
+        "name": "abc &#8211; lacinia nisi test  &#8211; - lacinia nisi test ! lacinia nisi test lacinia nisi test lacinia nisi test lacinia nisi test lacinia nisi test lacinia nisi test lacinia nisi test lacinia nisi test lacinia nisi test lacinia nisi test lacinia nisi test lacinia nisi test ",
         "img": "http://www.mediafire.com/convkey/c670/b4a7ppdlhghhai8zg.jpg"
       },
       {
         "id": 2,
-        "name": "mi integer",
+        "name": "mi &amp; integer",
         "img": "http://www.mediafire.com/convkey/836f/hrvrzwyykodaj0azg.jpg"
       },
       {

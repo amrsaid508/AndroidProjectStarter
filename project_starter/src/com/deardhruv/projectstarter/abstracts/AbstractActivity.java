@@ -32,8 +32,8 @@ public abstract class AbstractActivity extends AppCompatActivity { //FragmentAct
     }
 
     protected void initSnackBar(Context context) {
-        snackBar = SnackBar.make(context).applyStyle(R.style.SnackBarSingleLine);
-        snackBar.singleLine(true)
+        snackBar = SnackBar.make(context);//.applyStyle(R.style.SnackBarEmpty);
+        snackBar.singleLine(false)
                 .actionText("CLOSE")
                 .actionClickListener(new SnackBar.OnActionClickListener() {
                     @Override
@@ -42,8 +42,9 @@ public abstract class AbstractActivity extends AppCompatActivity { //FragmentAct
                     }
                 })
                 .backgroundColor(Color.parseColor("#5A5A5A"))
-                .textColor(Color.parseColor("#FFFFFF"))
+                .textColor(Color.parseColor("#ABABAB"))
                 .actionTextColor(Color.parseColor("#FFFFFF"))
+                .maxLines(2)
                 .duration(5000);
     }
 

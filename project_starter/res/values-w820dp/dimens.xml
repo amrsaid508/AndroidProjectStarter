@@ -7,6 +7,7 @@
     -->
     <dimen name="activity_horizontal_margin">64dp</dimen>
     <dimen name="margin_4">16dp</dimen>
+    <dimen name="margin_5">20dp</dimen>
     <dimen name="margin_1">4dp</dimen>
 
 </resources>

@@ -4,6 +4,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
     <dimen name="margin_1">1dp</dimen>
 
     <!-- Material -->
@@ -12,5 +13,6 @@
     <dimen name="drawer_text">20sp</dimen>
     <dimen name="title_text">16sp</dimen>
     <dimen name="bt_height">36dp</dimen>
+    <dimen name="pic_thumb_size">96dp</dimen>
 
 </resources>
