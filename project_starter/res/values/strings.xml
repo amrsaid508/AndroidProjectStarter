@@ -6,10 +6,16 @@
     <string name="action_settings">Settings</string>
     <string name="error_server_problem">Server issue occurred, please try again.</string>
     <string name="error_no_internet">Check your internet connection and try again.</string>
-    <string name="size_info">Below images has total size of 12 MB; be patient and let app load the images.</string>
+    <string name="size_info">Below the list will appear after clicking on Load Images. It may be very large depending on the uploaded images.</string>
     <string name="pictureviewer_error_no_pictures">No images</string>
     <string name="images">Images</string>
     <string name="upload_file">Upload File</string>
     <string name="select_file_to_upload_on_the_server">Select file to upload on the server</string>
+    <string name="first_name_mandatory">First name is mandatory</string>
+    <string name="invalid_file">File is not valid, try again.</string>
+    <string name="corrupted_file">File is corrupted.</string>
+    <string name="last_name_mandatory">Last name is mandatory</string>
+    <string name="enter_first_name">Enter first name</string>
+    <string name="enter_last_name">Enter last name</string>
 
 </resources>

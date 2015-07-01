@@ -1,10 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:clipChildren="false"
-             tools:context="com.deardhruv.projectstarter.activities.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    tools:context="com.deardhruv.projectstarter.activities.MainActivity">
 
 
     <RelativeLayout
@@ -14,7 +13,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
             android:clipToPadding="false"
+            android:gravity="center"
             android:orientation="vertical"
             android:padding="@dimen/margin_4">
 
@@ -30,7 +31,7 @@
                     android:gravity="center"
                     android:text="@string/size_info"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    tools:ignore="RtlHardcoded"/>
+                    tools:ignore="RtlHardcoded" />
             </com.facebook.shimmer.ShimmerFrameLayout>
 
             <LinearLayout
@@ -44,7 +45,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Load Images"/>
+                    android:text="Load Images" />
 
                 <Button
                     android:id="@+id/btnUploadFile"
@@ -52,9 +53,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Upload File"/>
+                    android:text="Upload File" />
             </LinearLayout>
-
 
             <!--<com.yalantis.phoenix.PullToRefreshView
                 android:id="@+id/pull_to_refresh"
@@ -71,7 +71,7 @@
                 <com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView
                     android:id="@+id/listPhotos"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" />
             </android.support.v4.widget.SwipeRefreshLayout>
 
 

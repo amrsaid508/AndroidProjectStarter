@@ -63,16 +63,15 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
 
     }
 
-
     private void initUI() {
         btnReload = (Button) findViewById(R.id.btnReload);
         btnUploadFile = (Button) findViewById(R.id.btnUploadFile);
-        recyclerView = (ObservableRecyclerView) findViewById(R.id.listPhotos);
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        recyclerView = (ObservableRecyclerView) findViewById(R.id.listPhotos);
         recyclerView.setLayoutManager(layoutManager);
 
         ShimmerFrameLayout mShimmerFrameLayout = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
-        mShimmerFrameLayout.setDuration(3000);
+        mShimmerFrameLayout.setDuration(4000);
         mShimmerFrameLayout.startShimmerAnimation();
 
         // mPullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
@@ -82,6 +81,7 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
     }
 
     private void initListener() {
+
         btnReload.setOnClickListener(this);
         btnUploadFile.setOnClickListener(this);
 
@@ -225,6 +225,10 @@ public class MainActivity extends AbstractActivity implements OnClickListener, O
                 break;
         }
     }
+
+    // ============================================================================================
+    // Observable scroll callbacks
+    // ============================================================================================
 
     @Override
     public void onScrollChanged(int i, boolean b, boolean b1) {

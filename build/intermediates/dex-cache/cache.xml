@@ -2,11 +2,53 @@
 <items version="2" >
 
     <item
-        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/it.sephiroth.android.library.imagezoom/imagezoom/2.1.1/jars/classes.jar"
+        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.2.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="8fbd4390c086423b591596e4b04a03e0e59b9397">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-0fdfb0cdcb2e225c77a1387a29f85b3c3cb9e666.jar" />
+        sha1="5b37cf49773f7f17aca9830efd3053b0cac56728">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-151727179484d14db9fa5ad5c9eef75bae744cd7.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.6.0-rc2/331582aaaa6096e05beb7dda13a726b0984a9d4c/jackson-core-2.6.0-rc2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="331582aaaa6096e05beb7dda13a726b0984a9d4c">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/jackson-core-2.6.0-rc2-bac840c980750f0e36cec30bf52788aabf1fc15b.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/DearDhruv/android_stuff/adt_eclipse/adt-bundle-linux-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-8294aaa00e89447283d716954a2b01e817830966.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.github.rey5137/material/1.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="60dee46bb1ba50fb53b5d064694dc849246596fd">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-e40f9a21f66cdc0f26ffa171506c9a124d531a83.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.6.0-rc2/8df00d55ee4f8798cb9511853872da820abbddd/jackson-databind-2.6.0-rc2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="08df00d55ee4f8798cb9511853872da820abbddd">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/jackson-databind-2.6.0-rc2-aa4c96ebc8d706e84797013d2f72264ce855f5b4.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/gson-2.3.1-28ed0e32e2b9fd76348692646fe4fcb64a989f90.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.facebook.shimmer/shimmer/0.1.0/c9cfbe4ec82bf2fb61054c8b2d9ee5e3b955c240/shimmer-0.1.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c9cfbe4ec82bf2fb61054c8b2d9ee5e3b955c240">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/shimmer-0.1.0-6d550e170bc497f55bcf632c5e66ad186bafa912.jar" />
     </item>
     <item
         jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
@@ -23,123 +65,25 @@
         <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/okio-1.4.0-e0876f1bc6ee138b0a799f795396b316762bfff7.jar" />
     </item>
     <item
-        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.github.shell-software/uitools/1.0.0/jars/classes.jar"
+        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.github.shell-software/fab/1.1.2/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="841420e749b01799d17bf0a83cc6eb64dd8fa136">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-bcec9cf18978dfc4529a017910b59c3edc2389ae.jar" />
+        sha1="48bbecbdd3ed42e9df1b94a945480838e3bb208b">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-e66c2d5a3f0fb79baacb6b9f677cce95496e721d.jar" />
     </item>
     <item
-        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.facebook.shimmer/shimmer/0.1.0/c9cfbe4ec82bf2fb61054c8b2d9ee5e3b955c240/shimmer-0.1.0.jar"
+        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/it.sephiroth.android.library.imagezoom/imagezoom/2.2.2/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="c9cfbe4ec82bf2fb61054c8b2d9ee5e3b955c240">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/shimmer-0.1.0-6d550e170bc497f55bcf632c5e66ad186bafa912.jar" />
+        sha1="0ae6b077aa2e6de9fa3e754e5d55a5efcb43db52">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-767b8aed0f5c47706f1fb7e78da26b1a8240b639.jar" />
     </item>
     <item
-        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.nostra13.universalimageloader/universal-image-loader/1.9.4/dd9eeb557650c4ad7394df23f0f5cf27a7cfc697/universal-image-loader-1.9.4.jar"
+        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.9/872ec63b41181e29ad5a3723f1417356e2d2c0f2/slf4j-api-1.7.9.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="dd9eeb557650c4ad7394df23f0f5cf27a7cfc697">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.4-80bb1048151ece419f1258188a35b75ef0a4a3b4.jar" />
-    </item>
-    <item
-        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="5b37cf49773f7f17aca9830efd3053b0cac56728">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-151727179484d14db9fa5ad5c9eef75bae744cd7.jar" />
-    </item>
-    <item
-        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.github.shell-software/viewmover/1.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="d065ab6e064a1398750b52b1108e52c6d5e77807">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-9646a534ae47cd86453c00c5083e782c803a0bf8.jar" />
-    </item>
-    <item
-        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/gson-2.3.1-28ed0e32e2b9fd76348692646fe4fcb64a989f90.jar" />
-    </item>
-    <item
-        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/de.greenrobot/eventbus/2.4.0/ddd166d01b3158d1c00576d29f7ed15c030df719/eventbus-2.4.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ddd166d01b3158d1c00576d29f7ed15c030df719">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/eventbus-2.4.0-604b9cd7308ef8575075bf87fbc94aa7e86a2433.jar" />
-    </item>
-    <item
-        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/libs/recyclerview-animators-1.2.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e6107c5fcfd45913fd4d9f2c69863c67f85f3d9f">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/recyclerview-animators-1.2.0-5dd1b4cc3b198682713e0c287b1d039ca1638682.jar" />
-    </item>
-    <item
-        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.5.3/c37875ff66127d93e5f672708cb2dcc14c8232ab/jackson-databind-2.5.3.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c37875ff66127d93e5f672708cb2dcc14c8232ab">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/jackson-databind-2.5.3-4d0d5706406929a04713e4a77a6e9970176ca49c.jar" />
-    </item>
-    <item
-        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.github.ksoichiro/android-observablescrollview/1.5.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ec15c42d9c3a917b4e31c03731342d42db481e33">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-89ddaa38cf7671771b1fdd7d3d68c3f416a06f77.jar" />
-    </item>
-    <item
-        jar="/home/dhruv/DearDhruv/android_stuff/adt_eclipse/adt-bundle-linux-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-8294aaa00e89447283d716954a2b01e817830966.jar" />
-    </item>
-    <item
-        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.github.shell-software/fab/1.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a7e668c8cbbfa0f30bcd8d4d761dc20e4f5115d2">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-1dde976255b5eae837c572d7b4ffa297531875bd.jar" />
-    </item>
-    <item
-        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.2/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="b017100da14f9c158c9f5f2f508333c224b24a7c">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-c658ef9bd61b633400594defe1f787c08b446603.jar" />
-    </item>
-    <item
-        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.github.rey5137/material/1.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="60dee46bb1ba50fb53b5d064694dc849246596fd">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-e40f9a21f66cdc0f26ffa171506c9a124d531a83.jar" />
-    </item>
-    <item
-        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.9.0/a681c044244d9fc375198588297a39ba78028423/retrofit-1.9.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a681c044244d9fc375198588297a39ba78028423">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/retrofit-1.9.0-83db65678dd5feaef2cbf8a73fd4c0c396fdedc4.jar" />
-    </item>
-    <item
-        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.5.3/a8b8a6dfc8a17890e4c7ff8aed810763d265b68b/jackson-core-2.5.3.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a8b8a6dfc8a17890e4c7ff8aed810763d265b68b">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/jackson-core-2.5.3-811e0789eafd98f90b36afb7dc960458a722a0ed.jar" />
-    </item>
-    <item
-        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/library-2.4.0-cb0e20cc7ebafa63d4b003cdb80fd83fb54d48f9.jar" />
+        sha1="872ec63b41181e29ad5a3723f1417356e2d2c0f2">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/slf4j-api-1.7.9-e8d81d1f7d28dc69e5d4c58df6518a07ff0bf269.jar" />
     </item>
     <item
         jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.4.0-RC1/4628fef2e0f336f3e894bf42d67d19d0841ba0ac/okhttp-2.4.0-RC1.jar"
@@ -149,11 +93,74 @@
         <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/okhttp-2.4.0-RC1-62106b287fa1ba43ea77b529183200aae384f152.jar" />
     </item>
     <item
-        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.5.3/ade455ede4797ed450ca6a56e589a81278fc8f45/jackson-annotations-2.5.3.jar"
+        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.github.shell-software/viewmover/1.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="ade455ede4797ed450ca6a56e589a81278fc8f45">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/jackson-annotations-2.5.3-4e9e2d27f80f6ef18187a141d48d46a90751791b.jar" />
+        sha1="3d6dc28c575755c91be7f6a69803e4ebe98c7c7d">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-e811ec9cbaddf8d151d25c39bae3fe4a1a5075b1.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/libs/recyclerview-animators-1.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e6107c5fcfd45913fd4d9f2c69863c67f85f3d9f">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/recyclerview-animators-1.2.0-5dd1b4cc3b198682713e0c287b1d039ca1638682.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/de.greenrobot/eventbus/2.4.0/ddd166d01b3158d1c00576d29f7ed15c030df719/eventbus-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ddd166d01b3158d1c00576d29f7ed15c030df719">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/eventbus-2.4.0-604b9cd7308ef8575075bf87fbc94aa7e86a2433.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.nostra13.universalimageloader/universal-image-loader/1.9.4/dd9eeb557650c4ad7394df23f0f5cf27a7cfc697/universal-image-loader-1.9.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="dd9eeb557650c4ad7394df23f0f5cf27a7cfc697">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.4-80bb1048151ece419f1258188a35b75ef0a4a3b4.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.6.0-rc2/16bee8a2be14c3d7b33d0cd826f96acb3ca2ee3/jackson-annotations-2.6.0-rc2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="016bee8a2be14c3d7b33d0cd826f96acb3ca2ee3">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/jackson-annotations-2.6.0-rc2-e9ca8b6516295192e17755a0a6506cdcda77149b.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/library-2.4.0-cb0e20cc7ebafa63d4b003cdb80fd83fb54d48f9.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.2/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b017100da14f9c158c9f5f2f508333c224b24a7c">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-c658ef9bd61b633400594defe1f787c08b446603.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-402813485ebf1f206051af4f351c5c7449ac3a57.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.github.shell-software/uitools/1.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="418307d960be5f7c5fe13794b7283f5fd09d0c17">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-46a5570b02758a2c60d728afcba6898fa92324f8.jar" />
+    </item>
+    <item
+        jar="/home/dhruv/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.9.0/a681c044244d9fc375198588297a39ba78028423/retrofit-1.9.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a681c044244d9fc375198588297a39ba78028423">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/retrofit-1.9.0-83db65678dd5feaef2cbf8a73fd4c0c396fdedc4.jar" />
     </item>
     <item
         jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
@@ -163,11 +170,11 @@
         <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-e258aca7c11108c80c4e7c75aeeea39b7cd1a300.jar" />
     </item>
     <item
-        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
+        jar="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/exploded-aar/com.github.ksoichiro/android-observablescrollview/1.5.2/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
-        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-402813485ebf1f206051af4f351c5c7449ac3a57.jar" />
+        sha1="256c2cf84542c459927ed4aa5f99a9b47855c071">
+        <dex dex="/home/dhruv/DearDhruv/Russmedia_Pros/Self_Study/Gits/Project_Starter_GIT/master_project_starter/project_starter/build/intermediates/pre-dexed/debug/classes-7b92d63d0557d1952048072973acc378010d1bc0.jar" />
     </item>
 
 </items>

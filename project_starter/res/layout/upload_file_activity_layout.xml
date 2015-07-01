@@ -48,11 +48,14 @@
                 android:inputType="textPersonName"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/fab_material_white"
+                app:et_autoCompleteMode="single"
+                app:et_helper="@string/enter_first_name"
                 app:et_inputId="@+id/txt_first_name_input"
                 app:et_labelInAnim="@anim/abc_grow_fade_in_from_bottom"
                 app:et_labelOutAnim="@anim/abc_slide_out_top"
-                app:et_supportMaxChars="12"
-                app:et_supportMode="none" />
+                app:et_supportMaxChars="10"
+                app:et_supportMode="helper"
+                app:et_supportTextErrorColor="@color/fab_material_red_500" />
 
             <com.rey.material.widget.EditText
                 android:id="@+id/txt_last_name"
@@ -64,10 +67,14 @@
                 android:inputType="textPersonName"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/fab_material_white"
+                app:et_autoCompleteMode="single"
+                app:et_helper="@string/enter_last_name"
                 app:et_inputId="@+id/txt_last_name_input"
                 app:et_labelInAnim="@anim/abc_grow_fade_in_from_bottom"
                 app:et_labelOutAnim="@anim/abc_slide_out_top"
-                app:et_supportMode="none" />
+                app:et_supportMaxChars="10"
+                app:et_supportMode="helper"
+                app:et_supportTextErrorColor="@color/fab_material_red_500" />
         </LinearLayout>
     </LinearLayout>
 

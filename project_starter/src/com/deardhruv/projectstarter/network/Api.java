@@ -9,6 +9,7 @@ import retrofit.http.GET;
 import retrofit.http.Multipart;
 import retrofit.http.POST;
 import retrofit.http.Part;
+import retrofit.http.Query;
 import retrofit.mime.TypedFile;
 
 /**
@@ -21,28 +22,31 @@ import retrofit.mime.TypedFile;
  * characters can be passed in the password.
  */
 public interface Api {
-	String APP_ID = "";
-	String USER_ID = "";
-	String BASE_PARAMS = "?application=" + APP_ID + "&userid=" + USER_ID;
-	/**
-	 * Retrive list of images.
-	 */
+    String APP_ID = "";
+    String USER_ID = "";
+    String BASE_PARAMS = "?application=" + APP_ID + "&userid=" + USER_ID;
+
+    /**
+     * Retrive list of images.
+     */
 //	@GET("/image_list_json")
-	@GET("/image_list.php")
-	void getImageList(Callback<ImageListResponse> callback);
+    @GET("/image_list.php")
+    void getImageList(Callback<ImageListResponse> callback);
 
-	String SECRET_KEY = "";
+    String SECRET_KEY = "";
 
-	/**
-	 * Upload file to server
-	 * 
-	 * @param file file to upload
-	 * @param callback callback class object
-	 */
-	@Multipart
-	@POST("/upload.php")
-	void uploadFile(
-			@Part("file") TypedFile file,
-			Callback<UploadFileResponse> callback);
+    /**
+     * Upload file to server
+     *
+     * @param file     file to upload
+     * @param callback callback class object
+     */
+    @Multipart
+    @POST("/upload.php")
+    void uploadFile(
+            @Part("file") TypedFile file,
+            @Query("first_name") String firstName,
+            @Query("last_name") String lastName,
+            Callback<UploadFileResponse> callback);
 
 }

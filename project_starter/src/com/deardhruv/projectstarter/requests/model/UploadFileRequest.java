@@ -1,6 +1,8 @@
 
 package com.deardhruv.projectstarter.requests.model;
 
+import android.content.Context;
+
 import com.deardhruv.projectstarter.ProjectStarterApplication;
 import com.deardhruv.projectstarter.R;
 import com.deardhruv.projectstarter.network.Api;
@@ -10,7 +12,6 @@ import com.deardhruv.projectstarter.response.model.UploadFileResponse;
 import com.deardhruv.projectstarter.utils.Helper;
 import com.deardhruv.projectstarter.utils.Logger;
 
-import android.content.Context;
 import retrofit.mime.TypedFile;
 
 /**
@@ -18,45 +19,45 @@ import retrofit.mime.TypedFile;
  * call.
  */
 public class UploadFileRequest extends AbstractApiRequest {
-	private static final String LOGTAG = UploadFileRequest.class.getSimpleName();
-	private static final Logger LOG = new Logger(LOGTAG);
+    private static final String LOGTAG = UploadFileRequest.class.getSimpleName();
+    private static final Logger LOG = new Logger(LOGTAG);
 
-	private static Context mContext;
-	/**
-	 * The callback used for this request. Declared globally for cancellation.
-	 * See {@link #cancel()}.
-	 */
-	private AbstractApiCallback<UploadFileResponse> callback;
+    private static Context mContext;
+    /**
+     * The callback used for this request. Declared globally for cancellation.
+     * See {@link #cancel()}.
+     */
+    private AbstractApiCallback<UploadFileResponse> callback;
 
-	/**
-	 * See super constructor
-	 * {@link AbstractApiRequest#AbstractApiRequest(Api, String)}.
-	 */
-	public UploadFileRequest(Api api, String tag) {
-		super(api, tag);
-		mContext = ProjectStarterApplication.getAppContext();
-	}
+    /**
+     * See super constructor
+     * {@link AbstractApiRequest#AbstractApiRequest(Api, String)}.
+     */
+    public UploadFileRequest(Api api, String tag) {
+        super(api, tag);
+        mContext = ProjectStarterApplication.getAppContext();
+    }
 
-	/**
-	 * Executes the request asynchronously using the built-in mechanism of
-	 * Retrofit. The api response is posted on the EventBus.
-	 */
-	public void execute(String requestTag, TypedFile file) {
-		callback = new AbstractApiCallback<>(tag);
-		if (!isInternetActive()) {
-			callback.postUnexpectedError(mContext.getString(R.string.error_no_internet));
-			return;
-		}
-		api.uploadFile(file, callback);
-	}
+    /**
+     * Executes the request asynchronously using the built-in mechanism of
+     * Retrofit. The api response is posted on the EventBus.
+     */
+    public void execute(String requestTag, TypedFile file, String firstName, String lastName) {
+        callback = new AbstractApiCallback<>(tag);
+        if (!isInternetActive()) {
+            callback.postUnexpectedError(mContext.getString(R.string.error_no_internet));
+            return;
+        }
+        api.uploadFile(file, firstName, lastName, callback);
+    }
 
-	@Override
-	public void cancel() {
-		callback.invalidate();
-	}
+    @Override
+    public void cancel() {
+        callback.invalidate();
+    }
 
-	@Override
-	public boolean isInternetActive() {
-		return Helper.isInternetActive(mContext);
-	}
+    @Override
+    public boolean isInternetActive() {
+        return Helper.isInternetActive(mContext);
+    }
 }

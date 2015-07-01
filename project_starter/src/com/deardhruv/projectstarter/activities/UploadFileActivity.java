@@ -1,4 +1,3 @@
-
 package com.deardhruv.projectstarter.activities;
 
 import android.annotation.TargetApi;
@@ -11,11 +10,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -51,19 +52,28 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 
     private static final int PHOTO_PICKER_CODE = 2001;
     private static final String UPLOAD_FILE_REQUEST_TAG = LOGTAG + ".uploadFileRequest";
+    AutoCompleteTextView.Validator emptyValidator = new AutoCompleteTextView.Validator() {
+        @Override
+        public boolean isValid(CharSequence text) {
+            return !TextUtils.isEmpty(text);
+        }
 
+        @Override
+        public CharSequence fixText(CharSequence invalidText) {
+            return null;
+        }
+    };
     private StoreImageHelper mStoreImageHelper;
     private File mTmpPictureFile;
-
     private DisplayImageOptions mImageOptions;
     private ImageLoader mImageLoader;
-
     private EventBus mEventBus;
     private ApiClient mApiClient;
-
+    private ProgressDialog pd;
     private Button btnUploadFile;
     private ImageView imgAddPhoto;
-    private ProgressDialog pd;
+    private com.rey.material.widget.EditText mTxtFirstName;
+    private com.rey.material.widget.EditText mTxtLastName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,20 +95,30 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
 
         mImageOptions = new DisplayImageOptions.Builder()
                 .showImageOnLoading(android.R.color.transparent)
-                .showImageForEmptyUri(R.drawable.ic_launcher).cacheInMemory(true).cacheOnDisk(true)
-                .considerExifParams(true).build();
+                .showImageForEmptyUri(R.drawable.ic_launcher)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .considerExifParams(true)
+                .build();
         mStoreImageHelper = new StoreImageHelper(this);
     }
 
     private void initUI() {
         btnUploadFile = (Button) findViewById(R.id.btnUploadFile);
         imgAddPhoto = (ImageView) findViewById(R.id.imgAddPhoto);
+
+        mTxtFirstName = (com.rey.material.widget.EditText) findViewById(R.id.txt_first_name);
+        mTxtLastName = (com.rey.material.widget.EditText) findViewById(R.id.txt_last_name);
+
         initListener();
     }
 
     private void initListener() {
         btnUploadFile.setOnClickListener(this);
         imgAddPhoto.setOnClickListener(this);
+
+        mTxtFirstName.setValidator(emptyValidator);
+        mTxtLastName.setValidator(emptyValidator);
     }
 
     @Override
@@ -143,7 +163,7 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
                 break;
 
             case R.id.btnUploadFile:
-                startUploading(mTmpPictureFile);
+                validateAndUpload(mTmpPictureFile, mTxtFirstName.getText().toString(), mTxtLastName.getText().toString());
                 break;
 
             default:
@@ -323,11 +343,26 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
                 mImageOptions);
     }
 
-    private void startUploading(final File file) {
+    private void validateAndUpload(final File file, String firstName, String lastName) {
 
-        if (file == null || !isPictureValid(file.getAbsolutePath())) {
-            showMsg("File is not valid, try again.");
-        } else if (file.exists()) {
+        if (TextUtils.isEmpty(firstName)) {
+            mTxtFirstName.setError(getString(R.string.first_name_mandatory));
+            mTxtLastName.setError("");
+        } else if (TextUtils.isEmpty(lastName)) {
+            mTxtLastName.setError(getString(R.string.last_name_mandatory));
+            mTxtFirstName.setError("");
+        } else if (file == null || !isPictureValid(file.getAbsolutePath())) {
+            mTxtFirstName.setError("");
+            mTxtLastName.setError("");
+            showMsg(getString(R.string.invalid_file));
+        } else {
+//            startUploading(mTmpPictureFile);
+            startUploading(file, firstName, lastName);
+        }
+    }
+
+    private void startUploading(final File file, String firstName, String lastName) {
+        if (file.exists()) {
             showProgressDialog();
             String mimeType = "image/jpeg"
                     // "application/octet-stream"
@@ -337,10 +372,10 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
                     ;
 
             TypedFile typedFile = new TypedFile(mimeType, file);
-            mApiClient.uploadFile(UPLOAD_FILE_REQUEST_TAG, typedFile);
+            mApiClient.uploadFile(UPLOAD_FILE_REQUEST_TAG, typedFile, firstName, lastName);
 
         } else {
-            showMsg("File is corrupted.");
+            showMsg(getString(R.string.corrupted_file));
         }
     }
 
