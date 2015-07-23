@@ -1,4 +1,3 @@
-
 package com.deardhruv.projectstarter.network;
 
 import com.deardhruv.projectstarter.BuildConfig;
@@ -25,27 +24,16 @@ import retrofit.mime.TypedFile;
 public class ApiClient {
     private static final String LOGTAG = ApiClient.class.getSimpleName();
 
-    // https://u.teknik.io/dr8OwG
-    // https://api.teknik.io/upload/post
-
-    // http://laendleimmo.immoservice.mobi/api/ad/upload/pictures
-    // http://laendleimmo.immoservice.mobi/immobilien/gewerbliche-immobilien/buro-ordination/vorarlberg/feldkirch/73793
-
-    // http://vendev12/image_list_json 192.168.1.12/
-
-    // http://vendev12/Upload.php
-
-    // public static final String WS_SCHEME = "https://";
     private static final String WS_SCHEME = "http://";
 
-    // public static final String WS_PREFIX_DOMAIN = "u.";
-    private static final String WS_PREFIX_DOMAIN = "192.168.1.12";
+    // public static final String WS_PREFIX_DOMAIN = "";
+    // private static final String WS_PREFIX_DOMAIN = "192.168.1.12";
+    private static final String WS_PREFIX_DOMAIN = "deardhruv.96.lt";
     private static final String WS_HOSTNAME = "";
     private static final String WS_SUFFIX_FOLDER = "/api";
 
     private static final String BASE_URL = WS_SCHEME + WS_PREFIX_DOMAIN + WS_HOSTNAME
             + WS_SUFFIX_FOLDER;
-    // https://raw.githubusercontent.com/DearDhruv/AndroidProjectStarter/master/image_list_json
 
     /**
      * Makes the api calls.
