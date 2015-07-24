@@ -25,11 +25,9 @@ public class ApiClient {
     private static final String LOGTAG = ApiClient.class.getSimpleName();
 
     private static final String WS_SCHEME = "http://";
-
-    // public static final String WS_PREFIX_DOMAIN = "";
     // private static final String WS_PREFIX_DOMAIN = "192.168.1.12";
-    private static final String WS_PREFIX_DOMAIN = "deardhruv.96.lt";
-    private static final String WS_HOSTNAME = "";
+    private static final String WS_PREFIX_DOMAIN = "deardhruv";
+    private static final String WS_HOSTNAME = ".96.lt";
     private static final String WS_SUFFIX_FOLDER = "/api";
 
     private static final String BASE_URL = WS_SCHEME + WS_PREFIX_DOMAIN + WS_HOSTNAME

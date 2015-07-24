@@ -101,7 +101,7 @@ public class StoreImageHelper {
 	public File createImageFile() throws IOException {
         // Create an image file name
         final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        final String imageFileName = "j" + timeStamp + "_";
+        final String imageFileName = "_" + timeStamp + "_";
         return File.createTempFile(imageFileName, ".jpg", mImageFolder);
     }
 }
