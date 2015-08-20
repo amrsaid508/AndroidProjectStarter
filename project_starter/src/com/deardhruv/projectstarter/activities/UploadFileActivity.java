@@ -213,12 +213,13 @@ public class UploadFileActivity extends AbstractActivity implements OnClickListe
             Bundle bundle = new Bundle();
 
             if (saveUri != null) {
-                bundle.putParcelable(MediaStore.EXTRA_OUTPUT, saveUri);
+//                bundle.putParcelable(MediaStore.EXTRA_OUTPUT, saveUri);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, saveUri);
             } else {
-                bundle.putBoolean("return-data", true);
+//                bundle.putBoolean("return-data", true);
+                takePictureIntent.putExtra("return-data", true);
             }
-
-            takePictureIntent.putExtras(bundle);
+//            takePictureIntent.putExtras(bundle);
 
         } catch (IOException e) {
             Log.e(LOGTAG, e.getMessage());
