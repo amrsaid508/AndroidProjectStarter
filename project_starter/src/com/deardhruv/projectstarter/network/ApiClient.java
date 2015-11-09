@@ -18,14 +18,14 @@ import retrofit.converter.Converter;
 import retrofit.mime.TypedFile;
 
 /**
- * Provides request functions for all api calls. This class maintains a map of
- * running requests to provide request cancellation.
+ * Provides request functions for all api calls. This class maintains a map of running requests to
+ * provide request cancellation.
  */
 public class ApiClient {
     private static final String LOGTAG = ApiClient.class.getSimpleName();
 
     private static final String WS_SCHEME = "http://";
-    // private static final String WS_PREFIX_DOMAIN = "192.168.1.12";
+    //    private static final String WS_PREFIX_DOMAIN = "192.168.1.12";
     private static final String WS_PREFIX_DOMAIN = "deardhruv";
     private static final String WS_HOSTNAME = ".96.lt";
     private static final String WS_SUFFIX_FOLDER = "/api";
@@ -44,14 +44,14 @@ public class ApiClient {
     private final Map<String, AbstractApiRequest> requests;
 
     /**
-     * Initializes the api interface which will handle the api calls. Also
-     * initializes an empty hash map of <request tag, request> pairs. Registers
-     * with EventBus to receive the {@link RequestFinishedEvent}.
+     * Initializes the api interface which will handle the api calls. Also initializes an empty hash
+     * map of <request tag, request> pairs. Registers with EventBus to receive the {@link
+     * RequestFinishedEvent}.
      *
-     * @param client    A retrofit {@link Client} implementation which will be used
-     *                  as the Http Client.
-     * @param converter A retrofit {@link Converter} implementation used for the
-     *                  api response conversion to POJOs.
+     * @param client    A retrofit {@link Client} implementation which will be used as the Http
+     *                  Client.
+     * @param converter A retrofit {@link Converter} implementation used for the api response
+     *                  conversion to POJOs.
      */
     public ApiClient(Client client, Converter converter) {
         RestAdapter restAdapter = new RestAdapter
@@ -78,8 +78,8 @@ public class ApiClient {
     // ============================================================================================
 
     /**
-     * Execute a request to retrieve the update message. See
-     * {@link Api#getImageList(retrofit.Callback)} for parameter details.
+     * Execute a request to retrieve the update message. See {@link Api#getImageList(retrofit.Callback)}
+     * for parameter details.
      *
      * @param requestTag The tag for identifying the request.
      */
@@ -90,9 +90,8 @@ public class ApiClient {
     }
 
     /**
-     * Execute a request to retrieve the update message. See
-     * {@link Api#uploadFile(TypedFile, String, String, Callback)} for
-     * parameter details.
+     * Execute a request to retrieve the update message. See {@link Api#uploadFile(TypedFile,
+     * String, String, Callback)} for parameter details.
      *
      * @param requestTag The tag for identifying the request.
      */
@@ -107,10 +106,11 @@ public class ApiClient {
     // ============================================================================================
 
     /**
-     * Look up the event with the passed tag in the event list. If the request
-     * is found, cancel it and remove it from the list.
+     * Look up the event with the passed tag in the event list. If the request is found, cancel it
+     * and remove it from the list.
      *
      * @param requestTag Identifies the request.
+     *
      * @return True if the request was cancelled, false otherwise.
      */
     public boolean cancelRequest(String requestTag) {
@@ -127,8 +127,8 @@ public class ApiClient {
     }
 
     /**
-     * Returns true if the request with the passed tag is in the list of running
-     * requests, false otherwise.
+     * Returns true if the request with the passed tag is in the list of running requests, false
+     * otherwise.
      */
     public boolean isRequestRunning(String requestTag) {
         return requests.containsKey(requestTag);

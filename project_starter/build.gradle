@@ -15,20 +15,20 @@ apply plugin: 'com.android.application'
 
 dependencies {
     compile fileTree(include: '*.jar', dir: 'libs')
-    compile 'com.android.support:support-v4:23.0.0'
-    compile 'com.android.support:recyclerview-v7:23.0.0'
-    compile 'com.android.support:appcompat-v7:23.0.0'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.6.1'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.1'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.1'
-    compile 'org.apache.httpcomponents:httpcore:4.4.1'
-    compile 'org.apache.httpcomponents:httpmime:4.5'
-    compile 'org.apache.httpcomponents:httpclient:4.5'
+    compile 'com.android.support:support-v4:23.1.0'
+    compile 'com.android.support:recyclerview-v7:23.1.0'
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.6.3'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.3'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
+    compile 'org.apache.httpcomponents:httpcore:4.4.4'
+    compile 'org.apache.httpcomponents:httpmime:4.5.1'
+    compile 'org.apache.httpcomponents:httpclient:4.5.1'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okio:okio:1.5.0'
     compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'com.github.rey5137:material:1.1.1'
+    compile 'com.github.rey5137:material:1.2.1'
     compile 'com.github.ksoichiro:android-observablescrollview:1.5.2'
     compile 'com.github.shell-software:fab:1.1.2'
     compile 'com.facebook.shimmer:shimmer:0.1.0'
@@ -47,11 +47,28 @@ dependencies {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.0"
+    buildToolsVersion "23.0.2"
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
+
+    }
+
+    dexOptions {
+        jumboMode = true
+        // incremental true
+        javaMaxHeapSize "4G"
+    }
+
+    defaultConfig {
+        applicationId 'com.laendleimmo'
+        multiDexEnabled true
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 14
+        versionName "1.13"
     }
 
     sourceSets {
