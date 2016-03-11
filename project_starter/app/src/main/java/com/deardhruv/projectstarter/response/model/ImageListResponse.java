@@ -12,7 +12,7 @@ public class ImageListResponse extends AbstractApiResponse {
 
 	private static final long serialVersionUID = -6933878383763810916L;
 	@JsonProperty("data")
-	private Data data;
+	private Data data = new Data();
 
 	public ImageListResponse() {
 		// nothing.
